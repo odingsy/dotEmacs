@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: common_header
+# key: header_
+# --
+#+TITLE: $1
+#+AUTHOR: GUO Shiyuan
+#+EMAIL: antguos@nus.edu.sg
+#+OPTIONS: toc:nil ^:nil num:nil
+#+DATE:
+#+LATEX_HEADER: \\addtolength{\\textwidth}{2in}
+#+LATEX_HEADER: \\addtolength{\\hoffset}{-1in}
+#+LATEX_HEADER: \\addtolength{\\voffset}{-1in}
+
+$0

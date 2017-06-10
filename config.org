@@ -1,16 +1,16 @@
-#+TITLE: EMACS configuration
++TITLE: EMACS configuration
 #+AUTHOR: ODIN
 #+TAGS: Arjen wolray Fabrice mine MELPA_ori
-#+TODO: TODO Indecisive Inactive | DONE 
+
 
 * Introduction
-This file is an org-file where emacs extracts the elisp code blocks to run initiation. By doing this, we can obtain an organized dot-emacs file with structured comments on the configuration. 
+This file is an org-file where emacs extracts the elisp code blocks to run initiation. By doing this, we can obtain an organized dot-emacs file with structured comments on the configuration.
 
-The place I steal this bunch of code is from [[https://github.com/danielmai/.emacs.d/blob/master/config.org][here]] with a youtube [[https://www.youtube.com/watch?v%3DVIuOwIBL-ZU&t%3D400s][here]]. 
+The place I steal this bunch of code is from [[https://github.com/danielmai/.emacs.d/blob/master/config.org][here]] with a youtube [[https://www.youtube.com/watch?v%3DVIuOwIBL-ZU&t%3D400s][here]].
 
 The mechanism of this configuration is using [[help:org-babel-load-file][org-babel-load-file]] function.
 
-The following table list down reference 
+The following table list down reference
 |--------------------------+-------------------------------+----------------------------------------------------|
 | author_name&dot_file     | dotEmacs last committing date | area his dotEmacs contributes                      |
 |--------------------------+-------------------------------+----------------------------------------------------|
@@ -24,23 +24,34 @@ The following table list down reference
 | [[https://github.com/fniessen][Fabrice Niessen]]          | up-to-date                    | various refcard(Beamer, babel), leuven theme       |
 | [[https://github.com/eschulte/emacs24-starter-kit][eschulte]]                 | 2015                          | emacs starter kits 24.                             |
 | [[https://github.com/xgarrido/emacs-starter-kit][xgarrido]]                 | Nov 2016                      | physicist from france.                             |
-| [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org][陈斌]]                     | 2016                          |                                                    |
+| [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org][陈斌]] 's [[http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html][blog]]             | 2016                          |                                                    |
 | [[https://github.com/abo-abo][abo-abo]]                  |                               | classic emacs packages (occur-dwim)                |
+| [[https://github.com/jwiegley/dot-emacs/blob/f23993cfcb9ca90c289b4214b9bafbf46883bdb4/lisp/paredit-ext.el][jwiegley]]                 |                               | use-package, recommending [[https://www.youtube.com/watch?v=QRBcm6jFJ3Q][paredit]]                  |
+| [[https://github.com/magnars/.emacs.d/blob/master/settings/sane-defaults.el][Magnars Sveen]]            |                               | multiple cursor, expand region                     |
+| [[http://emacslife.com/how-to-read-emacs-lisp.html][Sacha Chua]]               |                               | Q and A format                                     |
+| [[http://tuhdo.github.io][tuhdo]] in                 |                               | helm and helm projectile                           |
+| [[http://dotfiles.github.io][holistic docfile]]         |                               |                                                    |
 |--------------------------+-------------------------------+----------------------------------------------------|
-* Questions related Emacs initiation. 
+* Questions related Emacs initiation.
 ** what is the package loading Vs lisp loading; [[http://emacs.stackexchange.com/questions/3310/difference-between-load-file-and-load][Answer from stack exchange]]
 *** [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html][package loading]]
 - [[help:use-package][use-package]] from package.el
-- [[help:package-selected-packages][package-selected-packages]] used as a default for custom.el defined in package.el. 
-  - package-install-p: confirm package is installed. 
+- [[help:package-selected-packages][package-selected-packages]] used as a default for custom.el defined in package.el.
+  - package-install-p: confirm package is installed.
 - loading a package adds its directory to load-path and loads its autoloads.
-- ‘-q’ or ‘--no-init-file’ options inhibit this behaviour. 
-*** [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Lisp-Libraries.html#Lisp-Libraries][lisp loading]] 
-- byte compilation and .elc 
+- ‘-q’ or ‘--no-init-file’ options inhibit this behaviour.
+*** [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Lisp-Libraries.html#Lisp-Libraries][lisp loading]]
+- byte compilation and .elc
 - M-x load-file/load-library
 - Variable load-path
 - autoload: M-x compile/recompile
-- [[help:require][require]]: a primitive function 
+- [[help:require][require]]: a primitive function
+** what is all the "smart" package is all about
+*** these package include
+- [[https://github.com/Fuco1/smartparens][smartparens]] (sp) by Fuco1
+- smart-mode-line
+** key binding, in the context of usepackage and normal key binding 
+- [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-Rebinding.html][demystify escape sign in kbd]]
 * Personal Information
 
 #+begin_src emacs-lisp
@@ -52,17 +63,27 @@ The following table list down reference
 Set up the customize file to its [[help:custom-file][own separate file]], instead of saving
 customize settings in .emacs
 
-#+begin_src emacs-lisp
+#+begin_src
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 #+end_src
 
+* benchmark
+#+BEGIN_SRC emacs-lisp
+(use-package benchmark-init
+  :ensure t
+  :init
+  (benchmark-init/activate))
+#+END_SRC
 * Theme and theme library in  [[https://emacsthemes.com][emacs theme page]]
 - Theme are color combinations. Deciding this combination is arguably [[http://geog.uoregon.edu/datagraphics/EOS/Light-and-Bartlein_EOS2004.pdf][difficult.]]
-- There are various color palettes for scientific application (in general or in R setting). 
+- There are various color palettes for scientific application (in general or in R setting).
 - [[http://colorbrewer2.org/#type=diverging&scheme=BrBG&n=3][colorbrewer]] is a good place to find colour combi
+** my preferred theme:
+  - src block has diff (darker) background (#2a2f38) as compared to normal text
+  - the org-src-header and end are boarded and diff color (#bdc3ce and weighted) as compared to other.
 
-** Cyberpunk theme: Dark background+colorful headline. 
+** Cyberpunk theme: Dark background+colorful headline.
 
 #+begin_src
 (use-package cyberpunk-theme
@@ -72,12 +93,12 @@ customize settings in .emacs
   (progn
     (load-theme 'cyberpunk t)
     (set-face-attribute `mode-line nil
-                        :box nil)
+			:box nil)
     (set-face-attribute `mode-line-inactive nil
-                        :box nil)))
+			:box nil)))
 #+end_src
 
-** solarised 
+** solarised
 
 #+BEGIN_SRC
 (use-package solarized-theme
@@ -87,9 +108,8 @@ customize settings in .emacs
   :ensure t)
 #+END_SRC
 
-** BEST1: [[https://github.com/bbatsov/zenburn-emacs][zenburn]]. 
-
-*** Zenburn default 
+** BEST1: [[https://github.com/bbatsov/zenburn-emacs][zenburn]].
+*** Zenburn default
 **** DONE problem related to strange color with underline_proceeding in Zenburn default
 **** org-date == lvl5
 **** org-link == lvl4
@@ -109,12 +129,12 @@ customize settings in .emacs
  :ensure t
  :init)
 
-(set-face-italic-p 'italic nil) 
+(set-face-italic-p 'italic nil)
 (set-face-attribute 'region nil :background "#c51b7d" )
 #+END_SRC
 
 
-** Inactive BEST2: arjen-grey-theme
+** CANCELED BEST2: arjen-grey-theme
 - [[https://gitlab.com/buildfunthings/emacs-config/blob/master/loader.org][arjen font ]]
 #+BEGIN_SRC
 (use-package arjen-grey-theme
@@ -139,7 +159,7 @@ customize settings in .emacs
 ;;   (use-package all-the-icons
 ;;     :ensure t)
 #+END_SRC
-** Inactive kbd for switch code. 
+** CANCELED kbd for switch code.
 #+BEGIN_SRC
 (defun switch-theme (theme)
   "Disables any currently active themes and loads THEME."
@@ -147,8 +167,8 @@ customize settings in .emacs
   (interactive
    (list
     (intern (completing-read "Load custom theme: "
-                             (mapc 'symbol-name
-                                   (custom-available-themes))))))
+			     (mapc 'symbol-name
+				   (custom-available-themes))))))
   (let ((enabled-themes custom-enabled-themes))
     (mapc #'disable-theme custom-enabled-themes)
     (load-theme theme t)))
@@ -167,32 +187,30 @@ customize settings in .emacs
 (defun what-face (pos)
   (interactive "d")
   (let ((face (or (get-char-property (point) 'read-face-name)
-                  (get-char-property (point) 'face))))
+		  (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
 #+END_SRC
 
-* Miscellaneous default 
-Sources for this section include [[https://github.com/magnars/.emacs.d/blob/master/settings/sane-defaults.el][Magnars Sveen]] and [[http://pages.sachachua.com/.emacs.d/Sacha.html][Sacha Chua]].
+* Miscellaneous default
 ** Visual
 #+BEGIN_SRC emacs-lisp
 (global-linum-mode 1) ;line number mode
 (delete-selection-mode t) ;delete the region when typing, just like as we expect nowadays.
-(show-paren-mode t)
 (column-number-mode t)
 (defalias 'yes-or-no-p 'y-or-n-p) ;Answering just 'y' or 'n' will do
 (blink-cursor-mode -1) ;Turn off the blinking cursor
 (setq-default indicate-empty-lines t) ;Visually indicate empty lines after the buffer end.
 (setq sentence-end-double-space nil) ;one space to end a sentence
 
-(setq uniquify-buffer-name-style 'forward) ;syntax to contruct unique buffer names for files with the same baes name. 
+(setq uniquify-buffer-name-style 'forward) ;syntax to contruct unique buffer names for files with the same baes name.
 
 ;; (set-default-font "Source Code Pro" nil t)
 ;; (set-face-attribute 'default nil :height 100)
 
 (setq battery-mode-line-format "[%b%p%% %t]")
 #+END_SRC
-** Utility 
+** Utility
 #+begin_src emacs-lisp
 ;; These functions are useful. Activate them.
 (put 'downcase-region 'disabled nil)
@@ -207,9 +225,11 @@ Sources for this section include [[https://github.com/magnars/.emacs.d/blob/mast
 (set-selection-coding-system 'utf-8) ; please
 (prefer-coding-system 'utf-8) ; with sugar on top
 
-;; mode upon opening UTF-8 encoded files. 
+;; mode upon opening UTF-8 encoded files.
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
+(setq mouse-wheel-progressive-speed nil)
 
 #+end_src
 
@@ -232,17 +252,12 @@ Sources for this section include [[https://github.com/magnars/.emacs.d/blob/mast
   :if (memq window-system '(mac ns))
   :ensure t
   :init
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "LC_ALL")
+  (exec-path-from-shell-copy-env "LANG"))
 
 #+END_SRC
-** mouse scroll
-#+BEGIN_SRC emacs-lisp
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
-(setq mouse-wheel-progressive-speed nil)
-
-
-#+END_SRC
-** backup
+** file backup and delection
 #+BEGIN_SRC emacs-lisp
 ;; Keep all backup and auto-save files in one directory
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
@@ -256,9 +271,27 @@ Sources for this section include [[https://github.com/magnars/.emacs.d/blob/mast
       auto-save-interval 200 ; number of keystrokes between auto-saves (default: 300)
       )
 
+
+(when (string-equal system-type "darwin")
+  ;; delete files by moving them to the trash
+  (setq delete-by-moving-to-trash t)
+  (setq trash-directory "~/.Trash")
+  ;; Don't make new frames when opening a new file with Emacs
+  (setq ns-pop-up-frames nil)
+  ;; Use Command-` to switch between Emacs windows (not frames)
+  (bind-key "s-`" 'other-window)
+)
+
+  ;; Because of the keybindings above, set one for `other-frame'
+  ;; (bind-key "s-1" 'other-frame)
+
+  ;; Fullscreen!
+  (setq ns-use-native-fullscreen nil) ; Not Lion style
+  (bind-key "<s-return>" 'toggle-frame-fullscreen)
+
 #+END_SRC
-*** revert autosaved after breakdown 
-- [[http://emacs.stackexchange.com/questions/3776/how-to-view-diff-when-emacs-suggests-to-recover-this-file][this stack exchange post]] introduce the way running [[help:diff-buffer-with-file][=diff-buffer-with-file=]] after =recover-this-file= to see the difference between the autosave batch as compared to the master before system broken down. 
+*** revert autosaved after breakdown
+- [[http://emacs.stackexchange.com/questions/3776/how-to-view-diff-when-emacs-suggests-to-recover-this-file][this stack exchange post]] introduce the way running [[help:diff-buffer-with-file][=diff-buffer-with-file=]] after =recover-this-file= to see the difference between the autosave batch as compared to the master before system broken down.
 #+BEGIN_SRC emacs-lisp
 (defun odin-diff-buffer-with-file ()
   "Compare the current modified buffer with the saved version."
@@ -272,10 +305,10 @@ Sources for this section include [[https://github.com/magnars/.emacs.d/blob/mast
 
 ** kill/yank with CUA interaction
 - there was general worry that when I save the text from external program into the system clipboard (external pasting), and then killing the an emacs region before inserting the external text, the text in [[http://stackoverflow.com/questions/24196020/how-to-stop-emacs-from-contaminating-the-clipboard][the system clipboard will lost. ]]
-*** the mechanism of this issue 
-- there are two systems here, kill/yank system (KY system), with kill ring as the place store content, and CUA system, with system clipboard as place to store the content. 
-- By default, text from KY system is able to write into system clipboard, while the reciprocal writing (CUA writing in kill ring) was not active. 
-*** there are two ways to address this issue. 
+*** the mechanism of this issue
+- there are two systems here, kill/yank system (KY system), with kill ring as the place store content, and CUA system, with system clipboard as place to store the content.
+- By default, text from KY system is able to write into system clipboard, while the reciprocal writing (CUA writing in kill ring) was not active.
+*** there are two ways to address this issue.
 |----------------------------------------------+-------------------------------------|
 | solutions                                    | to accomplish external pasting      |
 |----------------------------------------------+-------------------------------------|
@@ -283,46 +316,59 @@ Sources for this section include [[https://github.com/magnars/.emacs.d/blob/mast
 | 2. or disable KY written in system clipboard | use a new key binding               |
 |----------------------------------------------+-------------------------------------|
 #+BEGIN_SRC emacs-lisp
-;; 1, unifying system clipboard and KY kill ring 
+;; 1, unifying system clipboard and KY kill ring
 (setq save-interprogram-paste-before-kill t)
 
-;; 2. sepeate clearly the two system and use a new key binding to it 
+;; 2. sepeate clearly the two system and use a new key binding to it
 ;;(setq x-select-enable-clipboard nil)
 ;;(global-set-key (kbd "C-c y") 'x-clipboard-yank)
 #+END_SRC
 ** mode-line face                            :MELPA_ori:
 #+BEGIN_SRC emacs-lisp
 (display-time-mode)
-(require 'smart-mode-line)
-(setq powerline-arrow-shape 'curve)
-(setq powerline-default-separator-dir 'wave) 
-(setq sml/theme 'powerline)
-(setq sml/mode-width 0)
-(setq sml/name-width 20)
-(rich-minority-mode 1)
-(setf rm-blacklist "")
-(sml/setup)
+
+
+
+(use-package smart-mode-line
+  :ensure t
+  :init
+  (setq sml/no-confirm-load-theme t)
+  (setq sml/theme 'powerline)
+  (setq powerline-arrow-shape 'curve)
+  (setq powerline-default-separator-dir '(left . right))
+  (setq sml/name-width 20)
+  (setq sml/mode-width 0)
+  (sml/setup) ;;to initiate the sml!!
+  :config
+  (progn
+    (set-face-attribute 'mode-line nil
+			:box nil)
+    (add-to-list 'sml/replacer-regexp-list '("^~/src/" ":src:") t)))
+
+(use-package diminish
+  :ensure t
+  :config
+  (progn
+    (eval-after-load "whitespace" '(diminish 'whitespace-mode))
+    (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+    (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
+    (eval-after-load "guide-key" '(diminish 'guide-key-mode))
+    (eval-after-load "smartparens" '(diminish 'smartparens-mode))
+    (eval-after-load "guide-key" '(diminish 'guide-key-mode))
+    (eval-after-load "eldoc" '(diminish 'eldoc-mode))
+    (eval-after-load "flyspell" '(diminish 'fly-spell-mode))
+    (diminish 'visual-line-mode)
+    ))
+
+;; (use-package org-wc
+;;   :ensure org-wc) ;;
+
+
+;; (custom-set-faces
+;;  '(mode-line ((t (:foreground "#030303" :background "#bdbdbd" :box nil))))
+;;  '(mode-line-inactive ((t (:foreground "#f9f9f9" :background "#666666" :box nil)))))
 #+END_SRC
 
-** Inactive chinese-fonts-setup              :MELPA_ori:
-#+BEGIN_SRC
-(require 'chinese-fonts-setup)
-(chinese-fonts-setup-enable)
-(set-face-attribute
- 'default nil
- :font (font-spec :name "-*-Monaco-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
-                  :weight 'normal
-                  :slant 'normal
-                  :size 12.5))
-(dolist (charset '(kana han symbol cjk-misc bopomofo))
-  (set-fontset-font
-   (frame-parameter nil 'font)
-   charset
-   (font-spec :name "-*-STKaiti-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1"
-              :weight 'normal
-              :slant 'normal
-              :size 15.0)))
-#+END_SRC
 ** guide-key mode                            :MELPA_ori:
 #+BEGIN_SRC emacs-lisp
 (require 'guide-key)
@@ -332,22 +378,23 @@ Sources for this section include [[https://github.com/magnars/.emacs.d/blob/mast
 #+END_SRC
 
 ** [[https://github.com/lewang/command-log-mode][command log-mode]]                          :MELPA_ori:
-#+BEGIN_SRC 
+#+BEGIN_SRC
 (use-package command-log-mode
   :ensure t)
-
+#+END_SRC
+** CANCELED ergoemacs mode
+#+BEGIN_SRC
+  (use-package ergoemacs-mode
+    :ensure t
+    :init (progn
+	    (setq emacs-theme "lvl1")
+	    (ergoemacs-mode 1)))
 
 #+END_SRC
-* Key binding setup
+* Files in buffers
+** file fast jump
+*** key jump
 #+begin_src emacs-lisp
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-cb" 'org-iswitchb)
-(global-set-key (kbd "C-c C-.") 'calendar)
-(global-set-key (kbd "C-c v") 'org-show-todo-tree)
-
-
 (global-set-key (kbd "S-<f10>")
   (lambda ()
     (interactive)
@@ -374,27 +421,22 @@ Sources for this section include [[https://github.com/magnars/.emacs.d/blob/mast
     (find-file "/Users/Guoshiyuan/.emacs.d/config.org")))
 
 #+end_src
-
-** tab behavior
-- tab indentation and program indentation with Emacs_manual 24 and 26.3 respectively. 
-
+*** bm: for book mark                      :MELPA_ori:
 #+BEGIN_SRC emacs-lisp
-(setq-default indent-tabs-mode t)
-
+(use-package bm
+  :ensure t
+  :bind (("C-c =" . bm-toggle)
+	 ("C-c [" . bm-previous)
+	 ("C-c ]" . bm-next)))
 #+END_SRC
 
-* Files in buffers 
-** Buffer/windows/frame in MAC flavor
+** MAC "s-" key
 #+BEGIN_SRC emacs-lisp
-(when (string-equal system-type "darwin")
-  ;; delete files by moving them to the trash
-  (setq delete-by-moving-to-trash t)
-  (setq trash-directory "~/.Trash")
 
   ;; Don't make new frames when opening a new file with Emacs
   (setq ns-pop-up-frames nil)
   ;; Use Command-` to switch between Emacs windows (not frames)
-  (bind-key "s-`" 'other-window))
+  ;; (bind-key "s-`" 'other-window))
 
   ;; Because of the keybindings above, set one for `other-frame'
   ;; (bind-key "s-1" 'other-frame)
@@ -404,11 +446,12 @@ Sources for this section include [[https://github.com/magnars/.emacs.d/blob/mast
   (bind-key "<s-return>" 'toggle-frame-fullscreen)
 
 #+END_SRC
-** switching among[[https://zhuanlan.zhihu.com/p/24017130?refer%3Dghostinemacs][ "meaningful" buffer ]]      :wolray:
-- what is definition of meaningful buffer. 
-- the two variable are [[help:buffer-read-only][buffer-read-only]] and [[help:buffer-file-name][buffer-file-name]]. 
+** buffer manipulation                      :wolray:
+*** switching among[[https://zhuanlan.zhihu.com/p/24017130?refer%3Dghostinemacs][ "meaningful" buffer ]]
+- what is definition of meaningful buffer.
+- the two variable are [[help:buffer-read-only][buffer-read-only]] and [[help:buffer-file-name][buffer-file-name]].
 #+BEGIN_SRC emacs-lisp
-;; define the meaning of normal buffer 
+;; define the meaning of normal buffer
 (defun f-normal-buffer ()
 (or (not buffer-read-only)
     (buffer-file-name)))
@@ -436,20 +479,50 @@ Sources for this section include [[https://github.com/magnars/.emacs.d/blob/mast
 (bind-key "s-[" 'c-switch-to-next-buffer)
 (bind-key "s-]" 'c-switch-to-prev-buffer)
 #+END_SRC
-
-** dired
-#+BEGIN_SRC emacs-lisp
-  (setq ls-lisp-use-insert-directory-program nil)
-  (require 'ls-lisp)
-
-#+END_SRC
-** ibuffer is the improved version of list-buffers.
+*** ibuffer is the improved version of list-buffers.
 #+begin_src emacs-lisp
 ;; make ibuffer the default buffer lister.
 (defalias 'list-buffers 'ibuffer)
 #+end_src
 source: http://ergoemacs.org/emacs/emacs_buffer_management.html
-** auto-revert mode
+*** toggle window view [[http://stackoverflow.com/questions/14881020/emacs-shortcut-to-switch-from-a-horizontal-split-to-a-vertical-split-in-one-move][from horizontal split to vertical split]]
+
+#+BEGIN_SRC emacs-lisp
+(defun toggle-window-split ()
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+	     (next-win-buffer (window-buffer (next-window)))
+	     (this-win-edges (window-edges (selected-window)))
+	     (next-win-edges (window-edges (next-window)))
+	     (this-win-2nd (not (and (<= (car this-win-edges)
+					 (car next-win-edges))
+				     (<= (cadr this-win-edges)
+					 (cadr next-win-edges)))))
+	     (splitter
+	      (if (= (car this-win-edges)
+		     (car (window-edges (next-window))))
+		  'split-window-horizontally
+		'split-window-vertically)))
+	(delete-other-windows)
+	(let ((first-win (selected-window)))
+	  (funcall splitter)
+	  (if this-win-2nd (other-window 1))
+	  (set-window-buffer (selected-window) this-win-buffer)
+	  (set-window-buffer (next-window) next-win-buffer)
+	  (select-window first-win)
+	  (if this-win-2nd (other-window 1))))))
+
+(global-set-key (kbd "C-x |") 'toggle-window-split)
+
+#+END_SRC
+** TODO dired file managment
+#+BEGIN_SRC emacs-lisp
+  (setq ls-lisp-use-insert-directory-program nil)
+  (require 'ls-lisp)
+
+#+END_SRC
+*** auto-revert mode
 #+begin_src emacs-lisp
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
@@ -458,35 +531,36 @@ source: http://ergoemacs.org/emacs/emacs_buffer_management.html
 (setq auto-revert-verbose nil)
 #+end_src
 source: [[http://whattheemacsd.com/sane-defaults.el-01.html][Magnars Sveen]]
-** Recentf 
+** TODO Recentf
 #+BEGIN_SRC emacs-lisp
 (recentf-mode 1)
 (setq recentf-max-saved-items 200
       recentf-max-menu-items 15)
-(setq inhibit-startup-message t)        
+(setq inhibit-startup-message t)
 #+END_SRC
-** minibuffer [[file:~/Dropbox/org_files/org_life/emacs-history][history]]
+*** minibuffer [[file:~/Dropbox/org_files/org_life/emacs-history][history]]
 #+BEGIN_SRC emacs-lisp
 (setq savehist-file "/Users/Guoshiyuan/Dropbox/org_files/org_life/emacs-history")
 (savehist-mode 1)
 
 #+END_SRC
 
-** External link using default apps. 
-- i thought this is an emacs problem; therefore I dig into the code from [[http://emacs.stackexchange.com/questions/3105/how-to-use-an-external-program-as-the-default-way-to-open-pdfs-from-emacs][using terminal default app]] and [[http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html][openwith package]]. I did not think carefully that this problem is actually an org-mode related problem 
+** External link using default apps.
+- i thought this is an emacs problem; therefore I dig into the code from [[http://emacs.stackexchange.com/questions/3105/how-to-use-an-external-program-as-the-default-way-to-open-pdfs-from-emacs][using terminal default app]] and [[http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html][openwith package]]. I did not think carefully that this problem is actually an org-mode related problem
   - I keep on testing file link in org mode, and the link (the [[http://stackoverflow.com/questions/3973896/emacs-org-mode-file-viewer-associations][URL-like link]]) is folded in org mode syntax.
 - this is the [[https://dontomp.wordpress.com/2015/01/31/in-org-mode-have-the-default-program-openoffice-word-or-whatever-open-docx-file-links/][link]] to addressing the issue.
-  - not quite sure about the extention syntax and meaning of single quote after it. //is that regular expression 
-    
+  - not quite sure about the extention syntax and meaning of single quote after it. //is that regular expression
+
 #+BEGIN_SRC emacs-lisp
 (setq org-file-apps
       '(("\\.docx\\'" . default)
-        ("\\.xlsx\\'" . default)
-        ("\\.png\\'" . default)
-        ("\\.tif\\'" . default)
-        ("\\.tiff\\'" . default)
+        ("\\.doc\\'" . default)
+	("\\.xlsx\\'" . default)
+	("\\.png\\'" . default)
+	("\\.tif\\'" . default)
+	("\\.tiff\\'" . default)
 	("\\.pdf\\'" . default)
-        (auto-mode . emacs)))
+	(auto-mode . emacs)))
 #+END_SRC
 
 *** open pdf using emacs internal packages, docview
@@ -499,73 +573,44 @@ source: [[http://whattheemacsd.com/sane-defaults.el-01.html][Magnars Sveen]]
 
 #+END_SRC
 
-* Completion and selection 
+* Selection and completion
 - how helm+swoop complement task with ivy+counsel+swiper
-- a list of function 
+- a list of function
   + M-x
   + C-x C-f
   + C-h v/f
-|---------------+---------------+-------------------------+------------------|
-| package combi | advantages    | disadv                  | task it complish |
-|---------------+---------------+-------------------------+------------------|
-| helm          |               | create a tangiblebuffer | flyspell,        |
-| ivy-swiper    | contextualise |                         | searching        |
-   
-** Helm                                      :MELPA_ori:
-- [[http://emacs.readthedocs.io/en/latest/completion_and_selection.html][helm and multiple cursor interaction]]. 
-#+begin_src emacs-lisp
-(use-package helm
-  :ensure t
-  :diminish helm-mode
-  :init (progn
-          (require 'helm-config)
-          (use-package helm-projectile
-            :ensure t
-            :commands helm-projectile
-            :bind ("C-c p h" . helm-projectile))
-          (use-package helm-ag :defer 10  :ensure t)
-          (setq helm-locate-command "mdfind -interpret -name %s %s"
-                helm-ff-newfile-prompt-p nil
-                helm-M-x-fuzzy-match t
-		helm-buffers-fuzzy-matching t
-		helm-recentf-fuzzy-match t
-		helm-apropos-fuzzy-match t
-		helm-semantic-fuzzy-match t
-		helm-imenu-fuzzy-match t)
-          (helm-mode)
-          (use-package helm-swoop
-            :ensure t
-            :bind ("C-M-z" . helm-swoop)
-	    :init (progn
-		    (setq helm-multi-swoop-edit-save t
-			  ))))
-  :bind (("C-c h" . helm-command-prefix)
-         ("C-x b" . helm-mini)
-         ("C-`" . helm-resume)
-         ("M-x" . helm-M-x)
-         ("C-x C-f" . helm-find-files)
-	 ("C-h a" . helm-apropos)
-	 ("C-c h o" . helm-occur)))
+|----------------------+-----------------------------+------------------|
+| packages&            | description                 | task it complish |
+|----------------------+-----------------------------+------------------|
+| [[https://github.com/emacs-helm/helm][helm]]                 |                             | flyspell,        |
+| - helm-projectile    |                             |                  |
+| - helm-ag            |                             |                  |
+| - helm-swoop         |                             |                  |
+|----------------------+-----------------------------+------------------|
+| [[http://oremacs.com/swiper/][ivy]] @ abo-abo        | generic list pick           | searching        |
+| - hydra              | C-o to initiate *fast key*  |                  |
+| - counsel            |                             |                  |
+| - councel-[[http://projectile.readthedocs.io/en/latest/][projectile]] | project interaction library |                  |
+| - swiper             | alt to isearch,             |                  |
+|----------------------+-----------------------------+------------------|
+| [[https://github.com/abo-abo/ace-window][ace-window]] @ abo-abo |                             |                  |
+|----------------------+-----------------------------+------------------|
+| [[https://github.com/abo-abo/ace-link][ace-link]] @ abo-abo   |                             |                  |
+|----------------------+-----------------------------+------------------|
+| [[https://github.com/abo-abo/avy][avy]] Vs [[https://github.com/winterTTr/ace-jump-mode][ace-jump-mode]] |                             |                  |
+|----------------------+-----------------------------+------------------|
+| popup                |                             |                  |
+| - ess-R-object-popup |                             |                  |
+|----------------------+-----------------------------+------------------|
+| [[http://company-mode.github.io][company]]              | technical completion        |                  |
+| - shell              | shell backend               |                  |
 
 
 
-#+end_src
-** ace-jump-mode
-#+BEGIN_SRC emacs-lisp
-(use-package ace-jump-mode
-  :ensure t
-  :bind ("C--" . ace-jump-mode))
-#+END_SRC
-** expand region
-#+BEGIN_SRC emacs-lisp
-(use-package expand-region
-  :ensure t
-  :bind ("C-=" . er/expand-region))
-#+END_SRC
 
 ** ivy-hydra for switching buffer            :MELPA_ori:
 #+BEGIN_SRC emacs-lisp
-(use-package counsel
+ (use-package counsel
    :ensure t
    :bind
    (("M-x" . counsel-M-x)
@@ -574,21 +619,20 @@ source: [[http://whattheemacsd.com/sane-defaults.el-01.html][Magnars Sveen]]
     ("M-y" . ivy-next-line)))
 
   (use-package swiper
-    :pin melpa
     :diminish ivy-mode
     :ensure t
     :bind*
     (("C-s" . swiper)
-     ;; ("C-c C-r" . ivy-resume)
-     ;; ("C-x C-f" . counsel-find-file)
-     ("C-h f" . counsel-describe-function)
-     ("C-h v" . counsel-describe-variable)
+     ("C-r" . ivy-resume) ;; original C-c C-r overide with ess send region. 
+     ("C-x C-f" . counsel-find-file)
+     ("C-c h f" . counsel-describe-function)
+     ("C-c h v" . counsel-describe-variable)
      ("C-c i u" . counsel-unicode-char)
-     ("M-i" . counsel-imenu))
-     ;;("C-c g" . counsel-git)
-     ;;("C-c j" . counsel-git-grep)
-     ;;("C-c k" . counsel-ag)
-
+     ("M-i" . counsel-imenu)
+     ("C-c g" . counsel-git)
+     ("C-c j" . counsel-git-grep)
+     ("C-c k" . counsel-ag)
+     ("C-c i u" . counsel-locate))
     :config
     (progn
       (ivy-mode 1)
@@ -597,18 +641,18 @@ source: [[http://whattheemacsd.com/sane-defaults.el-01.html][Magnars Sveen]]
       (ivy-set-actions
 	'counsel-find-file
 	'(("d" (lambda (x) (delete-file (expand-file-name x)))
-          "delete"
-          )))
+	  "delete"
+	  )))
       (ivy-set-actions
 	'ivy-switch-buffer
 	'(("k"
-          (lambda (x)
-            (kill-buffer x)
-            (ivy--reset-state ivy-last))
-          "kill")
-         ("j"
-          ivy--switch-buffer-other-window-action
-          "other window")))))
+	  (lambda (x)
+	    (kill-buffer x)
+	    (ivy--reset-state ivy-last))
+	  "kill")
+	 ("j"
+	  ivy--switch-buffer-other-window-action
+	  "other window")))))
 
  (use-package counsel-projectile
    :ensure t
@@ -618,24 +662,175 @@ source: [[http://whattheemacsd.com/sane-defaults.el-01.html][Magnars Sveen]]
  (use-package ivy-hydra :ensure t)
 #+END_SRC
 
-** bm: for book mark                         :MELPA_ori:
-#+BEGIN_SRC emacs-lisp
-(use-package bm
-  :ensure t
-  :bind (("C-c =" . bm-toggle)
-         ("C-c [" . bm-previous)
-         ("C-c ]" . bm-next)))
-#+END_SRC
 
-* Generic document edit 
-** Undo Tree                                 :MELPA_ori:
+** flyspell using ivy                       :MELPA_ori:
+- [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][the strength and weekness of using aspell and hunspell.]]
 #+BEGIN_SRC emacs-lisp
-(use-package undo-tree
-  :ensure t)
+(setq flyspell-use-meta-tab nil)
+
+(use-package flyspell-correct-ivy
+  :bind (:map flyspell-mode-map
+	      ("C-;" . flyspell-correct-word-generic)))
+
+;;(require 'flyspell-correct-helm)
+;;(define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-previous-word-generic)
 #+END_SRC
-** Parenthesis 
-*** sp-mode                                  :MELPA_ori:
- #+BEGIN_SRC emacs-lisp
+** avy
+#+BEGIN_SRC emacs-lisp
+(use-package avy
+  :bind
+  (:map dired-mode-map ("." . avy-goto-word-or-subword-1))
+  :config
+  (avy-setup-default))
+#+END_SRC
+** ace link
+- [[https://github.com/waymondo/hemacs/blob/master/init.el][waymondo]]
+#+BEGIN_SRC emacs-lisp
+(use-package ace-link
+  :bind
+  ("M-g e" . avy-jump-error)
+  :config
+  (ace-link-setup-default)
+  (defun avy-jump-error-next-error-hook ()
+    (let ((compilation-buffer (compilation-find-buffer)))
+      (quit-window nil (get-buffer-window compilation-buffer))
+      (recenter)))
+  (def avy-jump-error
+    (let ((compilation-buffer (compilation-find-buffer))
+	  (next-error-hook '(avy-jump-error-next-error-hook)))
+      (when compilation-buffer
+	(with-current-buffer compilation-buffer
+	  (when (derived-mode-p 'compilation-mode)
+	    (pop-to-buffer compilation-buffer)
+	    (ace-link-compilation)))))))
+#+END_SRC
+** ace window
+- [[https://github.com/waymondo/hemacs/blob/master/init.el][waymondo]]
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :ensure t
+  :bind  ("s-`" . ace-window)
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  :init
+  (progn
+    (global-set-key [remap other-window] 'ace-window)
+					;(setq aw-scope 'frame)
+    (custom-set-faces
+     '(aw-leading-char-face
+       ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+))
+#+END_SRC
+** CANCELED ace-jump-mode
+#+BEGIN_SRC
+(use-package ace-jump-mode
+  :ensure t
+  :bind ("C--" . ace-jump-mode))
+#+END_SRC
+** CANCELED Helm                            :MELPA_ori:
+- [[http://emacs.readthedocs.io/en/latest/completion_and_selection.html][helm and multiple cursor interaction]].
+#+begin_src
+(use-package helm
+  :ensure t
+  :diminish helm-mode
+  :init (progn
+	  (require 'helm-config)
+	  (use-package helm-projectile
+	    :ensure t
+	    :commands helm-projectile
+	    :bind ("C-c p h" . helm-projectile))
+	  (use-package helm-ag :defer 10  :ensure t)
+	  (setq helm-locate-command "mdfind -interpret -name %s %s"
+		helm-ff-newfile-prompt-p nil
+		helm-M-x-fuzzy-match t
+		helm-buffers-fuzzy-matching t
+		helm-recentf-fuzzy-match t
+		helm-apropos-fuzzy-match t
+		helm-semantic-fuzzy-match t
+		helm-imenu-fuzzy-match t)
+	  (helm-mode)
+	  (use-package helm-swoop
+	    :ensure t
+	    :bind ("C-M-z" . helm-swoop)
+	    :init (progn
+		    (setq helm-multi-swoop-edit-save t
+			  ))))
+  :bind (("C-c h" . helm-command-prefix)
+	 ("C-x b" . helm-mini)
+	 ("C-`" . helm-resume)
+	 ("M-x" . helm-M-x)
+	 ("C-x C-f" . helm-find-files)
+	 ("C-h a" . helm-apropos)
+	 ("C-c h o" . helm-occur)))
+
+
+
+#+end_src
+** CANCELED Ido                             :MELPA_ori:
+
+#+begin_src
+(use-package ido
+  :init
+  (setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+  (ido-mode t)
+  (use-package ido-vertical-mode
+    :ensure t
+    :defer t
+    :init (ido-vertical-mode 1)
+    (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
+#+end_src
+
+
+
+
+
+* Generic document edit
+** Parenthesis
+*** show parenthesis
+#+BEGIN_SRC emacs-lisp
+(show-paren-mode t)
+
+(use-package highlight-parentheses
+  :ensure t
+  :diminish highlight-parentheses-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook
+	    (lambda()
+	      (highlight-parentheses-mode)
+	      )))
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'lisp-mode-hook
+	    (lambda()
+	      (rainbow-delimiters-mode)
+	      ))
+  :init (global-highlight-parentheses-mode)
+  )
+
+
+#+END_SRC
+*** add parenthesis
+|-----------------------+-----------------------------------------+----------------------------------|
+|                       | requirements                            | strategy/mechanism               |
+|-----------------------+-----------------------------------------+----------------------------------|
+| in text (org)         | post-word highlight ()                  | wrapping outside of the previous |
+|                       | preset wrapper (=, ~, _, +), except "*" | expand region                    |
+| in program mode (ess) | post-word highlight                     |                                  |
+|                       |                                         |                                  |
+
+
+
+
+
+
+
+
+
+
+#+BEGIN_SRC emacs-lisp
 (smartparens-global-mode 1)
 (sp-pair "(" ")" :wrap "C-(")
 ;; |foobar
@@ -643,14 +838,22 @@ source: [[http://whattheemacsd.com/sane-defaults.el-01.html][Magnars Sveen]]
 ;; becomes (|foobar)
 (sp-pair "'" nil :actions :rem)
 
-(sp-local-pair 'org-mode "=" "=") ; select region, hit = then region -> =region= in org-mode
-(sp-local-pair 'org-mode "*" "*") ; select region, hit * then region -> *region* in org-mode
+;; (sp-local-pair 'org-mode "=" "=") ; select region, hit = then region -> =region= in org-mode
+;; (sp-local-pair 'org-mode "*" "*") ; select region, hit * then region -> *region* in org-mode
 ;;(sp-local-pair 'org-mode "/" "/") ; select region, hit / then region -> /region/ in org-mode
-(sp-local-pair 'org-mode "_" "_") ; select region, hit _ then region -> _region_ in org-mode
+;; (sp-local-pair 'org-mode "_" "_") ; select region, hit _ then region -> _region_ in org-mode
 ;; (sp-local-pair 'org-mode "+" "+") ; select region, hit + then region -> +region+ in org-mode
  #+END_SRC
-
+**** TODO this is troublesome for normal org documentation.
+- inserting formula in orgtable, ":=" gives a double equal sign
+- inserting org header give a double **...
+- the best thing is to only apply with highlighted region, which is activated by =expand resion=.
+- a [[http://stackoverflow.com/questions/2951797/wrapping-selecting-text-in-enclosing-characters-in-emacs%5D%5D][post]]
 *** paredit                                  :MELPA_ori:
+**** by jwiegley's [[https://github.com/jwiegley/dot-emacs/blob/e65069d6c715b6eba5d6543ff5897643c92b7625/init.el][init.el]] and self-defined_[[https://github.com/jwiegley/dot-emacs/blob/f23993cfcb9ca90c289b4214b9bafbf46883bdb4/lisp/paredit-ext.el][parendit-ext.el]], there are following functions
+-
+
+
 #+BEGIN_SRC emacs-lisp
 (use-package paredit
   :ensure t
@@ -672,35 +875,246 @@ source: [[http://whattheemacsd.com/sane-defaults.el-01.html][Magnars Sveen]]
   :config
   (add-hook 'prog-mode-hook #'paredit-everywhere-mode))
 
-(use-package highlight-parentheses
-  :ensure t
-  :diminish highlight-parentheses-mode
-  :config
-  (add-hook 'emacs-lisp-mode-hook
-            (lambda()
-              (highlight-parentheses-mode)
-              )))
-
-(use-package rainbow-delimiters
-  :ensure t
-  :config
-  (add-hook 'lisp-mode-hook
-            (lambda()
-              (rainbow-delimiters-mode)
-              )))
-
-(global-highlight-parentheses-mode)
 
 #+END_SRC
-** flyspell                                  :MELPA_ori:
 
+** expand region
 #+BEGIN_SRC emacs-lisp
-(setq flyspell-use-meta-tab nil)
-
-(require 'flyspell-correct-helm)
-(define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-previous-word-generic)
+(use-package expand-region
+  :ensure t
+  :bind ("C-=" . er/expand-region))
 #+END_SRC
 
+** TODO multiple cursor
+*** [[http://emacs.stackexchange.com/questions/751/fundamentals-of-multiple-cursors][fundamental use of multiple cursor]]
+*** mc usage @ [[http://pragmaticemacs.com/emacs/multiple-cursors/][pragmatics emacs]]
+#+BEGIN_SRC emacs-lisp
+;;kaushalmodi
+(use-package multiple-cursors
+  :bind (("C-S-c C-S-c" . mc/edit-lines)
+	 ("C->" . mc/mark-next-like-this)
+	 ("C-<" . mc/mark-previous-like-this)
+	 ("C-c C-<" . mc/mark-all-like-this)
+	 ("C-S-<mouse-1>" . mc/add-cursor-on-click))
+  ;; :bind (:map region-bindings-mode-map
+  ;;	      ("a" . mc/mark-all-like-this)
+  ;;	      ("p" . mc/mark-previous-like-this)
+  ;;	      ("n" . mc/mark-next-like-this)
+  ;;	      ("P" . mc/unmark-previous-like-this)
+  ;;	      ("N" . mc/unmark-next-like-this)
+  ;;	      ("[" . mc/cycle-backward)
+  ;;	      ("]" . mc/cycle-forward)
+  ;;	      ("m" . mc/mark-more-like-this-extended)
+  ;;	      ("h" . mc-hide-unmatched-lines-mode)
+  ;;	      ("\\" . mc/vertical-align-with-space)
+  ;;	      ("#" . mc/insert-numbers) ; use num prefix to set the starting number
+  ;;	      ("^" . mc/edit-beginnings-of-lines)
+  ;;	      ("$" . mc/edit-ends-of-lines))
+  :init
+  (progn
+    (setq mc/list-file (locate-user-emacs-file "mc-lists"))
+    ;; Disable the annoying sluggish matching paren blinks for all cursors
+    ;; when you happen to type a ")" or "}" at all cursor locations.
+    (defvar modi/mc-blink-matching-paren--store nil
+      "Internal variable used to restore the value of `blink-matching-paren'
+after `multiple-cursors-mode' is quit.")
+
+    ;; The `multiple-cursors-mode-enabled-hook' and
+    ;; `multiple-cursors-mode-disabled-hook' are run in the
+    ;; `multiple-cursors-mode' minor mode definition, but they are not declared
+    ;; (not `defvar'd). So do that first before using `add-hook'.
+    (defvar multiple-cursors-mode-enabled-hook nil
+      "Hook that is run after `multiple-cursors-mode' is enabled.")
+    (defvar multiple-cursors-mode-disabled-hook nil
+      "Hook that is run after `multiple-cursors-mode' is disabled.")
+
+    (defun modi/mc-when-enabled ()
+      "Function to be added to `multiple-cursors-mode-enabled-hook'."
+      (setq modi/mc-blink-matching-paren--store blink-matching-paren)
+      (setq blink-matching-paren nil))
+
+    (defun modi/mc-when-disabled ()
+      "Function to be added to `multiple-cursors-mode-disabled-hook'."
+      (setq blink-matching-paren modi/mc-blink-matching-paren--store))
+
+    (add-hook 'multiple-cursors-mode-enabled-hook #'modi/mc-when-enabled)
+    (add-hook 'multiple-cursors-mode-disabled-hook #'modi/mc-when-disabled)))
+
+
+
+;; (require 'multiple-cursors)
+;; (global-set-key (kbd "C-S-<right>") 'mc/mark-next-like-this)
+;; (global-set-key (kbd "C-S-<left>") 'mc/mark-previous-like-this)
+#+END_SRC
+** CANCELED global abbrev
+#+BEGIN_SRC
+;; * Autoformat mode in org-mode
+
+(defcustom scimax-autoformat-ordinals t
+  "Determines if scimax autoformats ordinal numbers."
+  :group 'scimax)
+
+(defun scimax-org-autoformat-ordinals ()
+  "Expand ordinal words to superscripted versions in org-mode.
+1st to 1^{st}.
+2nd to 2^{nd}
+3rd to 3^{rd}
+4th to 4^{th}"
+  (interactive)
+  (when (and scimax-autoformat-ordinals
+	     (eq major-mode 'org-mode)
+	     (not (org-in-src-block-p))
+	     (looking-back "\\(?3:\\<\\(?1:[0-9]+\\)\\(?2:st\\|nd\\|rd\\|th\\)\\>\\)\\(?:[[:punct:]]\\|[[:space:]]\\)"
+			   (line-beginning-position)))
+    (undo-boundary)
+    (save-excursion
+      (replace-match "\\1^{\\2}" nil nil nil 3))))
+
+
+(defcustom scimax-autoformat-fractions t
+  "Determines if scimax autoformats fractions."
+  :group 'scimax)
+
+
+(defun scimax-org-autoformat-fractions ()
+  "Expand fractions to take up space."
+  (interactive)
+  (when (and scimax-autoformat-fractions
+	     (eq major-mode 'org-mode)
+	     (not (org-in-src-block-p))
+	     (looking-back "\\(?3:\\<\\(1/4\\|1/2\\|3/4\\)\\>\\)\\(?:[[:punct:]]\\|[[:space:]]\\)"
+			   (line-beginning-position)))
+    (undo-boundary)
+    (save-excursion
+      (replace-match (cdr (assoc (match-string 3) '(("1/4" . "¼")
+						    ("1/2" . "½")
+						    ("3/4" . "¾"))))
+		     nil nil nil 3))))
+
+(defun scimax-org-autoformat ()
+  "Autoformat functions."
+  (scimax-org-autoformat-ordinals)
+  (scimax-org-autoformat-fractions))
+
+(define-minor-mode scimax-autoformat-mode
+  "Toggle `scimax-autoformat-mode'.  Converts 1st to 1^{st} as you type."
+  :init-value nil
+  :lighter (" om")
+  (if scimax-autoformat-mode
+      (add-hook 'post-self-insert-hook #'scimax-org-autoformat nil 'local)
+    (remove-hook 'post-self-insert-hook #'scimax-org-autoformat 'local)))
+
+
+(defcustom scimax-autoformat-months t
+  "Determines if months should be auto-capitalized."
+  :group 'scimax)
+
+(when scimax-autoformat-months
+  (define-global-abbrev "january" "January")
+  (define-global-abbrev "february" "February")
+  (define-global-abbrev "march" "March")
+  (define-global-abbrev "april" "April")
+  (define-global-abbrev "may" "May")
+  (define-global-abbrev "june" "June")
+  (define-global-abbrev "july" "July")
+  (define-global-abbrev "august" "August")
+  (define-global-abbrev "september" "September")
+  (define-global-abbrev "october" "October")
+  (define-global-abbrev "november" "November")
+  (define-global-abbrev "december" "December"))
+
+
+  (define-global-abbrev "monday" "Monday")
+  (define-global-abbrev "tuesday" "Tuesday")
+  (define-global-abbrev "wednesday" "Wednesday")
+  (define-global-abbrev "thursday" "Thursday")
+  (define-global-abbrev "friday" "Friday")
+  (define-global-abbrev "saturday" "Saturday")
+  (define-global-abbrev "sunday" "Sunday")
+
+(define-global-abbrev "degC" "°C")
+(define-global-abbrev "degF" "°F")
+(define-global-abbrev "ang" "Å")
+
+
+  (define-global-abbrev "arent" "are not")
+  (define-global-abbrev "aren't" "are not")
+
+  (define-global-abbrev "cant" "can not")
+  (define-global-abbrev "can't" "can not")
+
+  (define-global-abbrev "couldnt" "could not")
+  (define-global-abbrev "couldn't" "could not")
+
+  (define-global-abbrev "didnt" "did not")
+  (define-global-abbrev "didn't" "did not")
+
+  (define-global-abbrev "doesnt" "does not")
+  (define-global-abbrev "doesn't" "does not")
+
+  (define-global-abbrev "dont" "do not")
+  (define-global-abbrev "don't" "do not")
+
+  (define-global-abbrev "hadnt" "had not")
+  (define-global-abbrev "hadn't" "had not")
+
+  (define-global-abbrev "hasnt" "has not")
+  (define-global-abbrev "has'nt" "has not")
+
+  (define-global-abbrev "isnt" "is not")
+  (define-global-abbrev "isn't" "is not")
+
+  (define-global-abbrev "shouldnt" "should not")
+  (define-global-abbrev "shouldn't" "should not")
+
+  (define-global-abbrev "thats" "that is")
+  (define-global-abbrev "that's" "that is")
+
+  (define-global-abbrev "wasnt" "was not")
+  (define-global-abbrev "wasn't" "was not")
+
+  (define-global-abbrev "whos" "who is")
+  (define-global-abbrev "who's" "who is")
+
+  (define-global-abbrev "wont" "will not")
+  (define-global-abbrev "won't" "will not")
+
+  (define-global-abbrev "wouldve" "would have")
+  (define-global-abbrev "would've" "would have")
+
+  (define-global-abbrev "wouldn't" "would not")
+  (define-global-abbrev "wouldnt" "would not")
+
+
+
+  (define-global-abbrev "nad" "and")
+  (define-global-abbrev "ahve" "have")
+  (define-global-abbrev "fi" "if")
+  (define-global-abbrev "fo" "of")
+  (define-global-abbrev "nto" "not")
+  (define-global-abbrev "teh" "the")
+  (define-global-abbrev "hte" "the")
+  (define-global-abbrev "htat" "that")
+  (define-global-abbrev "htem" "them")
+  (define-global-abbrev "iwth" "with")
+  (define-global-abbrev "hwat" "what")
+  (define-global-abbrev "waht" "what")
+  (define-global-abbrev "wehn" "when")
+
+
+;; Some common names with umlauts
+;; (define-global-abbrev "schrodinger" "Schrödinger")
+#+END_SRC
+** Undo Tree                                 :MELPA_ori:
+#+BEGIN_SRC emacs-lisp
+(use-package undo-tree
+  :ensure t
+  :init
+  (progn
+    (global-undo-tree-mode)
+    (setq undo-tree-visualizer-timestamps t)
+    (setq undo-tree-visualizer-diff t)))
+#+END_SRC
 ** vocabuilder                               :MELPA_ori:
 #+BEGIN_SRC emacs-lisp
 (use-package voca-builder
@@ -740,30 +1154,11 @@ restores the old window configuration when you quit out of magit. No more juggli
 
 
 
-* Inactive Ido                               :MELPA_ori:
-
-#+begin_src 
-(use-package ido
-  :init
-  (setq ido-enable-flex-matching t)
-  (setq ido-everywhere t)
-  (ido-mode t)
-  (use-package ido-vertical-mode
-    :ensure t
-    :defer t
-    :init (ido-vertical-mode 1)
-    (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
-#+end_src
-
-
-
-
-
-
-
 * Org-mode
-
-
+** org directory
+#+BEGIN_SRC emacs-lisp
+(setq org-directory "~/Dropbox/org_files")
+#+END_SRC
 ** org-mode-hook
 #+BEGIN_SRC emacs-lisp
 (add-hook 'org-mode-hook 'flyspell-mode)
@@ -776,74 +1171,167 @@ restores the old window configuration when you quit out of magit. No more juggli
 				;; (org-defkey org-mode-map "\C-n" 'org-next-link)
 				;; (org-defkey org-mode-map "\C-p" 'org-previous-link)
 ))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cb" 'org-iswitchb)
+(global-set-key (kbd "C-c C-.") 'calendar)
+(global-set-key (kbd "C-c v") 'org-show-todo-tree)
 
-;; ;; handling links 
+;; ;; handling links
 ;;  (add-hook 'org-load-hook
 ;;             (lambda ()
 ;;               (define-key org-mode-map "C-n" 'org-next-link)
 ;;               (define-key org-mode-map "C-p" 'org-previous-link)))
 #+END_SRC
-** org-links 
+** org structural edit
+*** org catch invisible editing
+#+BEGIN_SRC emacs-lisp
+(setq org-catch-invisible-edits t)
+#+END_SRC
+*** TODO Org speed key command
+- Speed commands are a nice and quick way to perform certain actions
+while at the beginning of a heading. It's not activated by default.
+- See the doc for speed keys by checking out [[elisp:(info%20"(org)%20speed%20keys")][the documentation for
+speed keys in Org mode]].
+
+#+begin_src emacs-lisp
+(setq org-use-speed-commands t)
+#+end_src
+
+*** org insert empty lines before inserting new heading.
+#+BEGIN_SRC emacs-lisp
+(setf org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
+#+END_SRC
+*** control A/E/K header behaviour
+#+BEGIN_SRC emacs-lisp
+(setq org-special-ctrl-a/e t)
+(setq org-special-ctrl-k t)
+#+END_SRC
+*** indentation
+**** variables related
+***** org indent group: virtual indentation
+- Org Startup Indented :: a global setting in toggling the default state of org-indent-mode (#+startup: ). the [[http://orgmode.org/manual/Clean-view.html][options]] for =startup= can be:
+  - default state of org-indentation mode
+  - org-hide-leading-stars
+  - odd even
+- org indent boundary char ::  ie. what is the character that makes heading successfully become a heading, thus get perspective face. (*** only takes effect when proceeded with a space. )
+- org indent indentation per level ::
+- org indent mode turns on hiding stars :: mode behavior; will indentation and stars are redundant.
+***** true indentation
+****** org adapt indentation (on $ nil only)
+****** org list indentation
+- org list description max indent
+- org list indent offset
+****** src indentation: true indentation
+- org edit src content indentation
+- Org Src Preserve Indentation
+**** disable true indentation and default hide stars
+#+BEGIN_SRC emacs-lisp
+(setq org-adapt-indentation nil)
+;; (setq org-hide-leading-stars t)
+#+END_SRC
+
+** org-links
 #+BEGIN_SRC emacs-lisp
 ;; (setq org-link-abbrev-alist
 ;;       '(("org_refcard" . [[http://emacs.readthedocs.io/en/latest/index.html][org_refcard]])
-;; 	("dotEmacs_YT" . "http://emacs.readthedocs.io/en/latest/index.html")))
+;;	("dotEmacs_YT" . "http://emacs.readthedocs.io/en/latest/index.html")))
 
 #+END_SRC
 ** Org agenda
+- org-agenda-custom-commands: customization of your agenda variables.
+- Learned about [[help:delq][delq]]  & [[help:mapcar][mapcar]] trick from  [[https://github.com/sachac/.emacs.d/blob/83d21e473368adb1f63e582a6595450fcd0e787c/Sacha.org#org-agenda][from Sacha Chua's config]].
 
-Learned about [[help:delq][delq]] & [[help:mapcar][mapcar]] trick from  [[https://github.com/sachac/.emacs.d/blob/83d21e473368adb1f63e582a6595450fcd0e787c/Sacha.org#org-agenda][from Sacha Chua's config]]. 
 #+begin_src emacs-lisp
-(setq org-agenda-files
-      (delq nil
-            (mapcar (lambda (x) (and (file-exists-p x) x))
-                    '("~/Dropbox/org_files/"))))
+  (setq org-agenda-files
+	(delq nil
+	      (mapcar (lambda (x) (and (file-exists-p x) x))
+		      '("~/Dropbox/org_files/"))))
+
+  ;; I don't want to see things that are done. turn that off here.
+  ;; http://orgmode.org/manual/Global-TODO-list.html#Global-TODO-list
+  (setq org-agenda-skip-scheduled-if-done t)
+  (setq org-agenda-skip-deadline-if-done t)
+  (setq org-agenda-skip-timestamp-if-done t)
+  (setq org-agenda-todo-ignore-scheduled t)
+  (setq org-agenda-todo-ignore-deadlines t)
+  (setq org-agenda-todo-ignore-timestamp t)
+  (setq org-agenda-todo-ignore-with-date t)
+  (setq org-agenda-start-on-weekday nil) ;; start on current day
+
+  (setq org-upcoming-deadline '(:foreground "blue" :weight bold))
+
+  ;; use timestamps in date-trees. for the journal
+  (setq org-datetree-add-timestamp 'active)
+
+
+  ;; (add-to-list
+  ;;  'org-agenda-custom-commands
+  ;;  '("w" "Weekly Review"
+  ;;    ( ;; deadlines
+  ;;     (tags-todo "+DEADLINE<=\"<today>\""
+  ;;	       ((org-agenda-overriding-header "Late Deadlines")))
+  ;;     ;; scheduled  past due
+  ;;     (tags-todo "+SCHEDULED<=\"<today>\""
+  ;;	       ((org-agenda-overriding-header "Late Scheduled")))
+
+  ;;     ;; now the agenda
+  ;;     (agenda ""
+  ;;	    ((org-agenda-overriding-header "weekly agenda")
+  ;;	     (org-agenda-ndays 7)
+  ;;	     (org-agenda-tags-todo-honor-ignore-options t)
+  ;;	     (org-agenda-todo-ignore-scheduled nil)
+  ;;	     (org-agenda-todo-ignore-deadlines nil)
+  ;;	     (org-deadline-warning-days 0)))
+  ;;     ;; and last a global todo list
+  ;;     (todo "TODO"))))
 #+end_src
 
 ** org capture/refile
 
-*** current [[http://orgmode.org/manual/Template-expansion.html#Template-expansion][org capture template]]. 
-- debug and programming progress from debug. 
+*** current [[http://orgmode.org/manual/Template-expansion.html#Template-expansion][org capture template]].
+- debug and programming progress from debug.
 #+BEGIN_SRC emacs-lisp
 (setq org-capture-templates
       (quote (("t" "TODO_item_list" entry (file+datetree "~/Dropbox/org_files/TODO.org") "* TODO %^{Description} %^g\n  :LOGBOOK:\n  - State \"TODO\"       from              %T\n  :END:\n%?")
-              ("r" "NO_action" entry (file+datetree "~/Dropbox/org_files/TODO.org") "* %^{Description} %^g\n%?")
-              ("d" "bug_debug" entry (file+olp "~/Dropbox/org_files/tech.org" "bugs and debugs") "** TODO %^{Description} %^g\n%?")
-	      ("e" "excerpt_highlighted" entry (file+olp "~/Dropbox/org_files/free_thought.org" "Links, excerpts to be refiled") "** %^{Title} %^g\n %U\n \n#+BEGIN_QUOTE\n%i\n #+END_QUOTE\n%a \n %?")
+	      ("r" "NO_action" entry (file+datetree "~/Dropbox/org_files/TODO.org") "* %^{Description} %^g\n%?")
+	      ("d" "bug_debug" entry (file+olp "~/Dropbox/org_files/tech.org" "bugs and debugs") "** TODO %^{Description} %^g\n%?")
+	      ("f" "config_improvement" entry (file+olp "~/.emacs.d/config.org" "future improvement") "** TODO %^{Description} \n  :LOGBOOK:\n  - State \"TODO\"       from              %T\n  :END:\n%?")
 	      ("j" "Journal_entry" entry (file+datetree "~/Dropbox/org_files/杂记.org" ) "* %?" :unnarrowed t)
 	      )))
 #+END_SRC
 
-*** To-her/to-him, using org-capture to communicate. 
-- create a =what-say.org= file. 
-- setup capture. 
+*** To-her/to-him, using org-capture to communicate.
+- create a =what-say.org= file.
+- setup capture.
 #+BEGIN_SRC
-(add-to-list org-capture-templates 
-      (quote (("h" "to_her" entry (file+datetree "~/Dropbox/org_files/TODO.org") "* TODO %^{Description}  %^g\n%?\nAdded: %U")       
+(add-to-list org-capture-templates
+      (quote (("h" "to_her" entry (file+datetree "~/Dropbox/org_files/TODO.org") "* TODO %^{Description}  %^g\n%?\nAdded: %U")
 
 #+END_SRC
 
-** org todo 
-- [[help:org-use-fast-todo-selection][org-use-fast-todo-selection]]: =t= allows for single key selection. 
+** org todo
+- [[help:org-use-fast-todo-selection][org-use-fast-todo-selection]]: =t= allows for single key selection.
 #+BEGIN_SRC emacs-lisp
 (setq org-log-done nil)
 (setq org-todo-keywords
        '((sequence "TODO(t!)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
 (setq org-todo-keyword-faces
       (quote (("TODO" :foreground "red" :weight bold)
-              ("DONE" :foreground "forest green" :weight bold)
-              ("WAIT" :foreground "orange" :weight bold)
-              ("CANCELED" :foreground "blue" :weight bold))))
+	      ("DONE" :foreground "forest green" :weight bold)
+	      ("WAIT" :foreground "orange" :weight bold)
+	      ("CANCELED" :foreground "blue" :weight bold))))
 (setq org-use-fast-todo-selection t)
 #+END_SRC
 
 *** log to [[http://emacs.stackexchange.com/questions/21291/add-created-timestamp-to-logbook][drawer]]
-- [[help:org-log-into-drawer][org-log-into-drawer]]: non-nil is inserted; to where depends on: 
+- [[help:org-log-into-drawer][org-log-into-drawer]]: non-nil is inserted; to where depends on:
   - t for logbook
-  - property 
+  - property
 #+BEGIN_SRC emacs-lisp
 (setq org-log-into-drawer t)
-(setq org-clock-into-drawer t) 
+(setq org-clock-into-drawer t)
 
 ;; (defvar org-created-property-name "CREATED"
 ;;   "The name of the org-mode property that stores the creation date of the entry")
@@ -862,37 +1350,17 @@ Learned about [[help:delq][delq]] & [[help:mapcar][mapcar]] trick from  [[https:
 ;;       (org-set-property created now))))
 
 #+END_SRC
-** Org setup
-
-Speed commands are a nice and quick way to perform certain actions
-while at the beginning of a heading. It's not activated by default.
-
-See the doc for speed keys by checking out [[elisp:(info%20"(org)%20speed%20keys")][the documentation for
-speed keys in Org mode]].
-
-#+begin_src emacs-lisp
-(setq org-use-speed-commands t)
-#+end_src
-
-#+begin_src emacs-lisp
-(setq org-image-actual-width 550)
-#+end_src
-
-#+BEGIN_SRC emacs-lisp
-(setq org-highlight-latex-and-related '(latex script entities))
-#+END_SRC
-
 ** Org tags
 *** *tag position*: The default value is -77, which is weird for smaller width windows.
 I'd rather have the tags align horizontally with the header. 45 is a
 good column number to do that.
 *** personal tagging system
-**** two variable 
+**** two variable
 - org-tag-persistent-alist
 - org-tag-alist
-**** the use of [[http://orgmode.org/manual/Tag-hierarchy.html][hierarchical tag]] and mutually exclusive tags  
-- hierarchical tags is achieved by boundary keyword with :grouptags as subcategories. 
-- co-exist Vs mutually exclusivity is determined by the boundary 
+**** the use of [[http://orgmode.org/manual/Tag-hierarchy.html][hierarchical tag]] and mutually exclusive tags
+- hierarchical tags is achieved by boundary keyword with :grouptags as subcategories.
+- co-exist Vs mutually exclusivity is determined by the boundary
 |---------------+-------------------------------------------------|
 | local #+tags: | in .emacs                                       |
 |---------------+-------------------------------------------------|
@@ -920,8 +1388,9 @@ good column number to do that.
 ))
 #+end_src
 
-** org mobile 
-- [[https://mobileorg.github.io/#using-dropbox][org-mobile-push/pull]] 
+** org mobile
+- [[http://jonathanchu.is/posts/org-mode-and-mobileorg-installation-and-config/][jonathan chu configuration]]
+- [[https://mobileorg.github.io/#using-dropbox][org-mobile-push/pull]] with a detail [[https://mobileorg.github.io/documentation/#using-dropbox][description on sync]]. 
 #+BEGIN_SRC emacs-lisp
 (setq org-mobile-directory "/Users/Guoshiyuan/Dropbox/Apps/MobileOrg")
 
@@ -929,18 +1398,127 @@ good column number to do that.
 
 
 * LP in org
-** adding [[http://mirrors.ibiblio.org/CTAN/support/latexmk/latexmk.pdf][LatexMk]] support to AUCTeX.         :MELPA_ori:
+** tab behavior
+- tab indentation and program indentation with Emacs_manual 24 and 26.3 respectively.
+#+BEGIN_SRC emacs-lisp
+(setq-default indent-tabs-mode t)
+#+END_SRC
+** superscript/subscript default
+#+BEGIN_SRC emacs-lisp
+(setq org-export-with-sub-superscripts '{})
+#+END_SRC
+** org inline image and table
+#+begin_src emacs-lisp
+(setq org-startup-with-inline-images "inlineimages")
+(setq org-image-actual-width 550)
+
+
+(defun scimax-align-result-table ()
+  "Align tables in the subtree."
+  (save-restriction
+    (save-excursion
+      (unless (org-before-first-heading-p) (org-narrow-to-subtree))
+      (org-element-map (org-element-parse-buffer) 'table
+	(lambda (tbl)
+	  (goto-char (org-element-property :begin tbl))
+	  (while (not (looking-at "|")) (forward-line))
+	  (org-table-align))))))
+;; inline indentaiton
+(add-hook 'org-babel-after-execute-hook
+	  'scimax-align-result-table)
+(add-hook 'org-babel-after-execute-hook
+	  'org-display-inline-images)
+#+end_src
+** org-latex
+*** latex default packages.
+**** Function on org export default latex packages
+- variable is [[help:org-latex-default-packages-alist][org-latex-default-packages-alist]]
+- org-mode preload the following latex packages from the mac installed latex package list ([[/usr/local/texlive/2016/texmf-dist/tex/latex][latex package directory]])
+ |---------------------------------------+-------------------------------------------|
+ | default package alist                 | major functions                           |
+ |---------------------------------------+-------------------------------------------|
+ | inputenc, fontenc                     | for basic font and character selection    |
+ | fixltx2e                              | important patches of latex itself         |
+ | graphicx                              | for including images                      |
+ | longtable                             | for multipage tables                      |
+ | float, wrapfig                        | for figure placement                      |
+ | rotating                              | for sideways figures and tables           |
+ | ulem                                  | for underline and strike-through          |
+ | amsmath                               | for subscript and superscript and         |
+ |                                       | math environments                         |
+ | textcomp, marvosymb, wasysym, amssymb | for various symbols used for interpreting |
+ |                                       | the entities in ‘org-entities’.           |
+ | hyperref                              | for cross references                      |
+ |---------------------------------------+-------------------------------------------|
+
+
+#+BEGIN_SRC
+;; kinchin setup
+(setq org-latex-default-packages-alist
+      '(("AUTO" "inputenc" t)
+	("" "lmodern" nil)
+	("T1" "fontenc" t)
+	("" "fixltx2e" nil)
+	("" "graphicx" t)
+	("" "longtable" nil)
+	("" "float" nil)
+	("" "wrapfig" nil)
+	("" "rotating" nil)
+	("normalem" "ulem" t)
+	("" "amsmath" t)
+	("" "textcomp" t)
+	("" "marvosym" t)
+	("" "wasysym" t)
+	("" "amssymb" t)
+	("" "amsmath" t)
+	("version=3" "mhchem" t)
+	("numbers,super,sort&compress" "natbib" nil)
+	("" "natmove" nil)
+	("" "url" nil)
+	("" "minted" nil)
+	("" "underscore" nil)
+	("linktocpage,pdfstartview=FitH,colorlinks,
+linkcolor=blue,anchorcolor=blue,
+citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue"
+	 "hyperref" nil)
+	("" "attachfile" nil)))
+
+;; do not put in \hypersetup. Use your own if you want it e.g.
+;; \hypersetup{pdfkeywords={%s},\n pdfsubject={%s},\n pdfcreator={%}}
+(setq org-latex-with-hyperref nil)
+#+END_SRC
+*** adding [[http://mirrors.ibiblio.org/CTAN/support/latexmk/latexmk.pdf][LatexMk]] support to AUCTeX.        :MELPA_ori:
 #+BEGIN_SRC emacs-lisp
 (require 'auctex-latexmk)
 (auctex-latexmk-setup)
 #+END_SRC
-** Org babel languages
-- loading for src language evaluation, function [[help:org-babel-do-load-languages][org-babel-do-load-lang]] load variable called [[help:org-babel-load-languages][org-babel-load-lang]]. 
-- without the [[https://lists.gnu.org/archive/html/emacs-orgmode/2016-02/msg00415.html][bit-recompile part]], the R does not seems to work. 
-- =(add-to-list 'org-src-lang-modes '("<LANGUAGE>" . "<MAJOR-MODE>"))= 
+*** highlight
+#+BEGIN_SRC emacs-lisp
+(setq org-highlight-latex-and-related '(latex script entities))
+#+END_SRC
+*** TODO latex preview pane
+*** beamer
+ #+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'ox-latex
+  (add-to-list 'org-latex-classes
+	       '("beamer"
+	       "\\documentclass\[presentation\]\{beamer\}"
+	       ("\\section{%s}" . "\\section*{%s}")
+	       ("\\begin{frame}{%s}"
+		"\\end{frame}"
+		"\\begin{frame}{%s}"
+		"\\end{frame}"))))
 
+(setq org-beamer-frame-level 2)
+ #+END_SRC
+
+
+** Org babel languages
+- loading for src language evaluation, function [[help:org-babel-do-load-languages][org-babel-do-load-lang]] load variable called [[help:org-babel-load-languages][org-babel-load-lang]].
+- without the [[https://lists.gnu.org/archive/html/emacs-orgmode/2016-02/msg00415.html][bit-recompile part]], the R does not seems to work.
+- =(add-to-list 'org-src-lang-modes '("<LANGUAGE>" . "<MAJOR-MODE>"))=
+- for diff programming language, =Org Src Block Faces= select for language specific
 #+begin_src emacs-lisp
-(require 'ess-site)
 (add-hook 'R-mode-hook 'auto-complete-mode)
 ;; lisp-interaction-mode-hook to AC
 (add-hook 'lisp-interaction-mode-hook 'auto-complete-mode)
@@ -948,7 +1526,7 @@ good column number to do that.
 
 (byte-recompile-file
      (expand-file-name "ob-R.el"
-                       (file-name-directory (locate-library "org")))
+		       (file-name-directory (locate-library "org")))
      t)
 
 (org-babel-do-load-languages
@@ -970,24 +1548,604 @@ good column number to do that.
 ;;(add-to-list 'org-src-lang-modes (quote ("screen" . shell-script)))
 (add-to-list 'org-src-lang-modes (quote ("python" . python)))
 (add-to-list 'org-src-lang-modes (quote ("ditaa" . ditaa)))
-;; (add-to-list 'org-src-lang-modes (quote ("Graphviz" . Graphviz))) 
-;; disable confirmation 
+;; (add-to-list 'org-src-lang-modes (quote ("Graphviz" . Graphviz)))
+;; disable confirmation
 (defun odin/org-confirm-babel-evaluate (lang body)
   (not (or (string= lang "latex") (string= lang "R") (string= lang "python") (string= lang "shell") (string= lang "emacs-lisp"))))
 (setq org-confirm-babel-evaluate 'odin/org-confirm-babel-evaluate)
 #+end_src
 
-*** ess =ess-smart-S-assign= function by default has a toggling behavior: S-_(=_) insert assignment key and second time insert underscore. 
-- I used both assign key and underscore quite often. I will [[https://www.r-bloggers.com/a-small-customization-of-ess/][bound to assign key]] to M-- while S-_(=_) remains as underscore. 
-- package [[https://github.com/mattfidler/ess-smart-underscore.el][ess-smart-underscore]]. 
+*** ess =ess-smart-S-assign= function by default has a toggling behavior: S-_(=_) insert assignment key and second time insert underscore.
+- I used both assign key and underscore quite often. I will [[https://www.r-bloggers.com/a-small-customization-of-ess/][bound to assign key]] to M-- while S-_(=_) remains as underscore.
+- package [[https://github.com/mattfidler/ess-smart-underscore.el][ess-smart-underscore]].
+
+
+
+** Org babel/source blocks
+
+I like to have source blocks properly syntax highlighted and with the
+editing popup window staying within the same window so all the windows
+don't jump around. Also, having the top and bottom trailing lines in
+the block is a waste of space, so we can remove them.
+
+I noticed that fontification doesn't work with markdown mode when the
+block is indented after editing it in the org src buffer---the leading
+#s for headers don't get fontified properly because they appear as Org
+comments. Setting ~org-src-preserve-indentation~ makes things
+consistent as it doesn't pad source blocks with leading spaces.
+
+#+begin_src emacs-lisp
+(setq org-src-fontify-natively t
+      org-src-window-setup 'reorganize-frame
+      org-src-strip-leading-and-trailing-blank-lines t
+      org-src-preserve-indentation t
+      org-src-tab-acts-natively t)
+#+end_src
+*** fold src block
+- [[http://emacs.stackexchange.com/questions/7211/collapse-src-blocks-in-org-mode-by-default][stackexchange]]
 #+BEGIN_SRC emacs-lisp
-(setq ess-S-assign-key (kbd "M--"))
-(ess-toggle-S-assign-key t) ; enable above key definition
-;; leave my underscore key alone!
-(ess-toggle-underscore nil)
+(defvar org-blocks-hidden t)
+
+(defun f-org-toggle-blocks ()
+  (interactive)
+  (if org-blocks-hidden
+      (org-show-block-all)
+    (org-hide-block-all))
+  (setq-local org-blocks-hidden (not org-blocks-hidden)))
+
+(add-hook 'org-mode-hook 'f-org-toggle-blocks)
+
+(define-key org-mode-map (kbd "s-1") 'f-org-toggle-blocks)
 #+END_SRC
 
-*** inactive python and Ipython ([[http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/][configuration ref.]]) 
+
+*** [[http://orgmode.org/manual/Easy-templates.html#Easy-templates][org-structure-template-alist]] on customize src expansion
+
+** Org exporting
+*** copy formatted and paste into MSword
+#+BEGIN_SRC emacs-lisp
+(defun formatted-copy ()
+  "Export region to HTML, and copy it to the clipboard."
+  (interactive)
+  (save-window-excursion
+    (let* ((buf (org-export-to-buffer 'html "*Formatted Copy*" nil nil t t))
+	   (html (with-current-buffer buf (buffer-string))))
+      (with-current-buffer buf
+	(shell-command-on-region
+	 (point-min)
+	 (point-max)
+	 "textutil -stdin -format html -convert rtf -stdout | pbcopy"))
+      (kill-buffer buf))))
+
+(global-set-key (kbd "s-w") 'formatted-copy)
+#+END_SRC
+*** org table exporting
+- the [[help:org-table-export][org-table-export]] introduced on[[http://emacs.stackexchange.com/questions/16640/can-i-export-a-specific-table-in-an-org-file-to-csv-from-the-command-line][ stackexchange]]
+- bash massive export
+=$ emacs --batch foo.org -l setup.el --eval '(my-tbl-export "first-table")'=
+#+BEGIN_SRC emacs-lisp
+(defun f-tbl-export (name)
+  "Search for table named `NAME` and export."
+  (interactive "s")
+  (show-all)
+  (let ((case-fold-search t))
+    (if (search-forward-regexp (concat "#\\+NAME: +" name) nil t)
+    (progn
+      (next-line)
+      (org-table-export (format "%s.csv" name) "orgtbl-to-csv")))))
+#+END_SRC
+** org-ref                                   :MELPA_ori:
+- the [[https://github.com/jkitchin/org-ref][github repository]] from [[http://kitchingroup.cheme.cmu.edu][kichen group]].
+- [[help:org-ref-cancel-link-messages][org-ref-cancel-link-meessage]]: showing (key, value, begin, end, post-blank, post-affiliation, parent) at every cursor position.
+#+BEGIN_SRC emacs-lisp
+(setq org-ref-bibliography-notes "~/Dropbox/bibliography/notes.org"
+      org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
+      org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/")
+(setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
+      bibtex-completion-library-path "~/Dropbox/bibliography/bibtex-pdfs"
+      bibtex-completion-notes-path "~/Dropbox/bibliography/helm-bibtex-notes")
+(setq bibtex-completion-pdf-open-function 'org-open-file)
+(require 'org-ref)
+(require 'org-ref-pdf)
+(require 'org-ref-url-utils)
+(require 'doi-utils)
+(require 'org-ref-wos)
+
+(org-ref-cancel-link-messages)
+
+#+END_SRC
+** Yasnippet and template                    :MELPA_ori:
+*** org-template: [[http://stackoverflow.com/questions/19145433/shortcut-for-inserting-environments-in-org-mode][org-structure-template-alist]]
+#+BEGIN_SRC emacs-lisp
+;; add <el for emacs-lisp expansion
+(add-to-list 'org-structure-template-alist
+	     '("el" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"
+	       "<src lang=\"emacs-lisp\">\n?\n</src>"))
+
+;; add <sh for shell
+(add-to-list 'org-structure-template-alist
+	     '("sh" "#+BEGIN_SRC sh\n?\n#+END_SRC"
+	       "<src lang=\"shell\">\n?\n</src>"))
+
+(add-to-list 'org-structure-template-alist
+	     '("lh" "#+latex_header: " ""))
+
+(add-to-list 'org-structure-template-alist
+	     '("lc" "#+latex_class: " ""))
+
+(add-to-list 'org-structure-template-alist
+	     '("lco" "#+latex_class_options: " ""))
+
+(add-to-list 'org-structure-template-alist
+	     '("ao" "#+attr_org: " ""))
+
+(add-to-list 'org-structure-template-alist
+	     '("al" "#+attr_latex: " ""))
+
+(add-to-list 'org-structure-template-alist
+	     '("ca" "#+caption: " ""))
+
+(add-to-list 'org-structure-template-alist
+	     '("tn" "#+tblname: " ""))
+
+(add-to-list 'org-structure-template-alist
+	     '("n" "#+name: " ""))
+(add-to-list 'org-structure-template-alist
+	     '("r" "#+BEGIN_SRC R :results output \n?\n#+END_SRC"))
+#+END_SRC
+
+
+*** TODO yasnippet loading
+- yas does not load automatically upon entering
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :ensure t
+  :defer t
+  :config
+  (setq yas-snippet-dirs (concat user-emacs-directory "snippets"))
+  (yas-global-mode 1))
+#+END_SRC
+
+
+
+** ESS
+*** reference list
+  - [[https://github.com/imbs-hl/emacs.d/blob/master/config/init-46-coding-R.el][IMBS@Lübeck, Germany]]
+  - [[https://www.emacswiki.org/emacs/EmacsSpeaksStatistics][ess wiki]]
+*** Indecisive POLYmode to limit polymode to org+R and Rmarkdown and not other org babel block.
+*** babel:R configuration
+**** ess and ess-site and its general configuration, including face and indentation
+**** R-related key binding:
+1. =ess-smart-S-assign=
+2. restart (s-S-F10)
+3. =s-RET= evaluation (mimicing Rstudio behavior)
+4. pipe(%>% as s-M)
+**** initialization windows. (a few defun by )
+**** autocompletion.
+**** indentation by [[https://github.com/emacs-ess/ESS/issues/96][variable]] [[help:ess-own-style-list][ess-own-style-list]].
+**** ess-smart-underscore
+
+#+BEGIN_SRC emacs-lisp
+
+
+(unless (getenv "LANG") (setenv "LANG" "en_US.UTF-8"))
+
+;; (use-package ess-site
+;;   :ensure ess
+;;   :mode ("\\.R\\'" . R-mode)
+;;   :commands R
+;;   :config
+;;   ;; (add-hook 'R-mode-hook #'subword-mode)
+;;   (add-hook 'R-mode-hook #'smartparens-strict-mode)
+;;   (setq ess-R-font-lock-keywords
+;; 	'((ess-R-fl-keyword:modifiers . t)
+;; 	  (ess-R-fl-keyword:fun-defs . t)
+;; 	  (ess-R-fl-keyword:keywords . t)
+;; 	  (ess-R-fl-keyword:assign-ops . t)
+;; 	  (ess-R-fl-keyword:constants . t)
+;; 	  (ess-fl-keyword:fun-calls)
+;; 	  (ess-fl-keyword:numbers)
+;; 	  (ess-fl-keyword:operators)
+;; 	  (ess-fl-keyword:delimiters)
+;; 	  (ess-fl-keyword:=)
+;; 	  (ess-R-fl-keyword:F&T . t)
+;; 	  (ess-R-fl-keyword:%op% . t)))
+;;   (setq inferior-R-font-lock-keywords
+;; 	'((ess-S-fl-keyword:prompt . t)
+;; 	  (ess-R-fl-keyword:messages . t)
+;; 	  (ess-R-fl-keyword:modifiers . t)
+;; 	  (ess-R-fl-keyword:fun-defs . t)
+;; 	  (ess-R-fl-keyword:keywords . t)
+;; 	  (ess-R-fl-keyword:assign-ops . t)
+;; 	  (ess-R-fl-keyword:constants . t)
+;; 	  (ess-fl-keyword:matrix-labels . t)
+;; 	  (ess-fl-keyword:fun-calls)
+;; 	  (ess-fl-keyword:numbers)
+;; 	  (ess-fl-keyword:operators)
+;; 	  (ess-fl-keyword:delimiters)
+;; 	  (ess-fl-keyword:=)
+;; 	  (ess-R-fl-keyword:F&T . t)))
+;;   :init 
+;;   (setq ess-ask-for-ess-directory nil)
+;;   (setq ess-local-process-name "R")
+;;   (setq ansi-color-for-comint-mode 'filter)
+;;   (setq comint-scroll-to-bottom-on-input t)
+;;   (setq comint-scroll-to-bottom-on-output t)
+;;   (setq comint-move-point-for-output t)
+;;   (setq ess-eval-visibly-p 'nowait)
+;;   (setq ess-S-assign-key (kbd "M--"))
+;;   (ess-toggle-S-assign-key t) ; enable above key definition
+;;   ;; leave my underscore key alone!
+;;   (ess-toggle-underscore nil))
+
+;; alternative way of loading ess-site after ess. 
+(use-package ess
+  :ensure t
+  :defer t
+  :commands R
+  :mode ("\\.[rR]\\'" . R-mode)
+  :init
+  (require 'ess-site)
+  (setq ess-ask-for-ess-directory nil)
+  (setq ess-local-process-name "R")
+  (setq ansi-color-for-comint-mode 'filter)
+  (setq comint-scroll-to-bottom-on-input t)
+  (setq comint-scroll-to-bottom-on-output t)
+  (setq comint-move-point-for-output t)
+  (setq ess-eval-visibly-p 'nowait)
+  (setq ess-S-assign-key (kbd "M--"))
+  (ess-toggle-S-assign-key t) ; enable above key definition
+  ;; leave my underscore key alone!
+  (ess-toggle-underscore nil)
+  
+  (defun R_pipe ()
+    "%>% operator in R"
+    (interactive)
+    (just-one-space 1)
+    (insert "%>%")
+    (reindent-then-newline-and-indent))
+
+  (defun my-ess-start-R ()
+    (interactive)
+    (if (not (member "*R-main*" (mapcar (function buffer-name) (buffer-list))))
+	(progn
+	  (delete-other-windows)
+	  (setq w1 (selected-window))
+	  (setq w1name (buffer-name))
+	  (setq w2 (split-window w1 nil t))
+	  (R)
+	  (set-window-buffer w2 "*R*")
+	  (rename-buffer "*R-main*")
+	  (set-window-buffer w1 w1name))))
+  (defun my-ess-eval ()
+    (interactive)
+    (my-ess-start-R)
+    (if (and transient-mark-mode mark-active)
+	(call-interactively 'ess-eval-region)
+      (call-interactively 'ess-eval-line-and-step)))
+  (defun my-ess-init ()
+    "Init my ess mode."
+    (setq ess-help-own-frame 'one)
+    (setq ess-tab-complete-in-script t)
+    (setq ess-first-tab-never-complete
+          'symbol-or-paren-or-punct))
+
+  :config
+  (setq ess-history-file "~/.Rhisotry")
+  (setq ess-R-font-lock-keywords
+	'((ess-R-fl-keyword:modifiers . t)
+	  (ess-R-fl-keyword:fun-defs . t)
+	  (ess-R-fl-keyword:keywords . t)
+	  (ess-R-fl-keyword:assign-ops . t)
+	  (ess-R-fl-keyword:constants . t)
+	  (ess-fl-keyword:fun-calls)
+	  (ess-fl-keyword:numbers)
+	  (ess-fl-keyword:operators)
+	  (ess-fl-keyword:delimiters)
+	  (ess-fl-keyword:=)
+	  (ess-R-fl-keyword:F&T . t)
+	  (ess-R-fl-keyword:%op% . t)))
+  (setq inferior-R-font-lock-keywords
+	'((ess-S-fl-keyword:prompt . t)
+	  (ess-R-fl-keyword:messages . t)
+	  (ess-R-fl-keyword:modifiers . t)
+	  (ess-R-fl-keyword:fun-defs . t)
+	  (ess-R-fl-keyword:keywords . t)
+	  (ess-R-fl-keyword:assign-ops . t)
+	  (ess-R-fl-keyword:constants . t)
+	  (ess-fl-keyword:matrix-labels . t)
+	  (ess-fl-keyword:fun-calls)
+	  (ess-fl-keyword:numbers)
+	  (ess-fl-keyword:operators)
+	  (ess-fl-keyword:delimiters)
+	  (ess-fl-keyword:=)
+	  (ess-R-fl-keyword:F&T . t)))
+
+  (define-key ess-mode-map (kbd "C-%") 'R_pipe)
+  (define-key inferior-ess-mode-map (kbd "C-%") 'R-pipe)
+  (define-key comint-mode-map [C-up] 'comint-previous-matching-input-from-input)
+  (define-key comint-mode-map [C-down] 'comint-next-matching-input-from-input)
+  (add-hook 'ess-mode-hook
+	  '(lambda()
+	     (local-set-key [(shift return)] 'my-ess-eval)))
+  (add-hook 'Rnw-mode-hook
+	  '(lambda()
+	     (local-set-key [(shift return)] 'my-ess-eval)))
+  (add-hook 'ess-mode-hook
+	  (lambda ()
+	    (flyspell-prog-mode)
+	    (run-hooks 'prog-mode-hook)
+	    ))
+  (add-hook 'ess-R-post-run-hook (lambda () (smartparens-mode 1)))
+
+  (add-hook 'inferior-ess-mode-hook
+	  '(lambda()
+	     (local-set-key [C-up] 'comint-previous-input)
+	     (local-set-key [C-down] 'comint-next-input)))
+
+  (add-hook 'ess-mode-hook #'my-ess-init)
+  (add-hook 'inferior-ess-mode-hook #'turn-on-smartparens-mode)
+
+
+  )
+
+
+
+;; (use-package pretty-mode
+;;   :ensure t
+;;   :init
+;;   (add-hook 'ess-mode-hook 'turn-on-pretty-mode))
+
+
+
+
+(use-package polymode		; ESS with polymode
+  :ensure t
+  :defer t
+  :init
+  (require 'poly-R)		; Load necessary modes
+  (require 'poly-markdown)
+  (require 'poly-noweb)
+  :config
+  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+  )
+
+
+;; help and auto-completion
+;; (use-package ess-R-object-popup
+;;   :ensure t
+;;   :bind (:map ess-mode-map
+;;	      ("\C-c\C-g" . ess-R-object-popup)))
+
+;; company completion?? i thought ess has its own completion
+;; (add-hook 'R-mode-hook
+;;         (defun my-R-mode-hook ()
+;;           (company-mode)
+;;           (local-set-key (kbd "TAB") 'company-complete)))
+
+
+
+;; ess-initiation
+
+
+
+;; Tang Yi
+
+
+
+#+END_SRC
+
+
+
+
+
+
+* future improvement
+** TODO customise date and develop a better capture template for todo and lab log :programming:
+***** time customisation: add a customise label similar as 200117
+- [[http://stackoverflow.com/questions/19532371/how-to-insert-schedule-with-date-and-time-in-emacs-org-mode/19538085#19538085][How to insert schedule with date and time in Emacs org-mode]]
+- [[http://stackoverflow.com/questions/23218316/org-mode-org-time-stamp-custom-formats-shows-midnight-time][org-mode: org-time-stamp-custom-formats shows midnight time]](show  [[http://orgmode.org/manual/Custom-time-format.html][org-time-stamp-custom-formats]] legit format)
+- [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Time-Parsing.html][time customisation man page]]
+
+***** date tree customse to make it a flat structure instead of heavily nest as shown in this document
+- [[http://sachachua.com/blog/2015/02/org-mode-reusing-date-file-datetree-prompt/][date tree from sasha]]
+- [[http://stackoverflow.com/questions/26648731/refile-existing-entry-to-different-location-in-org-mode-date-tree/26683663][refile date tree (with lisp code) ]]
+- [[http://members.optusnet.com.au/~charles57/GTD/datetree.html][a typical customisation page]]
+- [[http://doc.norang.ca/org-mode.html][norang]]
+Added: [2017-01-20 Fri 09:44]
+
+** TODO to understand emacs default path     :programming:
+- [[help:load-path][load-path]]
+- [[help:default-directory][default-directory]]
+Added: [2017-02-14 Tue 10:27]
+
+** DONE open links custumisation             :programming:
+- open an link according to its extension
+- open an directory in Finder@mac or in dired, optionable.
+Added: [2017-02-14 Tue 11:00]
+** [[http://ergoemacs.org/emacs/emacs_upcase_sentence.html][capitalization after full stop]].
+** TODO <2017-02-23 Thu> strange thing happens after initiation
+- org src block has change from org-block-background to org-block
+- [[https://github.com/syl20bnr/spacemacs/issues/4618][issue name]].
+** TODO [[https://github.com/mhayashi1120/Emacs-langtool][langtool]] for grammar check
+
+** nanowrimo for word count and general documentation monitor.
+
+** thesaurus package
+- synonymous
+- synonyms
+- synosaurus
+** TODO GRE voca builder
+   :LOGBOOK:
+   - State "TODO"       from              [2017-03-10 Fri 11:25]
+   :END:
+
+** smex: enhancement for of M-x, similar as ido.
+
+** winner-mode for undo??
+
+** autopair global mode
+** TODO [[http://blog.binchen.org/posts/turn-off-linum-mode-when-file-is-too-big.html][Turn off linum-mode when file is too big]].
+
+
+
+#+BEGIN_SRC
+
+#+END_SRC
+
+** TODO polymode affecting face for source code.
+- poly mode change the nature of org source code so that
+|-------------+----------------------+----------------------------------------------------------|
+|             | before               | after                                                    |
+|-------------+----------------------+----------------------------------------------------------|
+| #+begin_src | org-block-begin-line |                                                          |
+| src         | org-block            |                                                          |
+| #+end_src   | org-block-end-line   | org-meta-line, which inherit from font-lock-comment-face |
+|-------------+----------------------+----------------------------------------------------------|
+
+** TODO optimizing expand region behavior.
+- highlight a region and add [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Org-Authoring.html#Org-Authoring][org markup]]
+
+** TODO yas-snippet need to restart before functioning. why??
+** DONE is it possible to have src have similar behavior as neighboring header (in folding, maybe)
+** TODO [[help:org-support-shift-select][org-support-shift-selection]]
+** TODO image justification in LaTeX @ kinchin
+#+BEGIN_SRC
+(defun org-latex-fragment-tooltip (beg end image imagetype)
+  "Add the fragment tooltip to the overlay and set click function to toggle it."
+  (overlay-put (ov-at) 'help-echo
+	       (concat (buffer-substring beg end)
+		       "\nmouse-1 to toggle."))
+  (overlay-put (ov-at) 'local-map (let ((map (make-sparse-keymap)))
+				    (define-key map [mouse-1]
+				      `(lambda ()
+					 (interactive)
+					 (org-remove-latex-fragment-image-overlays ,beg ,end)))
+				    map)))
+
+(advice-add 'org--format-latex-make-overlay :after 'org-latex-fragment-tooltip)
+
+(defun org-latex-fragment-justify (justification)
+  "Justify the latex fragment at point with JUSTIFICATION.
+JUSTIFICATION is a symbol for 'left, 'center or 'right."
+  (interactive
+   (list (intern-soft
+	  (completing-read "Justification (left): " '(left center right)
+			   nil t nil nil 'left))))
+
+  (let* ((ov (ov-at))
+	 (beg (ov-beg ov))
+	 (end (ov-end ov))
+	 (shift (- beg (line-beginning-position)))
+	 (img (overlay-get ov 'display))
+	 (img (and (and img (consp img) (eq (car img) 'image)
+			(image-type-available-p (plist-get (cdr img) :type)))
+		   img))
+	 space-left offset)
+    (when (and img (= beg (line-beginning-position)))
+      (setq space-left (- (window-max-chars-per-line) (car (image-display-size img)))
+	    offset (floor (cond
+			   ((eq justification 'center)
+			    (- (/ space-left 2) shift))
+			   ((eq justification 'right)
+			    (- space-left shift))
+			   (t
+			    0))))
+      (when (>= offset 0)
+	(overlay-put ov 'before-string (make-string offset ?\ ))))))
+
+(defun org-latex-fragment-justify-advice (beg end image imagetype)
+  "After advice function to justify fragments."
+  (org-latex-fragment-justify (or (plist-get org-format-latex-options :justify) 'left)))
+
+(advice-add 'org--format-latex-make-overlay :after 'org-latex-fragment-justify-advice)
+
+;; ** numbering latex equations
+(defun org-renumber-environment (orig-func &rest args)
+  "A function to inject numbers in LaTeX fragment previews."
+  (let ((results '())
+	(counter -1)
+	(numberp))
+
+    (setq results (loop for (begin .  env) in
+			(org-element-map (org-element-parse-buffer) 'latex-environment
+			  (lambda (env)
+			    (cons
+			     (org-element-property :begin env)
+			     (org-element-property :value env))))
+			collect
+			(cond
+			 ((and (string-match "\\\\begin{equation}" env)
+			       (not (string-match "\\\\tag{" env)))
+			  (incf counter)
+			  (cons begin counter))
+			 ((string-match "\\\\begin{align}" env)
+			  (prog2
+			      (incf counter)
+			      (cons begin counter)
+			    (with-temp-buffer
+			      (insert env)
+			      (goto-char (point-min))
+			      ;; \\ is used for a new line. Each one leads to a number
+			      (incf counter (count-matches "\\\\$"))
+			      ;; unless there are nonumbers.
+			      (goto-char (point-min))
+			      (decf counter (count-matches "\\nonumber")))))
+			 (t
+			  (cons begin nil)))))
+
+    (when (setq numberp (cdr (assoc (point) results)))
+      (setf (car args)
+	    (concat
+	     (format "\\setcounter{equation}{%s}\n" numberp)
+	     (car args)))))
+
+  (apply orig-func args))
+
+(advice-add 'org-create-formula-image :around #'org-renumber-environment)
+
+#+END_SRC
+
+
+
+
+** TODO improve emacs visualing nonstd symbols. :programming:
+     :LOGBOOK:
+     - State "TODO"       from              <2017-03-07 Tue 16:01>
+     :END:
+- degree sign
+- volume units.
+** DONE capture has a strange indentation    :programming:
+     :LOGBOOK:
+     - State "TODO"       from              <2017-03-11 Sat 20:12>
+     :END:
+- C-h a on "indentation"
+** TODO to prevent org-babel large output causing system hang.
+** CANCELED chinese-fonts-setup              :MELPA_ori:
+#+BEGIN_SRC
+(require 'chinese-fonts-setup)
+(chinese-fonts-setup-enable)
+(set-face-attribute
+ 'default nil
+ :font (font-spec :name "-*-Monaco-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+		  :weight 'normal
+		  :slant 'normal
+		  :size 12.5))
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   charset
+   (font-spec :name "-*-STKaiti-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1"
+	      :weight 'normal
+	      :slant 'normal
+	      :size 15.0)))
+#+END_SRC
+** TODO org bullets
+- org-bullet mode
+** CANCELED python and Ipython ([[http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/][configuration ref.]])
 #+BEGIN_SRC
 ; use IPython
 (setq-default py-shell-name "ipython")
@@ -1007,45 +2165,22 @@ good column number to do that.
 
 #+END_SRC
 
-** Org babel/source blocks
+** TODO loading yas with in-used mode only
+    :LOGBOOK:
+    - State "TODO"       from              [2017-03-10 Fri 12:27]
+    :END:
+- loading the whole yas turn to slows the system.
+** CANCELED TWO-mode mode: src block as end of programming mode from [[https://github.com/dandavison/emacs-config/blob/master/old/emacs.org][danDavision]]
+#+BEGIN_SRC
+(setq default-mode (list "org-mode" 'org-mode))
+(setq second-modes '(("python" "#+begin_src python" "#+end_src" python-mode)
+		     ("emacs-lisp" "#+begin_src emacs-lisp" "#+end_src" emacs-lisp-mode)
+		     ("ess" "#+begin_src R" "#+end_src" ess-mode)
+		     ))
 
-I like to have source blocks properly syntax highlighted and with the
-editing popup window staying within the same window so all the windows
-don't jump around. Also, having the top and bottom trailing lines in
-the block is a waste of space, so we can remove them.
-
-I noticed that fontification doesn't work with markdown mode when the
-block is indented after editing it in the org src buffer---the leading
-#s for headers don't get fontified properly because they appear as Org
-comments. Setting ~org-src-preserve-indentation~ makes things
-consistent as it doesn't pad source blocks with leading spaces.
-
-#+begin_src emacs-lisp
-(setq org-src-fontify-natively t
-      org-src-window-setup 'current-window
-      org-src-strip-leading-and-trailing-blank-lines t
-      org-src-preserve-indentation t
-      org-src-tab-acts-natively t)
-#+end_src
-*** fold src block 
-- [[http://emacs.stackexchange.com/questions/7211/collapse-src-blocks-in-org-mode-by-default][stackexchange]] 
-#+BEGIN_SRC emacs-lisp
-(defvar org-blocks-hidden t)
-
-(defun f-org-toggle-blocks ()
-  (interactive)
-  (if org-blocks-hidden
-      (org-show-block-all)
-    (org-hide-block-all))
-  (setq-local org-blocks-hidden (not org-blocks-hidden)))
-
-(add-hook 'org-mode-hook 'f-org-toggle-blocks)
-
-(define-key org-mode-map (kbd "s-1") 'f-org-toggle-blocks)
 #+END_SRC
-
-*** Inactive define face
-#+begin_src 
+*** CANCELED define org source face
+#+begin_src
 (defface org-block-begin-line
   '((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#8ed100")))
   "Face used for the line delimiting the begin of source blocks.")
@@ -1060,227 +2195,13 @@ consistent as it doesn't pad source blocks with leading spaces.
   '((t (:underline "#A7A6AA" :foreground "#008ED1")))
   "Face used for the line delimiting the end of source blocks.")
 #+end_src
-
-*** [[http://orgmode.org/manual/Easy-templates.html#Easy-templates][org-structure-template-alist]] on customize src expansion
-** ESS
-*** startup
-#+BEGIN_SRC emacs-lisp
-;; Adapted with one minor change from Felipe Salazar at
-;; http://www.emacswiki.org/emacs/EmacsSpeaksStatistics
-(require 'ess-site)
-(setq ess-ask-for-ess-directory nil) ;; start R on default folder
-(setq ess-local-process-name "R")
-(setq ansi-color-for-comint-mode 'filter) ;;
-(setq comint-scroll-to-bottom-on-input t)
-(setq comint-scroll-to-bottom-on-output t)
-(setq comint-move-point-for-output t)
-(setq ess-eval-visibly-p 'nowait) ;; no waiting while ess evalating
-
-
-
-;; (defun my-ess-start-R ()
-;;   (interactive)
-;;   (if (not (member "*R-main*" (mapcar (function buffer-name) (buffer-list))))
-;;       (progn
-;;         (delete-other-windows)
-;;         (setq w1 (selected-window))
-;;         (setq w1name (buffer-name))
-;;         (setq w2 (split-window w1 nil t))
-;;         (R)
-;;         (set-window-buffer w2 "*R*")
-;;         (rename-buffer "*R-main*")
-;;         (set-window-buffer w1 w1name))))
-;; (defun my-ess-eval ()
-;;   (interactive)
-;;   (my-ess-start-R)
-;;   (if (and transient-mark-mode mark-active)
-;;       (call-interactively 'ess-eval-region)
-;;     (call-interactively 'ess-eval-line-and-step)))
-;; (add-hook 'ess-mode-hook
-;;           '(lambda()
-;;              (local-set-key [(shift return)] 'my-ess-eval)))
-;; (add-hook 'ess-mode-hook
-;;           (lambda ()
-;;             (flyspell-prog-mode)
-;;             (run-hooks 'prog-mode-hook)
-;;             ))
-;; (add-hook 'ess-R-post-run-hook (lambda () (smartparens-mode 1)))
-
-;; ;; REF: http://stackoverflow.com/questions/2901198/useful-keyboard-shortcuts-and-tips-for-ess-r
-;; ;; Control and up/down arrow keys to search history with matching what you've already typed:
-;; (define-key comint-mode-map [C-up] 'comint-previous-matching-input-from-input)
-;; (define-key comint-mode-map [C-down] 'comint-next-matching-input-from-input)
-;; (setq ess-history-file "~/.Rhisotry")
-#+END_SRC
-
-*** Syntax highlight
-#+BEGIN_SRC emacs-lisp
-(setq ess-R-font-lock-keywords
-    '((ess-R-fl-keyword:modifiers . t)
-     (ess-R-fl-keyword:fun-defs . t)
-     (ess-R-fl-keyword:keywords . t)
-     (ess-R-fl-keyword:assign-ops)
-     (ess-R-fl-keyword:constants . t)
-     (ess-fl-keyword:fun-calls . t)
-     (ess-fl-keyword:numbers)
-     (ess-fl-keyword:operators)
-     (ess-fl-keyword:delimiters)
-     (ess-fl-keyword:=)
-     (ess-R-fl-keyword:F&T)
-     (ess-R-fl-keyword:%op%)))
-
-(use-package pretty-mode
-  :ensure t
-  :init
-  (add-hook 'ess-mode-hook 'turn-on-pretty-mode))
-#+END_SRC
-** Org exporting
-*** TODO copy formatted and paste into MSword
-#+BEGIN_SRC emacs-lisp
-(defun formatted-copy ()
-  "Export region to HTML, and copy it to the clipboard."
-  (interactive)
-  (save-window-excursion
-    (let* ((buf (org-export-to-buffer 'html "*Formatted Copy*" nil nil t t))
-           (html (with-current-buffer buf (buffer-string))))
-      (with-current-buffer buf
-        (shell-command-on-region
-         (point-min)
-         (point-max)
-         "textutil -stdin -format html -convert rtf -stdout | pbcopy")) 
-      (kill-buffer buf))))
-
-(global-set-key (kbd "s-w") 'formatted-copy)
-#+END_SRC
-*** org table exporting 
-- the [[help:org-table-export][org-table-export]] introduced on[[http://emacs.stackexchange.com/questions/16640/can-i-export-a-specific-table-in-an-org-file-to-csv-from-the-command-line][ stackexchange]]
-- bash massive export 
-=$ emacs --batch foo.org -l setup.el --eval '(my-tbl-export "first-table")'=
-#+BEGIN_SRC emacs-lisp
-(defun f-tbl-export (name)
-  "Search for table named `NAME` and export."
-  (interactive "s")
-  (show-all)
-  (let ((case-fold-search t))
-    (if (search-forward-regexp (concat "#\\+NAME: +" name) nil t)
-    (progn
-      (next-line)
-      (org-table-export (format "%s.csv" name) "orgtbl-to-csv")))))
-#+END_SRC
-** beamer 
-#+BEGIN_SRC emacs-lisp
-(with-eval-after-load 'ox-latex
-  (add-to-list 'org-latex-classes
-	       '("beamer"
-               "\\documentclass\[presentation\]\{beamer\}"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\begin{frame}{%s}"
-                "\\end{frame}"
-                "\\begin{frame}{%s}"
-                "\\end{frame}"))))
-
-(setq org-beamer-frame-level 2)
-#+END_SRC
-   
-
-** org-ref                                   :MELPA_ori:
-- the [[https://github.com/jkitchin/org-ref][github repository]] from [[http://kitchingroup.cheme.cmu.edu][kichen group]]. 
-- [[help:org-ref-cancel-link-messages][org-ref-cancel-link-meessage]]: showing (key, value, begin, end, post-blank, post-affiliation, parent) at every cursor position. 
-#+BEGIN_SRC emacs-lisp
-(setq org-ref-bibliography-notes "~/Dropbox/bibliography/notes.org"
-      org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
-      org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/")
-(setq bibtex-completion-bibliography "~/Dropbox/bibliography/references.bib"
-      bibtex-completion-library-path "~/Dropbox/bibliography/bibtex-pdfs"
-      bibtex-completion-notes-path "~/Dropbox/bibliography/helm-bibtex-notes")
-(setq bibtex-completion-pdf-open-function 'org-open-file)
-(require 'org-ref)
-(require 'org-ref-pdf)
-(require 'org-ref-url-utils)
-(require 'doi-utils)
-(require 'org-ref-wos)
-
-(org-ref-cancel-link-messages)
-
-#+END_SRC
-** Yasnippet                                 :MELPA_ori:
-*** my yasnippet loading 
-#+BEGIN_SRC emacs-lisp
-;; yasnipper for latex templating 
-;;(add-to-list 'load-path
-;;                "~/path-to-yasnippet")
-;;   (require 'yasnippet)
-;;   (yas-global-mode 1)
-
-(use-package yasnippet
-  :ensure t
-  :defer t
-  :config
-  (setq yas-snippet-dirs (concat user-emacs-directory "snippets"))
-  (yas-global-mode 1))
-
-
-
-#+END_SRC
-
-*** the use of [[http://stackoverflow.com/questions/10155181/display-all-snippets-of-yasnippet][m-x yas/describe-tables]]. 
-- the current function is [[help:yas-describe-tables][yas-describe-table]].
-*** TODO loading yas with in-used mode only 
-    :LOGBOOK:
-    - State "TODO"       from              [2017-03-10 Fri 12:27]
-    :END:
-** polymode                                  :MELPA_ori:
-#+BEGIN_SRC emacs-lisp
-(require 'poly-R)
-(require 'poly-markdown)
-(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
-
-#+END_SRC
-
-
-* future improvement
-** TODO customise date and develop a better capture template for todo and lab log :programming:
-***** time customisation: add a customise label similar as 200117
-- [[http://stackoverflow.com/questions/19532371/how-to-insert-schedule-with-date-and-time-in-emacs-org-mode/19538085#19538085][How to insert schedule with date and time in Emacs org-mode]]
-- [[http://stackoverflow.com/questions/23218316/org-mode-org-time-stamp-custom-formats-shows-midnight-time][org-mode: org-time-stamp-custom-formats shows midnight time]](show  [[http://orgmode.org/manual/Custom-time-format.html][org-time-stamp-custom-formats]] legit format) 
-- [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Time-Parsing.html][time customisation man page]]
-
-***** date tree customse to make it a flat structure instead of heavily nest as shown in this document 
-- [[http://sachachua.com/blog/2015/02/org-mode-reusing-date-file-datetree-prompt/][date tree from sasha]]
-- [[http://stackoverflow.com/questions/26648731/refile-existing-entry-to-different-location-in-org-mode-date-tree/26683663][refile date tree (with lisp code) ]]
-- [[http://members.optusnet.com.au/~charles57/GTD/datetree.html][a typical customisation page]]
-- [[http://doc.norang.ca/org-mode.html][norang]]
-Added: [2017-01-20 Fri 09:44]
-
-** TODO to understand emacs default path     :programming:
-- [[help:load-path][load-path]]
-- [[help:default-directory][default-directory]]
-Added: [2017-02-14 Tue 10:27]
-
-** DONE open links custumisation             :programming:
-- open an link according to its extension
-- open an directory in Finder@mac or in dired, optionable. 
-Added: [2017-02-14 Tue 11:00]
-** [[http://ergoemacs.org/emacs/emacs_upcase_sentence.html][capitalization after full stop]].
-** TODO <2017-02-23 Thu> strange thing happens after initiation
-- org src block has change from org-block-background to org-block 
-- [[https://github.com/syl20bnr/spacemacs/issues/4618][issue name]]. 
-** TODO [[https://github.com/mhayashi1120/Emacs-langtool][langtool]] for grammar check
-
-** nanowrimo for word count and general documentation monitor.
-
-** thesaurus package 
-- synonymous
-- synonyms
-- synosaurus
-** TODO GRE voca builder 
-   :LOGBOOK:
-   - State "TODO"       from              [2017-03-10 Fri 11:25]
-   :END:
-
-** smex: enhancement for of M-x, similar as ido. 
-
-** winner-mode for undo?? 
-
-** autopair global mode 
-** TODO [[http://blog.binchen.org/posts/turn-off-linum-mode-when-file-is-too-big.html][Turn off linum-mode when file is too big]]. 
+** TODO capture template for ~config.org~ future improvement.
+** TODO org-bullet
+** DONE define a macro for fast table setup: two hline and three vline
+** TODO design an hydra for toggling 
+** TODO what is the differnce between ~org-edit-special~ and ~org-babel-expand-src-block~
+** TODO setup [[https://github.com/flycheck/flycheck][flycheck]] for R using [[http://www.flycheck.org/en/latest/languages.html#r][lintr]]
+** TODO setup subword mode for programme mode.
+** TODO a mechanism that convert org table to list, and visa versa. 
+** TODO I have a list of R function. I want to push to github and these fucntion is loaded into R automatically when ever i initiate R.
+** TODO jump to pdf to a specific page number. 

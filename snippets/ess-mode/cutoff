@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: cutoff_for_IRSTPS
+# key: coffit_
+# --
+cutoff_$2 = unique(sort(c(seq(min($1$$2), max($1$$2)-0.001, by = 5), mean($1$$2), median($1$$2))))
+bin_$2 = sapply(cutoff_$2, function(n){
+    $1$$2>n
+})$0

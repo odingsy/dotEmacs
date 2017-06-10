@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: table
+# key: tb_
+# --
+table($1, useNA = "always")$0

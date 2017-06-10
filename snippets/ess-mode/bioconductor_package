@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: bioConductor
+# key: bioc_
+# --
+source("https://bioconductor.org/biocLite.R")$0
+biocLite("$1")

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: rname_apply
+# key: rnames_
+# --
+sapply(cutoff_$1, function(n) paste0("$1_", signif(n, digits = $2)))

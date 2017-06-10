@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: org_table
+# key: tbl_
+# --
+|----+---|
+| $0 |   |
+|----+---|
