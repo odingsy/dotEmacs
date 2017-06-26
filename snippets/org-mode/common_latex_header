@@ -1,14 +1,23 @@
 # -*- mode: snippet -*-
 # name: common_header
-# key: header_
+# key: hd_
 # --
 #+TITLE: $1
 #+AUTHOR: GUO Shiyuan
 #+EMAIL: antguos@nus.edu.sg
 #+OPTIONS: toc:nil ^:nil num:nil
 #+DATE:
-#+LATEX_HEADER: \\addtolength{\\textwidth}{2in}
-#+LATEX_HEADER: \\addtolength{\\hoffset}{-1in}
-#+LATEX_HEADER: \\addtolength{\\voffset}{-1in}
+#+LATEX_HEADER: \addtolength{\textwidth}{2in}
+#+LATEX_HEADER: \addtolength{\hoffset}{-1in}
+#+LATEX_HEADER: \addtolength{\voffset}{-1in}
+#+OPTIONS: texht:t
+#+OPTIONS: toc:2
+#+EXPORT_FILE_NAME: notebook
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [hidelinks,12pt]
+#+TAGS: pheno_assay(P) Western(W) attention(A) cell_work(c) IF(I) Write(w) Update(u) Fix(f) Check(c) noexport(n)
+#+EXCLUDE_TAGS: noexport
+#+PROPERTY: header-args:R :session main :results output :cache yes :exports none 
+#+PROPERTY: header-args:R+ :units in :width 10 :height 6.18 :res 144
 
 $0
