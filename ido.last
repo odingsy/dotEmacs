@@ -1,0 +1,129 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/Guoshiyuan/Dropbox/org_files/testing_ground/ess/" . "new-project/")
+ ("/Users/Guoshiyuan/Dropbox/org_files/" . "future/")
+ ("/Users/Guoshiyuan/Desktop/" . "RA_admin/")
+ ("/Users/Guoshiyuan/Documents/" . "journal/")
+ ("/Users/Guoshiyuan/Desktop/RA_admin/" . "SystematicReview/")
+ ("/" . "Users/")
+ ("/Users/Guoshiyuan/Downloads/" . "v46i03-replication/")
+ ("/Users/Guoshiyuan/Dropbox/" . "org_files/")
+ ("/Users/" . "Guoshiyuan/")
+ ("/Users/Guoshiyuan/.emacs.d/elpa/yasnippet-20161211.1918/snippets/" . "org-mode/")
+ ("/Users/Guoshiyuan/.emacs.d/elpa/yasnippet-20161211.1918/" . "snippets/")
+ ("/Users/Guoshiyuan/.emacs.d/elpa/" . "yasnippet-20161211.1918/")
+ ("/Users/Guoshiyuan/.emacs.d/" . "elpa/")
+ ("/Users/Guoshiyuan/" . ".emacs.d/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/Guoshiyuan/.emacs.d/elpa/yasnippet-20161211.1918/snippets/org-mode/"
+ "/Users/Guoshiyuan/.emacs.d/"
+ "/Users/Guoshiyuan/Desktop/"
+ "/Users/Guoshiyuan/Dropbox/org_files/system_files/"
+ "/Users/Guoshiyuan/"
+ "/Users/Guoshiyuan/Dropbox/org_files/future/"
+ "/Users/Guoshiyuan/Dropbox/org_files/"
+ "/Users/Guoshiyuan/Desktop/Programming/org_programming/"
+ "/Users/Guoshiyuan/Documents/journal/"
+ "/Users/Guoshiyuan/Desktop/Programming/R_study_notes/"
+ "/Users/Guoshiyuan/Desktop/RA_admin/"
+ "/Users/Guoshiyuan/Documents/lab_book_2/"
+ "~/"
+ "/Users/Guoshiyuan/Downloads/v46i03-replication/"
+ "/Users/Guoshiyuan/Downloads/"
+ "/Users/Guoshiyuan/Dropbox/bibliography/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "test.org"
+ "config.org"
+ ".emacs"
+ "literature_programming.org"
+ "bioinfomatics.org"
+ "antguos_lablog.org"
+ "杂记.org"
+ "sci_reading.org"
+ "free_thought.org"
+ "杂想.org"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/Guoshiyuan/.emacs.d/" (22722 11412 0 0) "url/" "snippets/" "recentf" "ido.last" "eshell/" "elpa/" "custom.el" "config.tex" "config.org~" "config.org" "config.el" "bookmarks" "backups/" "autosaves/" "auto-save-list/" "ac-comphist.dat" "abbrev_defs" ".org-id-locations" ".DS_Store" ".#config.org" "../" "./")
+
+ ("/Users/Guoshiyuan/Dropbox/org_files/testing_ground/ess/" (22719 40001 0 0) "R_test.R" "new-project/" "emacs_R.org" "data/" "cache/" ".Rhistory" ".DS_Store" ".#R_test.R" "../" "./")
+
+ ("/Users/Guoshiyuan/Downloads/" (22717 5508 0 0) "~$stematic Review Protocol - Final_ms.docx" "TMEM45B_template.xlsx" "pharmaceutics-03-00107.pdf" "IFIT1_sig_pval_stromal_updated_Wayne.csv" "20150723133014451-412202.pdf" ".tmp/" ".Rhistory" ".Rapp.history" ".localized" ".DS_Store" ".archiver-CC977476-0A48-46EA-B785-21DDA8BC2CDE-10342-000063888E055300/" ".archiver-BFCDC565-C1B9-469F-8C1C-313DEB254824-10342-000063888D7BAEDD/" ".archiver-034428A7-1C42-449D-A260-3C752D364FB2-2116-00003BBE58BEC42F/" "../" "./")
+
+ ("/Users/Guoshiyuan/Dropbox/org_files/" (22718 4012 0 0) "杂记.org" "TODO.org" "testing_ground/" "tech.org" "system_files/" "sci_reading.org" "org_life/" "future/" "free_thought.org" "antguos_lablog.org" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Dropbox/org_files/future/" (22715 61692 0 0) "System_biology.org" "stats_computing_in_R.org" "sci_reading.org" "related_data/" "P1_affymetrix_analysis.org" "Literate_programming.org" "lisp_study.org" "humanities.org" "database_study.org" "bioinfomatics.org" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Desktop/" (22717 7070 0 0) "TMEM45_IHC_analysis.pdf" "test.org" "siRNA_off_target/" "RA_admin/" "projects/" "Programming/" "PR application/" "interesting photos/" "articles/" "a kaleidoscope of books/" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/.emacs.d/elpa/yasnippet-20161211.1918/snippets/ess-mode/" (22700 60532 0 0) "sci_theme" "package_loading" "blank_graph_paper" "../" "./")
+
+ ("/Users/Guoshiyuan/Dropbox/org_files/testing_ground/ess/new-project/" (22714 42152 0 0) "TODO" "tmp-pdfcrop-84807.tex" "TMEM45_IHC_analysis.pdf" "TMEM45 IHC analysis.Rmd" "tests/" "src/" "reports/" "README.md~" "README.md" "profiling/" "munge/" "logs/" "lib/" "KIF21A_IHC_data_analysis.Rmd" "KIF21A_IHC_data_analysis.pdf" "IHC_staining.Rproj" "HS6ST2_cutoff_exploration.Rmd" "HS6ST2_cutoff_exploration.pdf" "HMGCR_dataset_analysis.Rmd" "HMGCR_dataset_analysis.pdf" "header.tex" "graphs/" "doc/" "diagnostics/" "data/" "config/" "cache/" "bca_IHC.Rmd" "bca_IHC.pdf" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Dropbox/org_files/testing_ground/" (22714 31504 0 0) "python crawler/" "2017_refcard-org-beamer/" ".DS_Store" "../" "./")
+
+ ("~/" (22711 61660 0 0) "百度云同步盘/" "Public/" "Pictures/" "org_images/" "org/" "OneDrive/" "Music/" "Movies/" "Library/" "Emacs_files/" "Dropbox/" "Downloads/" "Documents/" "Desktop/" "Applications/" ".Xauthority" ".viminfo" ".Trash/" ".subversion/" ".ssh/" ".spyder2/" ".sogouinput/" ".serverauth.2193" ".rstudio-desktop/" ".rnd" ".Rhistory" ".RData" ".Rapp.history" ".R/" ".oracle_jre_usage/" ".npm/" ".note.org" ".node_repl_history" ".matplotlib/" ".MacOSX/" ".local/" ".lesshst" ".ispell_english" ".idlerc/" ".hgignore_global" ".gtk-bookmarks" ".gnome2/" ".gitignore_global" ".gitignore" ".gitconfig" ".git/" ".gepard/" ".emacs~" ".emacs.d/" ".emacs" ".DS_Store" ".dropbox/" ".cups/" ".continuum/" ".config/" ".conda/" ".CFUserTextEncoding" ".cache/" ".bash_sessions/" ".bash_profile.macports-saved_2016-02-19_at_14:52:54" ".bash_profile-anaconda.bak" ".bash_profile" ".bash_history" ".aspell.en.pws" ".aspell.en.prepl" ".appIetviewer" ".AnnotationHub/" "../" "./")
+
+ ("/Users/Guoshiyuan/" (22711 61660 0 0) "百度云同步盘/" "Public/" "Pictures/" "org_images/" "org/" "OneDrive/" "Music/" "Movies/" "Library/" "Emacs_files/" "Dropbox/" "Downloads/" "Documents/" "Desktop/" "Applications/" ".Xauthority" ".viminfo" ".Trash/" ".subversion/" ".ssh/" ".spyder2/" ".sogouinput/" ".serverauth.2193" ".rstudio-desktop/" ".rnd" ".Rhistory" ".RData" ".Rapp.history" ".R/" ".oracle_jre_usage/" ".npm/" ".note.org" ".node_repl_history" ".matplotlib/" ".MacOSX/" ".local/" ".lesshst" ".ispell_english" ".idlerc/" ".hgignore_global" ".gtk-bookmarks" ".gnome2/" ".gitignore_global" ".gitignore" ".gitconfig" ".git/" ".gepard/" ".emacs~" ".emacs.d/" ".emacs" ".DS_Store" ".dropbox/" ".cups/" ".continuum/" ".config/" ".conda/" ".CFUserTextEncoding" ".cache/" ".bash_sessions/" ".bash_profile.macports-saved_2016-02-19_at_14:52:54" ".bash_profile-anaconda.bak" ".bash_profile" ".bash_history" ".aspell.en.pws" ".aspell.en.prepl" ".appIetviewer" ".AnnotationHub/" "../" "./")
+
+ ("/Users/Guoshiyuan/Dropbox/org_files/system_files/" (22703 35195 0 0) "README.org" "Icon
+" "dot_emacs" "custom.el" "config.org" ".DS_Store" ".dropbox" "../" "./")
+
+ ("/Users/Guoshiyuan/.emacs.d/elpa/ivy-hydra-20170302.1033/" (22712 52280 0 0) "ivy-hydra.elc" "ivy-hydra.el" "ivy-hydra-pkg.el" "ivy-hydra-autoloads.el" "../" "./")
+
+ ("/Users/Guoshiyuan/.emacs.d/elpa/yasnippet-20161211.1918/snippets/org-mode/" (22697 35554 0 0) "verse" "uml" "matrix" "latex" "img" "figure" "entry" "embedded" "elisp" "dot" "beamer" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/.emacs.d/elpa/yasnippet-20161211.1918/snippets/" (22697 19589 0 0) "yaml-mode/" "web-mode" "udev-mode/" "typerex-mode" "tuareg-mode/" "text-mode/" "sql-mode/" "snippet-mode/" "sh-mode/" "scala-mode/" "rust-mode/" "ruby-mode/" "rst-mode/" "rename_add_contr.py" "README.md" "python-mode/" "prog-mode/" "perl-mode/" "org-mode/" "octave-mode/" "nxml-mode/" "nsis-mode/" "nix-mode/" "nesc-mode/" "ned-mode/" "markdown-mode/" "malabar-mode/" "makefile-mode/" "makefile-gmake-mode/" "makefile-bsdmake-mode/" "makefile-automake-mode/" "m4-mode/" "lua-mode/" "lisp-mode/" "lisp-interaction-mode/" "LICENSE" "latex-mode/" "js3-mode" "js2-mode" "js-mode/" "java-mode/" "html-mode/" "haskell-mode/" "groovy-mode/" "go-mode/" "git-commit-mode/" "faust-mode/" "f90-mode/" "erlang-mode/" "erc-mode/" "ensime-mode" "enh-ruby-mode" "emacs-lisp-mode/" "elixir-mode/" "dix-mode/" "css-mode/" "csharp-mode/" "cpp-omnet-mode/" "cperl-mode/" "CONTRIBUTORS.txt" "conf-unix-mode/" "cmake-mode/" "clojure-mode/" "cider-repl-mode" "chef-mode/" "cc-mode/" "c-mode/" "c++-mode/" "applescript-mode/" "antlr-mode/" ".nosearch" ".gitignore" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/.emacs.d/snippets/ess-mode/" (22697 19607 0 0) "blank_graph_paper" "../" "./")
+
+ ("/Users/Guoshiyuan/.emacs.d/elpa/yasnippet-20161211.1918/snippets/R-mode/" (22697 19377 0 0) "sci_graph" "blank_graph_paper" "../" "./")
+
+ ("/Users/Guoshiyuan/.emacs.d/elpa/" (22696 10270 0 0) "zotelo-readme.txt" "zotelo-20160602.249/" "zenburn-theme-20170103.2328/" "yatemplate-readme.txt" "yasnippet-readme.txt" "yasnippet-20161211.1918/" "writegood-mode-readme.txt" "writegood-mode-20160802.1405/" "with-editor-20170111.609/" "weibo-readme.txt" "use-package-20170116.1309/" "undo-tree-20161012.701/" "textmate-to-yas-readme.txt" "tablist-20160424.235/" "speck-readme.txt" "solarized-theme-20161222.109/" "s-20160928.636/" "r-autoyas-readme.txt" "projectile-20170106.606/" "popup-imenu-readme.txt" "popup-complete-readme.txt" "popup-20160709.729/" "polymode-readme.txt" "pkg-info-20150517.443/" "pdf-tools-readme.txt" "pdf-tools-20161207.521/" "parsebib-20151006.232/" "ox-latex-chinese-readme.txt" "ox-latex-chinese-20160928.2153/" "ox-clip-readme.txt" "ox-bibtex-chinese-readme.txt" "ox-bibtex-chinese-20160510.506/" "org-ref-readme.txt" "org-ref-20161208.1825/" "org-pdfview-readme.txt" "org-multiple-keymap-readme.txt" "org-drill-table-readme.txt" "org-chinese-utils-readme.txt" "org-capture-pop-frame-readme.txt" "org-beautify-theme-readme.txt" "org-beautify-theme-20161019.1524/" "openwith-readme.txt" "openwith-20120531.1436/" "on-screen-readme.txt" "multiple-cursors-readme.txt" "magit-popup-20170128.745/" "magit-20170203.1633/" "lua-mode-20161101.1340/" "latex-preview-pane-20151023.1303/" "key-chord-20160227.438/" "julia-mode-20161027.625/" "ivy-20161210.333/" "ido-vertical-mode-20160429.1037/" "ido-ubiquitous-readme.txt" "ido-springboard-readme.txt" "ido-grid-mode-readme.txt" "ido-completing-read+-readme.txt" "ido-clever-match-readme.txt" "ido-at-point-readme.txt" "hydra-20161204.505/" "helm-swoop-20160619.953/" "helm-projectile-20170202.1000/" "helm-ispell-readme.txt" "helm-flyspell-readme.txt" "helm-core-20161212.408/" "helm-bibtex-20161202.236/" "helm-anything-readme.txt" "helm-ag-20170127.2155/" "helm-20161212.1321/" "git-commit-20170128.745/" "flyspell-correct-readme.txt" "flyspell-correct-helm-readme.txt" "flyspell-correct-helm-20161031.1134/" "flyspell-correct-20161031.1134/" "f-20161002.800/" "etags-select-readme.txt" "ess-20161101.215/" "epl-20150517.433/" "empos-readme.txt" "docbook-snippets-readme.txt" "dired-subtree-readme.txt" "dired-k-readme.txt" "dired-icon-readme.txt" "dired+-readme.txt" "diminish-20151215.915/" "dash-20161121.55/" "cyberpunk-theme-20161012.1855/" "chess-readme.txt" "chess-2.0.4/" "bind-key-20161218.1520/" "biblio-core-20160901.1115/" "biblio-20161014.1604/" "auto-yasnippet-readme.txt" "auto-complete-readme.txt" "auto-complete-20161029.643/" "auctex-readme.txt" "auctex-lua-readme.txt" "auctex-lua-20151121.810/" "auctex-latexmk-readme.txt" "auctex-latexmk-20160923.7/" "auctex-11.89.7/" "async-20161103.1036/" "archives/" "ac-ispell-readme.txt" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Dropbox/" (22691 62961 0 0) "org_files/" "obsolete/" "LSM2241 CA1a reports/" "Latin Music/" "Icon
+" "Citations/" "book/" "bibliography/" "Bible text/" "Apps/" ".DS_Store" ".dropbox.cache/" ".dropbox" "../" "./")
+
+ ("/Users/Guoshiyuan/Desktop/RA_admin/org_anat/" (22673 16312 0 0) "HS6STs_Review.org" "HS6STs_Review.bib" "animal_training.org" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Documents/journal/" (22673 21434 0 0) "20170113" "20170112" "20170111" "20170110_archive" "20170110" "20170109" "20170106" "20170105" "20170103" "20170101" "20161229" "20161228" "20161227" "20161225" "20161223" "20161222" "20161221" "20161220" "20161219" ".DS_Store" ".#20161227" "../" "./")
+
+ ("/Users/Guoshiyuan/Emacs_files/" (22652 8074 0 0) "杂想.org" "System_Biology.org" "study_of_conscious.org" "some_books.org" "Nerds_functions.org" "Master_plan.org" "bill_in_golden_coast.org" "all_information.org" ".DS_Store" ".#Nerds_functions.org" "../" "./")
+
+ ("/Users/Guoshiyuan/Desktop/RA_admin/" (22637 60616 0 0) "wetlab/" "SystematicReview/" "protocols/" "org_anat/" "Literature/" "janet's leftover/" "bioinformatics_project/" "admin/" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Desktop/Programming/org_programming/" (22637 39919 0 0) "stats_computing_in_R.org" "related_data/" "P1_affymetrix_analysis.org" "literate_programming.org" "lisp_study.org" "database_study.org" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Documents/" (22636 37164 0 0) "traveling /" "My EndNote Library.enl" "My EndNote Library.Data/" "Molecular biology of the cell.pdf" "MacTeXtras/" "lab_book_2/" "journal/" "hobbies/" "GRE/" "Graduated_nextstep/" "From dad/" "EndNote/" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Desktop/Programming/" (22632 39635 0 0) "R_study_notes/" "org_programming/" "literate_programm&reproducible_research/" "Help_Sheets/" "fig./" "Cook_books/" ".Rproj.user/" ".Rhistory" ".Rapp.history" ".gitignore" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Desktop/Programming/R_study_notes/" (22632 39654 0 0) "R_for_data_science/" "R_basic/" "ph525_exercise/" "my_code/" "interesting_functions/" "Bugs/" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/.emacs.d/elpa/org-journal-20161024.46/" (22618 26275 0 0) "org-journal.elc" "org-journal.el" "org-journal-pkg.el" "org-journal-autoloads.el" "../" "./")
+
+ ("/Users/Guoshiyuan/Documents/lab_book_2/" (22540 28613 0 0) "placeholder.png" "labbook.cls" "lab_book_2.toc" "lab_book_2.tex" "lab_book_2.pdf" "lab_book_2.out" "lab_book_2.log" "lab_book_2.idx" "lab_book_2.dvi" "lab_book_2.brf" "lab_book_2.blg" "lab_book_2.bbl" "lab_book_2.aux" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Desktop/RA_admin/SystematicReview/" (22610 30670 0 0) "~$stematic Review Protocol -Final_ms.docx" "Systematic Review Protocol -Final_ms.docx" "raw_text/" "Diana Ridley-The Literature Review_ A Step-by-Step Guide for Students-SAGE Publications (2012).pdf" "article_screening/" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Dropbox/bibliography/" (22607 39021 0 0) "references.bib" "notes.org" ".DS_Store" "../" "./")
+
+ ("/Users/Guoshiyuan/Downloads/v46i03-replication/" (20235 59780 0 0) "v46i03.org" "v46i03.bib" "v2.slp.country.codes" "v2.mean_adj.Z" "README.txt" "Makefile" "jsslogo.jpg" "jss.cls" "jss.bst" "init.el" "../" "./")
+
+ ("/Users/" (22600 48451 0 0) "Shared/" "Guoshiyuan/" ".localized" "../" "./")
+
+ ("/Users/Guoshiyuan/.emacs.d/elpa/yasnippet-20161211.1918/" (22606 24268 0 0) "yasnippet.elc" "yasnippet.el" "yasnippet-pkg.el" "yasnippet-autoloads.el" "snippets/" ".DS_Store" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

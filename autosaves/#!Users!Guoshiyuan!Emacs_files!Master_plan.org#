@@ -1,0 +1,382 @@
+* 20 Jun 2016: Post-falure-in-first-interview Era. 
+
+** RA application
+*** CSI
+**** Richie Soong Lab interview on 23 Jun: prepare a brief of all three research experiences and other experiences enlisted on CV.
+    - CRISPR-guided platform in interrogating functions for histone marks.
+      + WHOLE picture: fucntion role of EZH2 (modulator for adding histone repressive marks) in tumurgenesis is poorly understood.
+      + the guided EZH2 is an importance tools which opens up oppotunities to understand the mechanism of EZH2 on carcinogenesis. (promoter poised state, EZH2-induced H3K27me break the balance.) the targeted EZH2 reduce the off-target effect of EZH2 which is major chanllegne in elucidating the function of epigenentic marks.  
+      + problem faced: systhetics biology need to be tested at a rather late stage when everything is readily assembled within the cell. // more technical detailed chanllenge: gibson assembly adaptation. 
+
+    - exome sequencing for fusion transcript. 
+      + Exome sequecing to reveal novel mutation in a Chinese cohort.
+      + effeciently and low cost method in identify SNP/varient from individual. 
+      + the juncture characterisation reveals how VDJ reconbination is mediated by protein (BRAC).
+      + problem faced: importance of bioinformatics. DATA Obtained from exome sequencing is complicated (first time seening such big dataset), even the cleaning the data seem to be problematic. 
+	
+    - improving the Vincristine efficacy in resistance
+      - 
+
+      - acquired drug resistance with development 
+
+      - problem: 1) finishing a project under a big project, difficult to see the big picture; 2) weakness of western result: interpreting antibody epitope. 
+
+
+
+
+- JOB tilte: research assistant in Medical genomics team. 
+  - requirements in skills (NO SPECIFIC): communication, reporting, writing. 
+  - responsibilities. 
+    - discovery and development of molecular biomarkers and diagnostics with direct relevance to healthcare.
+    - 
+      
+
+
+ 
+
+- what's the BLUE PRINT in the lab (papers; [[https://www.csi.nus.edu.sg/ws/team/pi/richie-soong][personal description]]; [[https://www.csi.nus.edu.sg/ws/research/core-facilities-support-technologies/centre-for-translational-research-and-diagnostics-ctrad/centre-for-translational-research-and-diagnostics][core facilities description]]) . 
+  - generally impression: diversity subject matter: ranging from diabetes, high blood pressure, lung cancer, colorectal cancer. 
+  - PAPER: 
+    - personalized medicine: stratification into risk group is better dealing heterogeneity. 
+
+- the personal data protection docuemnt sent for filling. 
+** Interview Questions
+*** Describe your research experiences. 
+**** CRISPR-guided platform in interrogating functions for histone marks.
+- what is the pathogenetic role of H3K27me3 especially in lymphoma.
+- to understand the function role of H3K27 repressive mark in disease generation, a genetic tool is needed to precisely implant H3K27 into the specific location of within the genome. 
+- therefore, the idea of developing CRISPR guided tool by fusing deactivated Cas9 protein with EZH2 Set domain was perceived and carried out. 
+
+***** my task is to design and assemble this functional tool 
+- obtained each individual components from addgene plasmids and assemble them using gibson assembly 
+- gibson is a single tube, isothermal reaction which does not limited by fusing restriction sites. it uses designed primers with overlapping regions. 
+
+***** progress, we did manage to obtained the construct during my FYP; but after continous with the design after the FYP, we finally obtianed the plasmid.
+- the long primers results in difficultes in PCR amplification.
+- the gibson assembly overlapping primer must be carefully designed to avoid self hybridisation. 
+
+*****  problem faced: 
+- systhetics biology need to be tested at a rather late stage when everything is readily assembled within the cell. // more technical detailed chanllenge: gibson assembly adaptation. 
+- As we are testing the construct on a GFP expressed HEK293T cell (human embryonic kidney),  
+
+**** exome sequencing for fusion transcript. 
+- whole Exome sequecing to reveal novel mutation in a Chinese cohort.
+- effeciently and low cost method in identify SNP/varient from individual. 
+- the juncture characterisation reveals how VDJ reconbination is mediated by protein (BRAC). 
+- how mutation at junctional side contributes to wrong splicing events and truncated protein. 
+***** problem faced: 
+- importance of bioinformatics. DATA Obtained from exome sequencing is complicated (first time seening such big dataset), even the cleaning the data seem to be problematic. 
+	
+**** improving the Vincristine efficacy in resistance
+***** whole picture: how to impove VCR efficacy (arresting cell division) in clinical setting where drug resistance prevails. 
+- what are diff. types of resistance to VCR. 
+  - acquired resistance: small increment of VCR over 6 months. 
+  - conditional resistance: stroma cell co-culture. 
+- what are the mechanism of diff. resistance. 
+  - acquired drug resistance with PI3K, warburg effect.
+    - stathmin might be a good indicator for quantifying effort. 
+  - microenvironrent induced resistance and STAT3 pathway. 
+    - de novo resistance that initially contributes to resistance.  
+- good illustation of synthetic lethality. 
+
+***** problem faced. 
+1) finishing a project under a big project, difficult to see the big picture; 
+2) weakness of western result: interpreting antibody epitope.
+3) drug screening can be labourous, what a did is jsut pre-clinical drug testing.  
+
+
+
+*** what's the learning point of two project.(collaborative clinical study Vs. indepedent project) 
+    - clinical research project: how collaboration happens in addressing from difference aspects of same disease.
+    - functional genomics project: how indepdent project can be plan and carryout. 
+    - it is the person who understand both pictures who can carry each aspect well. 
+
+
+*** why are you interested in applying this lab. 
+**** rooted in techological advancement. 
+- tech adv. is the first step to success; it increases the credibility of experiment in supporting the model. 
+- 
+
+
+*** what is you advantages than other candidates // how can you contributed to our group?
+**** clinical research experiences (bed to bench and benefit back to bed) 
+- understand the flow of clinical study: from sample repository -->bioinformatics -->translational elucidation -->clinical application. 
+**** understand the nature of RA position 
+- have experiences in manage lab material // willing to start from basic 
+**** awareness of bioinformatics 
+- the impt of informatics arised from my experiences in KI. 
+- The project I was doing is on exome seqeuecing and SNP characterisation at transcrption fusion sides. it is my first time seeing big dataset. 
+- the post-doc I am helping with is orthodoxly trained clinical researcher. 
+- what his method of dealing with the massive set is primitive, by using excel in doing it. 
+- I was hoping to be a research rooted in wetlab but understand the sufficient knowledge in bioinformatics, which enables me to have the statistician perspective in biomedical research, even I was nt directly involved in. 
+
+*** research career: why do you feel you are suitable to do research. 
+- biomedical research has been or will be part of my life. This has to do with the both my nature and nuture during Bachelor. 
+**** passionate and sense of fulfilment when seeing successes in your area of interests.
+**** trained in multitasking through cooking. increase your brain ability to handle parallel task.
+**** trained in tackling various subject matter in the area of biomedical research. 
+- quick shift from clinical research to molecular cloning 
+**** managing failure and resilence: FYP was not generally going well despite efforts. 
+- the relience in biomedical research has close related to personal characteristics. 
+*** preference over MD over phD.   
+*** what is your character weakness that you yourself believe it is a weakness
+too responsible casue a few problems
+- cares a lot on spending effort(for being the limiting factor), to the extent of mean; if found any partner is not working along the same direction, I becomes mad. 
+- do not usually say 'no' to a requirst, promise sth that beyong physical limit; work until break down. 
+- overlook your own duty. 
+  
+** RA applications
+*** melissa Fullwood
+*** Temasek LL (not even an interview)
+*** richie Soong
+*** TBT from duke nus 
+*** Ge Ruowen
+*** [[http://medicine.nus.edu.sg/ant/directory/acad/anttaysw.shtml][Tay Sam Wah, Samuel]] (department of Anatomy) (samuel_tay@nuhs.edu.sg) 
+**** 19/jun/16
+**** research interest
+- Stem Cell Biology (with special reference to mesenchymal and neural stem cells)
+- Molecular characterization and transplantation of mesenchymal stem cells
+- Diabetes mellitus and neurodegeneration in the nervous system
+- Molecular analysis of gestational diabetes-induced changes in the developing nervous system
+- Cardiac malformations in embryos of diabetic pregnancy
+  
+*** George Yip (department of anatomy) (georgeyip@nus.edu.sg)
+**** 08/jun/16
+**** interest 
+- 
+*** Chng Wee Joo from CSI 
+- Professor Chng Wee Joo’s research focus is on the use of *global genomics methods* (microarray and sequencing platforms) to study the clinical and biological *heterogeneity* in haematologic malignancies including acute myeloid leukemia, multiple myeloma and lymphoma. Using these methods, he has identified novel *prognostic markers* and well as *molecular abnormalities* in these malignancies that provide insights into disease pathogenesis and biology and serve as potential targets for therapy. This serve as an experimental therapeutic platform to also study new *drugs* in these disease and their *mechanism* of action and resistance.
+
+- The Haematological Malignancy Genomics Laboratory operates a comprehensive translational research program in haematological malignancies with focus on multiple myeloma (MM), acute myeloid leukemias (AML) and natural killer / T-cell Lymphoma (NKTL). At the core of this program is the use of high-throughput cutting edge genomics and proteomics techniques in human tumor samples and model system to make clinically relevant discoveries. (*functionality of the discovery: centered arround patients*) These discoveries will encompass novel biological *insights*, identification of new diagnostic *subtypes*, *prognostic* factors, *therapeutic* targets, and aspects of molecular epidemiology and pharmacogenomics, all with potential impact on patient care. In this bench-to-bedside translational *pipeline*, discoveries are validated in the pre-clinical setting before clinical validation. The program will be supported by a comprehensive tissue bank that provides high-quality source materials for down-stream study, and a clinical database that is connected by a relational database for integrated system biology analysis (See Figure Below). 
+
+- In *MM*, we are focused on identifying the pathways leading to disease progression. In this regards, we have constructed step-wise pathways of progression for MM and is using this as a framework to design therapeutic intervention strategy. At the same time, we are using genomics to dissect the molecular heterogeneity of the disease. This has yielded robust genetic subtypes. We are now focusing on rationally targeting high-risk subtypes based on the underlying genomic aberrations and molecular defect. 
+- In *AML*, we have been working on mechanisms mediating therapeutic resistance in FLT3 positive AML, and in the process have identified novel molecules that play a fundamental role in leukemogenesis and may represent novel therapeutic targets. In addition, we are also testing novel compounds targeting EZH2, an oncogenic histone modifier, and has unraveled interesting biology in AML so far. 
+- In *NKTL*, we are using genomics to understand key molecular event mediating pathophysiology. Till now, we have identified key pathways that are activated and showed that most of these pathway activation is due to downregulation of regulating miRNAs. The downregulation of these miRNA are mediated by EBV infection or MYC activation. We also identified certain markers that are universally over-expressed in NKTL and may serve as novel therapeutic targets.
+
+
+- =generally, they use genetic/proteonomic tech+ sample bank + clinical database to make clinical/patient centered discovery.=
+- they focus on stratify to tackle hetterogeneity, prognostic/therapeutic marks, drug target and functional/resistance mechanism. 
+
+**** publications 
+***** AML
+1) Review in NF-kB aberrant in ALL. 
+   - NF-kB 40% activation in AML.
+   - NF-kB exerts effect along through
+   - Bortezomib a proteasome inhibitor. 
+=what so special about small molecule inhibitor=. (500dalton < sm <900dalton) 
+
+- myeloid hematological 
+***** MM 
+- plasma cell maglinance affecting ab production. 
+***** NKTL 
+- phosphrylation of EZH2 abandons its methyltransferase activity, render its function as a transcriptional activator. 
+
+**** skill required 
+- microarray workflow using the Affymetrix platform: 
+  - affy package and linear model on macroarray analysis (limma package). 
+- miRNA profiling either using microarray or RT-PCR
+
+
+
+
+* RA_life starts 
+** GRE 
+*** GRE general test
+**** analytical writing
+**** verbal reasoning
+**** 
+*** GRE subject test 
+- understand the syllabus through linking syllabus to questions. 
+- 
+** DONE email to referees to settle reference letters. 
+** DONE emails to request for adminstrative for for RA<2016-08-22 Mon>
+** DONE RA_application <2016-08-22 Mon>
+   - university certificate
+   - long-term SV pass. 
+
+
+
+
+** DONE partime master by research application <2016-11-15 Tue>
+- [[https://inetapps.nus.edu.sg/gda2/Home.aspx][portal for application]]
+** TODO visa to US (left with handin application fee) 
+- [[http://www.ustraveldocs.com/sg/sg-niv-typeb1b2.asp][B-2 visa]]
+  - That the purpose of their trip is to enter the U.S. for a temporary visit, such as business, pleasure, or medical treatment;
+  - That they plan to remain for a specific, limited period;
+  - Evidence of funds to cover expenses in the United States ; and,
+  - That they have a residence outside the U.S. as well as other binding social or economic ties that will ensure their return abroad at the end of the visit.
+- [[http://www.ustraveldocs.com/sg/sg-niv-ds160info.asp][DS-160 form]]
+- [[http://www.ustraveldocs.com/sg/sg-niv-visaapply.asp][Apply for an nonimmagrant Visa]]
+  - U.S. Embassy, Singapore. 27 Napier Road. Singapore 258508
+
+
+- [[https://cgifederal.secure.force.com][singapore visa application]]: need 224 SGD to complete the application 
+  - EBL891321933010003
+  - EBL8913/2193/301/0003
+  - 73012417880705
+				   
+
+- flight detail:
+|---+--------------------------------+------------+------------+----------|
+|   | destination                    | transit    | total hour | price    |
+|---+--------------------------------+------------+------------+----------|
+|   | hartford/bradley international | tokyo, los |       27.5 | 1.3-1.5k |
+|   | boston                         | san        |       22.5 | 1.5-1.6k |
+|---+--------------------------------+------------+------------+----------|
+  - [[http://www.valleytransporter.com/SampleRates-id-5.html][best options from bradley]]: valley transporter
+    - We depart on schedule from Bradley no later than forty-five minutes past the hour. Our final departure from Bradley is at 12:30 AM /12:45 AM (just after midnight), provided we have reservations.
+
+    - *Passengers must be ready to leave at the start time of their assigned pickup window. We will attempt to be there as early as possible within the window time period.*
+
+    - [[https://www.amherst.edu/offices/student-affairs/international/new_international_students/new_language_assistants/travel_and_arrival_information_for_language_assistants_international_students/ground_transportation_from_airports_to_amherst][Hartford’s Bradley International Airport ]]
+    - $53+ $25+ 15 gratuity. 
+    - three month notice is recommended
+
+*** help parents to travel to US
+- date to travel? better price at 25 Dec
+|---+-------------+----------------+-------|
+|   | travel date | airline choose | price |
+|---+-------------+----------------+-------|
+|   | 25dec       | american air   | 989   |
+|   |             | united         | 1289  |
+|   | 26dec       | american air   | 973   |
+|   |             | unite          | 1254  |
+|   |             |                |       |
+- suggest the Braley as a prefered destination 
+- American air/ unite as a major ariline. not delta. 
+- soeul/eastern airline as a minor transit. 
+- expected travel time 22h. price 10-12k. 
+
+**** airline chosen
+***** 12月28， 29， 30 (~USD$450)
+咸阳国际机场T3（XIY) --- 布莱德雷国际机场（Bradley International Airport（BDL））， 11:10am - 10:32pm(当地时间）（全程24h 22m）
+1. 咸阳国际机场T3（XIY) -- 北京首都国际机场(PEK)， 11:10a to 1:10p (2h), United 7572 operated by Air China （Boeing 737）
+停 3h 50m (PEK)
+2. Capital Intl. (PEK) ———— Liberty Intl. (EWR)， 5:00p to 5:40p (13h 40m), United 88（Boeing 777）
+停 3h 50m （EWR)
+3. Liberty Intl. (EWR) ---- Bradley Intl. (BDL), 9:30p-- 10:32p (1h 2m), United 4880 operated by CommutAir DBA United Express （Dehavilland Dash 8-300）
+
+***** 12月30 (~USD$600)
+咸阳国际机场T3（XIY) --- 布莱德雷国际机场（Bradley International Airport（BDL））， 12:25pm- 8:44p （全程 21h 19m）
+1. 咸阳国际机场T3（XIY)--- 上海浦东(PVG)， 12:25p - 2:45p(2h20m), Air China   Flight 1215  ( Airbus A320)
+2h 15m
+2. 上海浦东(PVG) -- Chicago, IL (ORD) O'Hare Intl Airport, 5:00p--4:10p (13h 10m) United Airlines Flight 836, ( Boeing 747-400)
+1h 30m
+3.  Chicago, IL (ORD) O'Hare Intl Airport --- 布莱德雷国际机场 (Bradley Intl Airport(BDL)), 5:40p- 8:44p(2h 4m),  United Airlines  Flight 442   5:40p- 8:44p(2h 4m) 
+
+***** 12月30
+咸阳国际机场T3（XIY) --- 布莱德雷国际机场（Bradley International Airport（BDL）），12:55p-10:40p（ 22h 45m ）
+1. 咸阳国际机场T3（XIY) --—— Seoul, Republic of Korea (ICN) （Korean Air   Flight 808）   2h 50m
+
+
+
+*** accomodation
+- Dear Nancy,
+Thank you for you patience in sending us the invitation letters. 
+We would like to enquire for information related to accomodation.  
+1. Accoding to International Student and Scholar (https://www.umass.edu/ipo/iss/visiting), there are limited number of 'one bedroom apartments in North  Village 990 N. Pleasant St'. If those are still availble, we are keen to know how we should rent one. 
+2. If not, we would like to know more about more reliable alternatives in finding acoomodations. To my knowledge, there is an Off Campus Student Center(OCSC)(http://www.umocss.org/index.php) that posts rental information. I am not sure how to start using that system, i.e. is completing LOC training mandatory. 
+3. Moreover, do you know how past visiting scholars found their accomodation; we will be much more confident in finding on forums like craigslist (http://westernmass.craigslist.org) if it has been done proviously with good feedback. 
+We are looking forward to your reply!
+Best regards,
+Shenqing and Xiajun 
+
+- LOC training for 
+  - https://www.umass.edu/ipo/iss/visiting
+  - odingsy@gmail.com // Odingsy123
+**** rental 
+- [[http://www.realtor.com/apartments/Amherst_MA/beds-1/price-na-2000?pos=42.342266,-72.553179,42.383362,-72.481081,14][realtor]]
+- [[https://www.forrent.com/find/MA/metro-Springfield/Amherst/beds-1][for rent]]
+
+
+*** general info regarding UMass
+- 23 jan 2017 first day of school. 
+
+
+
+
+*** LOC UMASS [[https://owl.oit.umass.edu/owl-c/quiz_engine/Question.cgi][LOC]]
+
+- Benefits of Living Off Campus Certification. How do I benefit?)
+
+The Living Off Campus Certification (LOC) is an introduction to the resources and assistance the University, area landlords, and the surrounding communities provide as you start your student experience off campus as a tenant. When you are finished you will be able to:
+
+Estimate your costs, find a rental, and find housemates if you need to.
+
+Know the steps to complete a rental application, inspect a rental, sign a lease or sublease, and know the rights and responsibilities of tenants and landlords.
+
+Understand the importance of being a good neighbor.
+
+Move in to your new place, set up utilities, set expectations with your housemates, and meet your neighbors.
+
+**** Things to Know
+
+ You have two weeks to complete the training. You can work at your own pace, exit, and come back to it later.
+
+ The LOC is "open book." Important links will open in new tabs or windows.
+
+ When you complete the LOC you can print a Living Off Campus Certificate. Landlords may ask for a copy before they sign a lease.
+
+ About 4 hours after you finish you can verfiy LOC completion online.
+
+****   Training Information  
+
+
+ The Off Campus Student Center, 314 Student Union, hosts programs, has lockers you can rent, provides services and activities, and is a place for you to hang out between classes.
+
+ The Center is staffed by Off Campus Assistants (OCAs) who are students who live off campus. They can help you stay connected to campus, and can help you answer most of the tenant questions you might have. They can also help you get involved in your new neighborhood.
+
+ The Dean of Students Office, 227 Whitmore, can provide you with the support, resources, and the referrals you need to be successful at the University.
+
+ The Student Legal Services Office, 922 Campus Center, is a student-funded law office that provides free legal assistance to UMass students. They can advise you about most legal issues including those that affect student tenants, and the payment of illegal fees.
+
+
+
+*** house information
+|------------------------------------+---------------------+----------------+----------------------+---------------------------------------------------|
+| location/distance form UMASS       | owner/other tenent? | price          | inclusive?           | contact                                           |
+|------------------------------------+---------------------+----------------+----------------------+---------------------------------------------------|
+| 1.5 mile, [[http://www.umocss.org/searchRentals.php?sec=view&availableBedrooms=Any&parkingSpots=No+Need&cid%5B%5D=0&occupancy=No+Preference&moveIn=on+a+Specific+Date&moveInMonth=December&moveInYear=2016&moveInRange=exactly&moveOut=Show+All&moveOutMonth=&moveOutYear=2016&moveOutRange=or+earlier&maxRent=&furnished=on&skip=10&reVerID=28581][website]]                  | no                  | 1150(two room) | electri/water.       | 413 549-0845                                      |
+| 2 mile, [[http://www.umocss.org/searchRentals.php?sec=view&availableBedrooms=Any&parkingSpots=No+Need&cid%5B%5D=0&occupancy=No+Preference&moveIn=on+a+Specific+Date&moveInMonth=December&moveInYear=2016&moveInRange=exactly&moveOut=Show+All&moveOutMonth=&moveOutYear=2016&moveOutRange=or+earlier&maxRent=&furnished=on&skip=10&reVerID=19503][website]] [[https://plus.google.com/photos/113498828948365487712/albums/5172215866641136385?banner=pwa][image]] (room3)      | yes                 | (1/4rooms)550  | all included         | Sun Kim, youngtess@yahoo.com                      |
+| 1.2 [[http://www.umocss.org/searchRentals.php?sec=view&availableBedrooms=Any&parkingSpots=No+Need&cid%5B%5D=0&occupancy=No+Preference&moveIn=on+a+Specific+Date&moveInMonth=December&moveInYear=2016&moveInRange=exactly&moveOut=Show+All&moveOutMonth=&moveOutYear=2016&moveOutRange=or+earlier&maxRent=&furnished=on&skip=10&reVerID=28604][website]]                        | yes                 | (1/2room) 650  | not electricity/heat | Kristin Wong,kmwong@umass.edu                     |
+| 2.7 mile  [[http://www.umocss.org/searchRentals.php?sec=view&availableBedrooms=Any&parkingSpots=No+Need&cid%5B%5D=0&occupancy=No+Preference&moveIn=on+a+Specific+Date&moveInMonth=December&moveInYear=2016&moveInRange=exactly&moveOut=Show+All&moveOutMonth=&moveOutYear=2016&moveOutRange=or+earlier&maxRent=&furnished=on&skip=0&reVerID=28633][website]](couple, LGBTQIA) | yes                 | 1/2 625        | all included         | Emily Rimmer,emilyrimmer@gmail.com                |
+| 8.5 [[http://www.umocss.org/searchRentals.php?sec=view&availableBedrooms=Any&parkingSpots=No+Need&cid%5B%5D=0&occupancy=No+Preference&moveIn=on+a+Specific+Date&moveInMonth=December&moveInYear=2016&moveInRange=exactly&moveOut=Show+All&moveOutMonth=&moveOutYear=2016&moveOutRange=or+earlier&maxRent=&furnished=on&skip=0&reVerID=28652][website]]                        | yes                 | 1/2 650        | not heat, elect,gas  | Claudia Marcela Paez Lotero,claudiapalo@gmail.com |
+| 2.7 [[http://www.umocss.org/searchRentals.php?sec=view&availableBedrooms=Any&parkingSpots=No+Need&cid%5B%5D=0&occupancy=No+Preference&moveIn=on+a+Specific+Date&moveInMonth=December&moveInYear=2016&moveInRange=exactly&moveOut=Show+All&moveOutMonth=&moveOutYear=2016&moveOutRange=or+earlier&maxRent=&furnished=on&skip=0&reVerID=28633][website]]  (all girls)           | yes                 | 1/5 550        | all included         | Laura Johns, lkjohns@umass.edu                    |
+|                                    |                     |                |                      |                                                   |
+
+
+
+looking for a place for a couple
+
+I am Shiyuan, looking for place to stay for my parents, who will both be  visiting professors in UMASS.
+
+They will reach Amherst on 30 Dec 2016. They will stay a year although half-year lease is also OK for them. 
+
+I have seen the information posted on UMASS Off-campus rental site and I am interested know the current avaibility. 
+
+
+Hope to hear from you soon!
+Shiyuan
+
+** Pr application [[https://eappointment.ica.gov.sg/ibook/index.do][eappointment]]
+- current eappointment is on <2017-03-29 Wed>
+- 6 years salary slips. 
+  - if I would be able to get 1st month slip by <2016-10-18 Tue>, this date is ok.
+  - UPDATE! cannot fit 
+    - nov
+    - dec
+    - jan
+    - feb
+    - mar
+    - apr 17 which is in US
+    - may: after <2017-05-15 Mon> 
+
+
+
+
+** good place to start labnote books in emacs. 
+- [[http://www.ctan.org/tex-archive/macros/latex/contrib/labbook][CTAN for labbook.cls]] 
+
+
+
+thi

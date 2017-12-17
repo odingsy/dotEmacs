@@ -1,0 +1,128 @@
+cd denten
+bundle exec jekyll serve -w
+bundle exec jekyll serve -w
+cd ..
+cd test_denten/
+bundle exec jekyll serve -w
+bundle exec jekyll serve -w
+bundle exec jekyll serve -w
+bundle exec jekyll serve -w
+cd ..
+cd test_denten/
+bundle exec jekyll serve -w
+bundle exec jekyll serve -w
+cd ..
+cd test_denten/
+bundle exec jekyll serve -w
+cd .
+cd ..
+cd denten/
+bundle exec jekyll serve -w
+bundle exec jekyll serve -w
+cd ..
+cd test_denten/
+bundle exec jekyll serve -w
+bundle exec jekyll serve -w
+bundle exec jekyll serve -w
+cd ..
+cd denten/
+bundle exec jekyll serve -w
+cd ..
+cd test_denten/
+bundle exec jekyll serve -w
+bundle install
+bundle exec jekyll serve -w
+bundle exec jekyll serve -w
+bundle install
+bundle exec jekyll serve -w
+cd ..
+bundle exec jekyll serve -w
+bundle exec jekyll serve -w
+cd ..
+cd test_jekyll/
+bundle exec jekyll serve -w
+cd ..
+cd denten/
+bundle exec jekyll serve -w
+bundle exec jekyll serve --watch
+cd  /Users/Guoshiyuan/Dropbox/org_files/future/academic_webpage
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+gem install org-ruby
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+jekyll serve
+jekyll serve -w
+ruby _plugins/org_converter.rb 
+chmod +x _plugins/org_converter.rb 
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+ls
+cd ..
+mkdir my_project
+cd my_project/
+mkdir org
+mkdir jekyll
+cd mak
+cd jekyll/
+git pull https://github.com/denten/denten.github.io.git
+git init
+git pull https://github.com/denten/denten.github.io.git
+cd ..
+ls
+cd org/
+ls
+mkdir _post
+cd _post/
+jk_
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+bundle install --path vendor/bundle
+bundle exec jekyll serve --watch
+jk_
+cd ..
+bundle exec jekyll serve --watch
+cd ..
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+cd ~/Dropbox/org_files/future/GuoSY_blog
+cd ~/Dropbox/org_files/future/
+mkdir GuoSY_blog/shiyuan.github.io GuoSY_blog/org_post
+mkdir -r GuoSY_blog/shiyuan.github.io GuoSY_blog/org_post
+man mkdir
+mkdir -p GuoSY_blog/shiyuan.github.io GuoSY_blog/org_post
+cd GuoSY_blog/
+ls
+ls
+cd shiyuan.github.io/
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+bundle exec jekyll serve --watch
+jk_
+bundle exec jekyll serve --watch
+ls 
+jekyll serve -w
+bundle exec jekyll serve --watch
+jekyll serve --watch
+cd ..
+jekyll serve- w
+jekyll serve -w
+jekyll serve -w
+jekyll serve -w
+jekyll serve -w
+jekyll serve -w
+jekyll serve -w
+jekyll serve -w
+jekyll serve -w
+jekyll serve -w
+bundle exec jekyll serve --watch
+jekyll serve --watch

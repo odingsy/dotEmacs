@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: fetching GEO
+# key: geo_
+# --
+remotefile <- $1
+destfile <- $2
+if(!file.exists(destfile)) download.file(remotefile, destfile)
+$0 <- getGEO(filename=destfile)

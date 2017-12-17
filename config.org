@@ -1,4 +1,4 @@
-+TITLE: EMACS configuration
+#+TITLE: EMACS configuration
 #+AUTHOR: ODIN
 #+TAGS: Arjen wolray Fabrice mine MELPA_ori
 
@@ -20,6 +20,7 @@ The following table list down reference
 | [[https://github.com/fniessen/dotfiles][Fabrice Niessen@fniessen]] |                               | CS major                                           |
 | [[https://github.com/howardabrams/dot-files/blob/master/emacs.org][Howward Abrams]]           |                               | holistic configuration, with literate tweak        |
 | [[http://emacs.readthedocs.io/en/latest/index.html][Yi Tang]]                  | Jul 2015                      | [[http://blog.yitang.uk][data scientist(R) in emacs]], sp, savehist, recentf) |
+| [[http://gongzhitaao.org/dotemacs/][gongzhitaao]]              |                               |                                                    |
 | [[https://github.com/dandavison/emacs-config][Dan Davison]]              | 30 Aug 2016                   |                                                    |
 | [[https://github.com/fniessen][Fabrice Niessen]]          | up-to-date                    | various refcard(Beamer, babel), leuven theme       |
 | [[https://github.com/eschulte/emacs24-starter-kit][eschulte]]                 | 2015                          | emacs starter kits 24.                             |
@@ -31,6 +32,8 @@ The following table list down reference
 | [[http://emacslife.com/how-to-read-emacs-lisp.html][Sacha Chua]]               |                               | Q and A format                                     |
 | [[http://tuhdo.github.io][tuhdo]] in                 |                               | helm and helm projectile                           |
 | [[http://dotfiles.github.io][holistic docfile]]         |                               |                                                    |
+| [[http://cs2.swfu.edu.cn/~wx672/dotfile/dot.emacs.d/][wx672]]                    | yas on lp                     |                                                    |
+| [[https://github.com/ronert/.emacs.d][ronert]]                   |                               |                                                    |
 |--------------------------+-------------------------------+----------------------------------------------------|
 * Questions related Emacs initiation.
 ** what is the package loading Vs lisp loading; [[http://emacs.stackexchange.com/questions/3310/difference-between-load-file-and-load][Answer from stack exchange]]
@@ -74,6 +77,12 @@ customize settings in .emacs
   :ensure t
   :init
   (benchmark-init/activate))
+#+END_SRC
+* security 
+#+BEGIN_SRC emacs-lisp
+(require 'epa-file)
+(custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg2"))
+(epa-file-enable)
 #+END_SRC
 * Theme and theme library in  [[https://emacsthemes.com][emacs theme page]]
 - Theme are color combinations. Deciding this combination is arguably [[http://geog.uoregon.edu/datagraphics/EOS/Light-and-Bartlein_EOS2004.pdf][difficult.]]
@@ -205,6 +214,9 @@ customize settings in .emacs
 
 (setq uniquify-buffer-name-style 'forward) ;syntax to contruct unique buffer names for files with the same baes name.
 
+(scroll-bar-mode -1) ;; no scoll bar
+(tool-bar-mode -1) 
+(menu-bar-mode -1)
 ;; (set-default-font "Source Code Pro" nil t)
 ;; (set-face-attribute 'default nil :height 100)
 
@@ -255,6 +267,9 @@ customize settings in .emacs
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-env "LC_ALL")
   (exec-path-from-shell-copy-env "LANG"))
+
+
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/Cellar")) 
 
 #+END_SRC
 ** file backup and delection
@@ -419,6 +434,16 @@ customize settings in .emacs
   (lambda ()
     (interactive)
     (find-file "/Users/Guoshiyuan/.emacs.d/config.org")))
+(global-set-key (kbd "S-<f6>")
+  (lambda ()
+    (interactive)
+    (dired "/Users/Guoshiyuan/Documents/GRE/Test_preparation/")))
+(global-set-key (kbd "S-<f5>")
+  (lambda ()
+    (interactive)
+    (find-file "/Users/Guoshiyuan/Dropbox/org_files/org_life/voca.org")))
+
+
 
 #+end_src
 *** bm: for book mark                      :MELPA_ori:
@@ -1114,7 +1139,7 @@ after `multiple-cursors-mode' is quit.")
   :diminish undo-tree-mode)
 #+END_SRC
 ** vocabuilder                               :MELPA_ori:
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC 
 (use-package voca-builder
   :ensure t
   :init
@@ -1428,7 +1453,9 @@ good column number to do that.
 ** org inline image and table
 #+begin_src emacs-lisp
 (setq org-startup-with-inline-images "inlineimages")
-(setq org-image-actual-width 550)
+;;(setq org-image-actual-width 550)
+(setq org-image-actual-width (/ (display-pixel-width) 3))
+;;(setq org-image-actual-width 400)
 
 
 (defun scimax-align-result-table ()
@@ -1516,18 +1543,38 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue"
 #+END_SRC
 *** TODO latex preview pane
 *** beamer
+this was silly in the end. there was an elisp command ~org-beamer-export-to-pdf~ from ox-beamer.el dealing with beamer export that doesn't not need any default setting. The original ~C-c C-e~ runs ~org-export-dispatch~ command from ox.el. therefore just 
  #+BEGIN_SRC emacs-lisp
-(with-eval-after-load 'ox-latex
-  (add-to-list 'org-latex-classes
-	       '("beamer"
-	       "\\documentclass\[presentation\]\{beamer\}"
-	       ("\\section{%s}" . "\\section*{%s}")
-	       ("\\begin{frame}{%s}"
-		"\\end{frame}"
-		"\\begin{frame}{%s}"
-		"\\end{frame}"))))
-
+(setq org-latex-listings t)
 (setq org-beamer-frame-level 2)
+
+
+;; only applicable if using org-export-dispathch 
+;; (with-eval-after-load 'ox-latex
+;;   (add-to-list 'org-latex-classes
+;; 	       '("beamer"
+;; 	       "\\documentclass\[presentation\]\{beamer\}"
+;; 	       ("\\section{%s}" . "\\section*{%s}")
+;; 	       ("\\begin{frame}{%s}"
+;; 		"\\end{frame}"
+;; 		"\\begin{frame}{%s}"
+;; 		"\\end{frame}"))))
+;; (eval-after-load "ox-latex"
+
+;;     ;; update the list of LaTeX classes and associated header (encoding, etc.)
+;;     ;; and structure
+;;     '(add-to-list 'org-latex-classes
+;;                   `("beamer"
+;;                     ,(concat "\\documentclass[presentation]{beamer}\n"
+;;                              "[DEFAULT-PACKAGES]"
+;;                              "[PACKAGES]"
+;;                              "[EXTRA]\n")
+;;                     ("\\section{%s}" . "\\section*{%s}")
+;;                     ("\\subsection{%s}" . "\\subsection*{%s}")
+;;                     ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+
+
+
  #+END_SRC
 
 
@@ -1537,9 +1584,8 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue"
 - =(add-to-list 'org-src-lang-modes '("<LANGUAGE>" . "<MAJOR-MODE>"))=
 - for diff programming language, =Org Src Block Faces= select for language specific
 #+begin_src emacs-lisp
-(add-hook 'R-mode-hook 'auto-complete-mode)
 ;; lisp-interaction-mode-hook to AC
-(add-hook 'lisp-interaction-mode-hook 'auto-complete-mode)
+;; (add-hook 'lisp-interaction-mode-hook 'auto-complete-mode)
 
 
 (byte-recompile-file
@@ -1673,6 +1719,20 @@ consistent as it doesn't pad source blocks with leading spaces.
 
 #+END_SRC
 ** Yasnippet and template                    :MELPA_ori:
+*** TODO yasnippet loading
+- yas does not load automatically upon entering
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :ensure t
+  :init (yas-global-mode 1)
+  :config
+  ;; (progn
+  ;;   (yas-reload-all))
+  )
+#+END_SRC
+
+
+
 *** org-template: [[http://stackoverflow.com/questions/19145433/shortcut-for-inserting-environments-in-org-mode][org-structure-template-alist]]
 #+BEGIN_SRC emacs-lisp
 ;; add <el for emacs-lisp expansion
@@ -1710,27 +1770,17 @@ consistent as it doesn't pad source blocks with leading spaces.
 	     '("n" "#+name: " ""))
 (add-to-list 'org-structure-template-alist
 	     '("r" "#+BEGIN_SRC R :results output \n?\n#+END_SRC"))
+
+(add-to-list 'org-structure-template-alist
+	     '("R" "#+BEGIN_SRC R :results output graphics :file ./test.png :exports results \n?\n#+END_SRC"))
+
 #+END_SRC
-
-
-*** TODO yasnippet loading
-- yas does not load automatically upon entering
-#+BEGIN_SRC emacs-lisp
-(use-package yasnippet
-  :ensure t
-  :defer t
-  :config
-  (setq yas-snippet-dirs (concat user-emacs-directory "snippets"))
-  (yas-global-mode 1))
-#+END_SRC
-
 
 
 ** ESS
 *** reference list
   - [[https://github.com/imbs-hl/emacs.d/blob/master/config/init-46-coding-R.el][IMBS@Lübeck, Germany]]
   - [[https://www.emacswiki.org/emacs/EmacsSpeaksStatistics][ess wiki]]
-*** Indecisive POLYmode to limit polymode to org+R and Rmarkdown and not other org babel block.
 *** babel:R configuration
 **** ess and ess-site and its general configuration, including face and indentation
 **** R-related key binding:
@@ -1744,64 +1794,45 @@ consistent as it doesn't pad source blocks with leading spaces.
 **** ess-smart-underscore
 
 #+BEGIN_SRC emacs-lisp
-
-
 (unless (getenv "LANG") (setenv "LANG" "en_US.UTF-8"))
 
-;; (use-package ess-site
-;;   :ensure ess
-;;   :mode ("\\.R\\'" . R-mode)
-;;   :commands R
-;;   :config
-;;   ;; (add-hook 'R-mode-hook #'subword-mode)
-;;   (add-hook 'R-mode-hook #'smartparens-strict-mode)
-;;   (setq ess-R-font-lock-keywords
-;; 	'((ess-R-fl-keyword:modifiers . t)
-;; 	  (ess-R-fl-keyword:fun-defs . t)
-;; 	  (ess-R-fl-keyword:keywords . t)
-;; 	  (ess-R-fl-keyword:assign-ops . t)
-;; 	  (ess-R-fl-keyword:constants . t)
-;; 	  (ess-fl-keyword:fun-calls)
-;; 	  (ess-fl-keyword:numbers)
-;; 	  (ess-fl-keyword:operators)
-;; 	  (ess-fl-keyword:delimiters)
-;; 	  (ess-fl-keyword:=)
-;; 	  (ess-R-fl-keyword:F&T . t)
-;; 	  (ess-R-fl-keyword:%op% . t)))
-;;   (setq inferior-R-font-lock-keywords
-;; 	'((ess-S-fl-keyword:prompt . t)
-;; 	  (ess-R-fl-keyword:messages . t)
-;; 	  (ess-R-fl-keyword:modifiers . t)
-;; 	  (ess-R-fl-keyword:fun-defs . t)
-;; 	  (ess-R-fl-keyword:keywords . t)
-;; 	  (ess-R-fl-keyword:assign-ops . t)
-;; 	  (ess-R-fl-keyword:constants . t)
-;; 	  (ess-fl-keyword:matrix-labels . t)
-;; 	  (ess-fl-keyword:fun-calls)
-;; 	  (ess-fl-keyword:numbers)
-;; 	  (ess-fl-keyword:operators)
-;; 	  (ess-fl-keyword:delimiters)
-;; 	  (ess-fl-keyword:=)
-;; 	  (ess-R-fl-keyword:F&T . t)))
-;;   :init 
-;;   (setq ess-ask-for-ess-directory nil)
-;;   (setq ess-local-process-name "R")
-;;   (setq ansi-color-for-comint-mode 'filter)
-;;   (setq comint-scroll-to-bottom-on-input t)
-;;   (setq comint-scroll-to-bottom-on-output t)
-;;   (setq comint-move-point-for-output t)
-;;   (setq ess-eval-visibly-p 'nowait)
-;;   (setq ess-S-assign-key (kbd "M--"))
-;;   (ess-toggle-S-assign-key t) ; enable above key definition
-;;   ;; leave my underscore key alone!
-;;   (ess-toggle-underscore nil))
-
-;; alternative way of loading ess-site after ess. 
 (use-package ess
   :ensure t
   :defer t
   :commands R
   :mode ("\\.[rR]\\'" . R-mode)
+  :config
+  ;; (setq ess-history-file "~/.Rhisotry")
+  ;; (setq ess-R-font-lock-keywords
+  ;; 	'((ess-R-fl-keyword:modifiers . t)
+  ;; 	  (ess-R-fl-keyword:fun-defs . t)
+  ;; 	  (ess-R-fl-keyword:keywords . t)
+  ;; 	  (ess-R-fl-keyword:assign-ops . t)
+  ;; 	  (ess-R-fl-keyword:constants . t)
+  ;; 	  (ess-fl-keyword:fun-calls)
+  ;; 	  (ess-fl-keyword:numbers)
+  ;; 	  (ess-fl-keyword:operators)
+  ;; 	  (ess-fl-keyword:delimiters)
+  ;; 	  (ess-fl-keyword:=)
+  ;; 	  (ess-R-fl-keyword:F&T . t)
+  ;; 	  (ess-R-fl-keyword:%op% . t)))
+  ;; (setq inferior-R-font-lock-keywords
+  ;; 	'((ess-S-fl-keyword:prompt . t)
+  ;; 	  (ess-R-fl-keyword:messages . t)
+  ;; 	  (ess-R-fl-keyword:modifiers . t)
+  ;; 	  (ess-R-fl-keyword:fun-defs . t)
+  ;; 	  (ess-R-fl-keyword:keywords . t)
+  ;; 	  (ess-R-fl-keyword:assign-ops . t)
+  ;; 	  (ess-R-fl-keyword:constants . t)
+  ;; 	  (ess-fl-keyword:matrix-labels . t)
+  ;; 	  (ess-fl-keyword:fun-calls)
+  ;; 	  (ess-fl-keyword:numbers)
+  ;; 	  (ess-fl-keyword:operators)
+  ;; 	  (ess-fl-keyword:delimiters)
+  ;; 	  (ess-fl-keyword:=)
+  ;; 	  (ess-R-fl-keyword:F&T . t)))
+
+
   :init
   (require 'ess-site)
   (setq ess-ask-for-ess-directory nil)
@@ -1848,64 +1879,33 @@ consistent as it doesn't pad source blocks with leading spaces.
     (setq ess-first-tab-never-complete
           'symbol-or-paren-or-punct))
 
-  :config
-  (setq ess-history-file "~/.Rhisotry")
-  (setq ess-R-font-lock-keywords
-	'((ess-R-fl-keyword:modifiers . t)
-	  (ess-R-fl-keyword:fun-defs . t)
-	  (ess-R-fl-keyword:keywords . t)
-	  (ess-R-fl-keyword:assign-ops . t)
-	  (ess-R-fl-keyword:constants . t)
-	  (ess-fl-keyword:fun-calls)
-	  (ess-fl-keyword:numbers)
-	  (ess-fl-keyword:operators)
-	  (ess-fl-keyword:delimiters)
-	  (ess-fl-keyword:=)
-	  (ess-R-fl-keyword:F&T . t)
-	  (ess-R-fl-keyword:%op% . t)))
-  (setq inferior-R-font-lock-keywords
-	'((ess-S-fl-keyword:prompt . t)
-	  (ess-R-fl-keyword:messages . t)
-	  (ess-R-fl-keyword:modifiers . t)
-	  (ess-R-fl-keyword:fun-defs . t)
-	  (ess-R-fl-keyword:keywords . t)
-	  (ess-R-fl-keyword:assign-ops . t)
-	  (ess-R-fl-keyword:constants . t)
-	  (ess-fl-keyword:matrix-labels . t)
-	  (ess-fl-keyword:fun-calls)
-	  (ess-fl-keyword:numbers)
-	  (ess-fl-keyword:operators)
-	  (ess-fl-keyword:delimiters)
-	  (ess-fl-keyword:=)
-	  (ess-R-fl-keyword:F&T . t)))
+
 
   (define-key ess-mode-map (kbd "C-%") 'R_pipe)
   (define-key inferior-ess-mode-map (kbd "C-%") 'R-pipe)
   (define-key comint-mode-map [C-up] 'comint-previous-matching-input-from-input)
   (define-key comint-mode-map [C-down] 'comint-next-matching-input-from-input)
   (add-hook 'ess-mode-hook
-	  '(lambda()
-	     (local-set-key [(shift return)] 'my-ess-eval)))
+  	  '(lambda()
+  	     (local-set-key [(shift return)] 'my-ess-eval)))
   (add-hook 'Rnw-mode-hook
-	  '(lambda()
-	     (local-set-key [(shift return)] 'my-ess-eval)))
+  	  '(lambda()
+  	     (local-set-key [(shift return)] 'my-ess-eval)))
   (add-hook 'ess-mode-hook
-	  (lambda ()
-	    (flyspell-prog-mode)
-	    (run-hooks 'prog-mode-hook)
-	    ))
+  	  (lambda ()
+  	    (flyspell-prog-mode)
+  	    (run-hooks 'prog-mode-hook)
+  	    ))
   (add-hook 'ess-R-post-run-hook (lambda () (smartparens-mode 1)))
 
   (add-hook 'inferior-ess-mode-hook
-	  '(lambda()
-	     (local-set-key [C-up] 'comint-previous-input)
-	     (local-set-key [C-down] 'comint-next-input)))
+  	  '(lambda()
+  	     (local-set-key [C-up] 'comint-previous-input)
+  	     (local-set-key [C-down] 'comint-next-input)))
 
   (add-hook 'ess-mode-hook #'my-ess-init)
   (add-hook 'inferior-ess-mode-hook #'turn-on-smartparens-mode)
-
-
-  )
+    )
 
 
 
@@ -1917,34 +1917,39 @@ consistent as it doesn't pad source blocks with leading spaces.
 
 
 
-(use-package polymode		; ESS with polymode
-  :ensure t
-  :defer t
-  :init
-  (require 'poly-R)		; Load necessary modes
-  (require 'poly-markdown)
-  (require 'poly-noweb)
-  :config
-  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
-  (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
-  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
-  )
+;; (use-package polymode		; ESS with polymode
+;;   :ensure t
+;;   :defer t
+;;   :init
+;;   (require 'poly-R)		; Load necessary modes
+;;   (require 'poly-markdown)
+;;   (require 'poly-noweb)
+;;   :config
+;;   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+;;   )
 
 
 ;; help and auto-completion
-;; (use-package ess-R-object-popup
-;;   :ensure t
-;;   :bind (:map ess-mode-map
-;;	      ("\C-c\C-g" . ess-R-object-popup)))
+(use-package ess-R-object-popup
+  :ensure t
+  :bind (:map ess-mode-map
+	      ("\C-c\C-g" . ess-R-object-popup)))
 
 ;; company completion?? i thought ess has its own completion
-;; (add-hook 'R-mode-hook
-;;         (defun my-R-mode-hook ()
-;;           (company-mode)
-;;           (local-set-key (kbd "TAB") 'company-complete)))
 
+(add-hook 'R-mode-hook
+        (defun my-R-mode-hook ()
+          (company-mode)
+          (local-set-key (kbd "TAB") 'company-complete)))
 
+(setq company-selection-wrap-around t
+      company-tooltip-align-annotations t
+      company-idle-delay 0.36
+      company-minimum-prefix-length 2
+      company-tooltip-limit 10)
 
 ;; ess-initiation
 
@@ -1958,9 +1963,10 @@ consistent as it doesn't pad source blocks with leading spaces.
 
 
 
-
+*** kill R process
+- by default, it binds to C-c C-\ key
 *** "polymode" by kitchin
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC 
 (setq scimax-src-block-keymaps
       `(("R" . ,(let* ((map (copy-keymap ess-mode-map)))
 		  (define-key map (kbd "C-c C-c") 'org-ctrl-c-ctrl-c)
@@ -2016,7 +2022,129 @@ It is for commands that depend on the major mode. One example is
 (add-hook 'org-mode-hook (lambda ()
                            (scimax-src-keymap-mode +1)))
 #+END_SRC
+* personal webside
+** learning markdown mode is tedious
+#+BEGIN_SRC emacs-lisp
+(require 'yaml-mode)
+   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-hook 'yaml-mode-hook
+    '(lambda ()
+       (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+#+END_SRC
+** why not we use org? here is org2jekyll. 
+#+BEGIN_SRC emacs-lisp
+(use-package org2jekyll
+  :defer 3
+  :config
+  (custom-set-variables '(org2jekyll-blog-author       "Shiyuan Guo")
+                        '(org2jekyll-source-directory  (expand-file-name "/Users/Guoshiyuan/Dropbox/org_files/future/GuoSY_blog/org_post"))
+                        '(org2jekyll-jekyll-directory  (expand-file-name "/Users/Guoshiyuan/Dropbox/org_files/future/GuoSY_blog/shiyuan.github.io"))
+                        '(org2jekyll-jekyll-drafts-dir "")
+                        '(org2jekyll-jekyll-posts-dir  "_posts/")
+                        '(org-publish-project-alist
+                          `(("default"
+                             :base-directory ,(org2jekyll-input-directory)
+                             :base-extension "org"
+                             ;; :publishing-directory "/ssh:user@host:~/html/notebook/"
+                             :publishing-directory ,(org2jekyll-output-directory)
+                             :publishing-function org-gfm-publish-to-gfm
+                             :headline-levels 4
+                             :section-numbers nil
+                             :with-toc nil
+                             :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>"
+                             :html-preamble t
+                             :recursive t
+                             :make-index t
+                             :html-extension "md"
+                             :body-only t)
+
+                            ("post"
+                             :base-directory ,(org2jekyll-input-directory)
+                             :base-extension "org"
+                             :publishing-directory ,(org2jekyll-output-directory org2jekyll-jekyll-posts-dir)
+                             :publishing-function org-gfm-publish-to-gfm
+                             :headline-levels 4
+                             :section-numbers nil
+                             :with-toc nil
+                             :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>"
+                             :html-preamble t
+                             :recursive t
+                             :make-index t
+                             :html-extension "md"
+                             :body-only t)
+
+                            ("images"
+                             :base-directory ,(org2jekyll-input-directory "img")
+                             :base-extension "jpg\\|gif\\|png"
+                             :publishing-directory ,(org2jekyll-output-directory "img")
+                             :publishing-function org-publish-attachment
+                             :recursive t)
+			    
+                            ("files"
+                             :base-directory ,(org2jekyll-input-directory "artefects")
+                             :base-extension "pdf\\|csv\\|tex\\|xlsx\\|xls"
+                             :publishing-directory ,(org2jekyll-output-directory "artefects")
+                             :publishing-function org-publish-attachment
+                             :recursive t)			    
+
+                            ("js"
+                             :base-directory ,(org2jekyll-input-directory "js")
+                             :base-extension "js"
+                             :publishing-directory ,(org2jekyll-output-directory "js")
+                             :publishing-function org-publish-attachment
+                             :recursive t)
+
+                            ("css"
+                             :base-directory ,(org2jekyll-input-directory "css")
+                             :base-extension "css\\|el"
+                             :publishing-directory ,(org2jekyll-output-directory "css")
+                             :publishing-function org-publish-attachment
+                             :recursive t)
+
+                            ("web" :components ("images" "js" "css"))))))
+
+(provide 'blog-pack)
+#+END_SRC
+
+#+BEGIN_SRC 
+;; from worg about teaching org export to jekyll directory [[http://orgmode.org/worg/org-tutorials/org-jekyll.html]]
+(setq org-publish-project-alist
+      '(
+
+  ("org-ianbarton"
+          ;; Path to your org files.
+          :base-directory "~/devel/ianbarton/org/"
+          :base-extension "org"
+
+          ;; Path to your Jekyll project.
+          :publishing-directory "~/devel/ianbarton/jekyll/"
+          :recursive t
+          :publishing-function org-publish-org-to-html
+          :headline-levels 4 
+          :html-extension "html"
+          :body-only t ;; Only export section between <body> </body>
+    )
+
+
+    ("org-static-ian"
+          :base-directory "~/devel/ianbarton/org/"
+          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
+          :publishing-directory "~/devel/ianbarton/"
+          :recursive t
+          :publishing-function org-publish-attachment)
+
+    ("ian" :components ("org-ianbarton" "org-static-ian"))
+
+))
+#+END_SRC
 * future improvement
 ** TODO customise date and develop a better capture template for todo and lab log :programming:
 ***** time customisation: add a customise label similar as 200117
@@ -2278,3 +2406,12 @@ JUSTIFICATION is a symbol for 'left, 'center or 'right."
 ** TODO a mechanism that convert org table to list, and visa versa. 
 ** TODO I have a list of R function. I want to push to github and these fucntion is loaded into R automatically when ever i initiate R.
 ** TODO jump to pdf to a specific page number. 
+** TODO org reveal to visualize 
+  :LOGBOOK:
+  - State "TODO"       from              <2017-07-04 Tue 10:44>
+  :END:
+
+
+  
+
+

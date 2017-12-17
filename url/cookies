@@ -1,0 +1,14 @@
+;; Emacs-W3 HTTP cookies file
+;; Automatically generated file!!! DO NOT EDIT!!!
+
+(setq url-cookie-storage
+ '(("www.nature.com"
+  [url-cookie "user.uuid" "f6e8c29c-e63d-4bfa-8265-be540cea9be4" "Sat, 16 Dec 2017 03:22:20 -0000" "/" "www.nature.com" nil]))
+)
+(setq url-cookie-secure-storage
+ 'nil)
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; End:

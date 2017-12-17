@@ -16,7 +16,7 @@
 (require 'package)
 ;;(defvar gnu '("gnu" . "https://elpa.gnu.org/packages/"))
 (defvar melpa '("melpa" . "https://melpa.org/packages/"))
-;;(defvar melpa-stable '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(defvar melpa-stable '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
 (setq package-archives nil)
 ;;(add-to-list 'package-archives melpa-stable t)
@@ -60,12 +60,16 @@
  '(custom-safe-themes
    (quote
     ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" default)))
+ '(epg-gpg-program "/usr/local/bin/gpg2")
  '(package-selected-packages
    (quote
-    (flycheck elpy lispy org-mac-link syntax-subword flyspell-correct-ivy ace-window ace-link org-wc company-shell benchmark-init ess-smart-equals ess-smart-underscore ess-view sml powerline-evil zenburn-theme xah-fly-keys writegood-mode voca-builder use-package solarized-theme smartparens smart-mode-line-powerline-theme rainbow-delimiters r-autoyas pretty-mode polymode pdf-tools paredit-everywhere ox-latex-chinese ox-ioslide ox-bibtex-chinese org-ref multiple-cursors magit latex-preview-pane ivy-hydra highlight-parentheses helm-swoop helm-projectile guide-key expand-region exec-path-from-shell ergoemacs-mode cyberpunk-theme counsel-projectile command-log-mode chinese-fonts-setup bm auctex-lua auctex-latexmk arjen-grey-theme)))
+    (org2jekyll edit-indirect ox-gfm markdown-mode+ markdown-preview-mode markdown-mode yaml-mode pamparam ox-reveal flycheck elpy lispy org-mac-link syntax-subword flyspell-correct-ivy ace-window ace-link org-wc company-shell benchmark-init ess-smart-equals ess-smart-underscore ess-view sml powerline-evil zenburn-theme xah-fly-keys writegood-mode voca-builder use-package solarized-theme smartparens smart-mode-line-powerline-theme rainbow-delimiters r-autoyas pretty-mode polymode pdf-tools paredit-everywhere ox-latex-chinese ox-ioslide ox-bibtex-chinese org-ref multiple-cursors magit latex-preview-pane ivy-hydra highlight-parentheses helm-swoop helm-projectile guide-key expand-region exec-path-from-shell ergoemacs-mode cyberpunk-theme counsel-projectile command-log-mode chinese-fonts-setup bm auctex-lua auctex-latexmk arjen-grey-theme)))
  '(safe-local-variable-values
    (quote
-    ((whitespace-style face tabs spaces trailing lines space-before-tab::space newline indentation::space empty space-after-tab::space space-mark tab-mark newline-mark)))))
+    ((eval org-shifttab 2)
+     (org-confirm-babel-evaluate)
+     (whitespace-style face tabs spaces trailing lines space-before-tab::space newline indentation::space empty space-after-tab::space space-mark tab-mark newline-mark))))
+ '(tramp-syntax (quote default) nil (tramp)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

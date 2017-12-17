@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: jekyll_start
+# key: jk_
+# --
+bundle exec jekyll serve --watch

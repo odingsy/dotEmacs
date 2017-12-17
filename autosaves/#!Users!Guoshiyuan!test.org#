@@ -1,0 +1,12 @@
+#+BEGIN_SRC R :results output 
+library(fortunes)
+fortune(250)                                  
+#+END_SRC
+
+#+RESULTS:
+: 
+: As Obi-Wan Kenobi may have said in Star Wars: "Use the source, Luke!"
+:    -- Barry Rowlingson (answering a question on the documentation of some
+:       implementation details)
+:       R-devel (January 2010)
+: 

@@ -1,0 +1,124 @@
+#+TITLE: GRE analytical writing 
+#+AUTHOR: GUO Shiyuan
+#+EMAIL: antguos@nus.edu.sg
+#+OPTIONS: toc:nil ^:nil num:nil
+#+DATE:
+#+LATEX_HEADER: \addtolength{\textwidth}{2in}
+#+LATEX_HEADER: \addtolength{\hoffset}{-1in}
+#+LATEX_HEADER: \addtolength{\voffset}{-1in}
+#+OPTIONS: texht:t
+#+OPTIONS: toc:2
+#+EXPORT_FILE_NAME: notebook
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [hidelinks,12pt]
+#+TAGS: pheno_assay(P) Western(W) attention(A) cell_work(c) IF(I) Write(w) Update(u) Fix(f) Check(c) noexport(n)
+#+EXCLUDE_TAGS: noexport
+#+PROPERTY: header-args:R :session main :results output :cache yes :exports none 
+#+PROPERTY: header-args:R+ :units in :width 10 :height 6.18 :res 144
+
+
+
+* the common theme 
+** issue 
+- social wellfare/well-being. as a measurement of political achievement
+- politics crowd-driven(consensus) or unique vioce. 
+  - [[http://www.education.com/reference/article/intrinsic-and-extrinsic-motivation/#B][external and internal motivation ]]
+- limited gov funding to spend on art, animal conservation
+
+
+
+* web scrapping for obtaining GRE AW questions ([[https://www.ets.org/gre/revised_general/prepare/analytical_writing/argument/pool][arguement]] and  [[https://www.ets.org/gre/revised_general/prepare/analytical_writing/issue/pool][issue]]) and tabulation. 
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgc51e0d7">1. the main sources for learning scraping technic are</a></li>
+</ul>
+</div>
+</div>
+
+<a id="orgc51e0d7"></a>
+
+# the main sources for learning scraping technic are
+
+-   [scraping intro](https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/)@analyticsvidhya
+-   [rvest tutorial: scraping the web using R](https://stat4701.github.io/edav/2015/04/02/rvest_tutorial/)
+-   vignette("selectorgadget") under `rvest`
+
+
+** characterizing the background info.
+Backgound info of the 
+|----------------+-------------------+------------------------------------------------|
+| question types | single text block | two text blocks                                |
+|----------------+-------------------+------------------------------------------------|
+| issue          |                   | the 1st starts with "Claim" while 2nd "Reason" |
+| arguement      |                   | the 1st starts with "The following" and quote. |
+|----------------+-------------------+------------------------------------------------|
+
+
+#+BEGIN_SRC R :results output graphics :file ./test.png :exports results 
+x <- c("tidyverse","modelr", "xtable", "contrast", "survival", "grid", "grid Extra", "rvest")
+lapply(x, require, character.only = TRUE, quietly = T,  warn.conflicts = F)
+
+
+
+url_issue <- "https://www.ets.org/gre/revised_general/prepare/analytical_writing/issue/pool"
+url_argument <- "https://www.ets.org/gre/revised_general/prepare/analytical_writing/argument/pool"
+
+
+scraping <- function(url, css){
+    html_text(html_nodes(read_html(url), css))
+}
+
+
+## For issue, join claims and reason
+issue <- scraping(url_issue, ".divider-50~ p , .indented p")
+start_claim <- unname(which(sapply(issue, substr, start = 1, stop = 5 ) == "Claim"))
+## start_reason <- which(sapply(issue, substr, start = 1, stop = 6 ) == "Reason")
+## unname(start_claim)+1 == unname(start_reason)
+issue[start_claim] <- paste(issue[start_claim], "\n",issue[start_claim+1])
+issue <- issue[-(start_claim + 1)]
+issue_tbl <- tbl_df(matrix(issue, ncol = 2, byrow = T)) %>%
+    mutate(., qn_no = as.numeric(factor(V2)))
+colnames(issue_tbl) <- c("background_info", "question", "qn_no")
+## write_csv(issue_tbl, "~/Desktop/issue.csv")
+
+
+## for argument, 
+argument <- scraping(url_argument, ".divider-50~ p , .indented p"); str(argument)
+start_response <- unname(which(sapply(argument, substr, start = 1, stop = 16) == "Write a response"))
+## testing the findInterval behavior, the only changes is on 2nd item. 
+(cbind(unname(sapply(argument, substr, start = 1, stop = 16)), findInterval(1:493, start_response, rightmost.closed = T, left.open = T))) 
+interval <- findInterval(1:493, start_response, rightmost.closed = T, left.open = T)
+interval[2] <- c(0)
+interval_tbl <- tbl_df(cbind(argument, interval)) %>%
+    group_by(., interval) %>%
+    filter(., row_number() != n()) %>%
+    ungroup()
+bg_tbl <- aggregate(argument~interval, interval_tbl, paste, collapse = "\n") %>%
+    tbl_df
+qn_tbl <- tbl_df(cbind(argument, interval)) %>%
+    group_by(., interval) %>%
+    filter(., row_number() == n()) %>%
+    ungroup()
+argument_tbl <- inner_join(bg_tbl, qn_tbl, by = c("interval" = "interval")) %>%
+    select(., -interval) %>%
+    mutate(., qn_no = as.numeric(factor(argument.y)))
+colnames(argument_tbl) <- c("background_info", "question", "qn_no")
+
+
+
+ftable(sapply(argument_tbl$question, substr, start = 80, stop = 180),argument_tbl$qn_no)
+
+
+## write_csv(argument_tbl, "~/Desktop/argument.csv")
+
+
+
+#+END_SRC
+
+
+
+
+
+

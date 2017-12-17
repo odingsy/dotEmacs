@@ -1,0 +1,7 @@
+# name : wetlab_property_header 
+# key : wetlab_
+# --
+   :PROPERTIES: 
+   :COLUMNS:  %20ITEM %10nature %20prep_date %20treatment %5amount %5cell_line %5passage 
+   :ID:       6EAA5084-8B74-4FC9-A797-1C919DE47774
+   :END:

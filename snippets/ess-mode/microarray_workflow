@@ -1,0 +1,60 @@
+# -*- mode: snippet -*-
+# name: microarray_workflow
+# key: mf_
+# --
+x <- c("tidyverse","modelr", "xtable", "contrast", "survival", "grid", "gridExtra", "limma", "affy", "affyPLM", "annotate", "arrayQualityMetrics", "genefilter")
+lapply(x, require, character.only = TRUE, quietly = T,  warn.conflicts = F)
+
+setwd("$1") ## directory containing .cel file
+
+pd <- read.AnnotatedDataFrame("$2",sep="", row.names=1) ## pheno file
+
+## cel read and QC on raw file 
+raw <-ReadAffy(filenames=rownames(pData(pd)), phenoData=pd) 
+
+
+## par(mfrow=c(2,1))
+## hist(log2(pm(raw[,1])),breaks=100,col="steelblue",main="PM",xlim=c(4,14))
+## hist(log2(mm(raw[,1])),breaks=100,col="steelblue",main="MM",xlim=c(4,14))
+## mva.pairs(pm(raw)[,1:6],plot.method="smoothScatter")
+## plmset <- fitPLM(raw)
+## par(mfrow=c(1,1))
+## NUSE(plmset,las=2) # 2nd cel file
+## RLE(plmset,las=2)
+
+
+## eset 
+eset <- rma(raw)
+# head(exprs(eset))
+# boxplot(exprs(eset),las=2)
+# mva.pairs(exprs(eset)[,1:4],log.it = FALSE,plot.method="smoothScatter")
+# arrayQualityMetrics(eset, outdir = "1238", force = TRUE, do.logtransform = TRUE)
+
+## annotation
+ID <- featureNames(eset)
+Symbol <- getSYMBOL(ID,${3"hgu133plus2.db"})
+Name <- as.character(lookUp(ID, ${3"hgu133plus2.db"}, "GENENAME"))
+Ensembl <- as.character(lookUp(ID, ${3"hgu133plus2.db"}, "ENSEMBL"))
+Ensembl <- ifelse(Ensembl=="NA", NA, 
+paste("<a href='http://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=",
+Ensembl, "'>", Ensembl, "</a>", sep=""))
+tmp <- data.frame(ID=ID, Symbol=Symbol, Name=Name, Ensembl=Ensembl, stringsAsFactors=F)
+tmp[tmp=="NA"] <- NA
+fData(eset) <- tmp
+
+## limma
+design <- c(${4:-1, -1, -1 , 1, 1, 1})
+## eset <- varFilter(eset)
+fit <- lmFit(eset, design)
+fit <- eBayes(fit)
+top <- topTable(fit, adjust="fdr", sort.by="B", number=100)
+## volcanoplot(fit)
+
+## t.test
+toprowttests(exprs(eset),fac=design)
+
+## output 
+HTML(top, "out.html", append=F)
+
+
+

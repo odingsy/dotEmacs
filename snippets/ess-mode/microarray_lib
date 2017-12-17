@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: microarray
+# key: ma_
+# --
+, "affy", "limma", "GEOquery", "affyPLM", "annotate", "arrayQualityMetrics", "genefilter", "hgu133plus2.db", "R2HTML"

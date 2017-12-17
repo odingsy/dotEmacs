@@ -2,6 +2,4 @@
 # name: latex
 # key: latex_
 # --
-#+BEGIN_LaTeX
-$0
-#+END_LaTeX
+#+ATTR_LaTeX: :width $0

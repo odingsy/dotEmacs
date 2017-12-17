@@ -1,0 +1,377 @@
+#+TITLE: frequent use wrapper
+#+AUTHOR: GUO Shiyuan
+#+EMAIL: antguos@nus.edu.sg
+#+OPTIONS: toc:nil ^:nil num:nil
+#+DATE:
+#+LATEX_HEADER: \addtolength{\textwidth}{2in}
+#+LATEX_HEADER: \addtolength{\hoffset}{-1in}
+#+LATEX_HEADER: \addtolength{\voffset}{-1in}
+#+OPTIONS: texht:t
+#+OPTIONS: toc:2
+#+EXPORT_FILE_NAME: notebook
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [hidelinks,12pt]
+#+TAGS: pheno_assay(P) Western(W) attention(A) cell_work(c) IF(I) Write(w) Update(u) Fix(f) Check(c) noexport(n)
+#+EXCLUDE_TAGS: noexport
+#+PROPERTY: header-args:R :session main :results output :cache yes :exports none 
+#+PROPERTY: header-args:R+ :units in :width 10 :height 6.18 :res 288
+
+
+
+
+* Introduction
+These wrappers are designed to deal with data from daily-bench work. The main character is to use ~scan~ function to allow data importing from excel express sheet. 
+
+* wrappers to 3 group of triplicates 
+#+srcname: plot graph with tukey
+#+BEGIN_SRC R :results output graphics :file wrapper_test.png :exports results
+x <- c("tidyverse","modelr", "xtable", "survival", "grid", "gridExtra")
+lapply(x, require, character.only = TRUE, quietly = T,  warn.conflicts = F)
+
+## data scanning 
+readings <- scan(text = "
+9.260018645
+6.522778562
+5.200242569
+3.30864391
+5.519920617
+3.664747796
+2.974931581
+3.861207325
+5.346070591
+")
+
+## define grouping 
+N <- 3
+group <- c(rep("scrambled_5nM", N), rep("TMEM45B_S1_5nM", N), rep("TMEM45B_S2_5nM", N))
+tbl <- tbl_df(cbind(readings, group))
+tbl$readings <- as.numeric(tbl$readings)
+tbl$group <- factor(tbl$group, levels = c("scrambled_5nM", "TMEM45B_S1_5nM", "TMEM45B_S2_5nM"))
+
+## anova
+text <- summary(aov(readings~group, data = tbl))[[1]][["Pr(>F)"]][1] %>% signif(., digits = 3) %>% paste0("P-val from anova\n= ", .)
+
+## post hoc 
+post_hoc <- TukeyHSD(x=aov(readings~group, data = tbl), "group", conf.level=0.95)$group[,c(1,4)] %>% signif(., digits = 3)
+                                                                               
+
+colnames(post_hoc) <- c("diff", "pval")
+## n_1 <- t.test(tbl$readings[which(group == "scrambled_5nM")], tbl$readings[which(group == "TMEM45B_S1_5nM")])
+## n_3 <- t.test(tbl$readings[which(group == "scrambled_5nM")], tbl$readings[which(group == "TMEM45B_S2_5nM")])
+## s3_1 <- t.test(tbl$readings[which(group == "TMEM45B_S2_5nM")], tbl$readings[which(group == "TMEM45B_S1_5nM")])
+## post_hoc <- tbl_df(matrix(c(n_1$estimate[1]-n_1$estimate[2], n_3$estimate[1]-n_3$estimate[2], s3_1$estimate[1]-s3_1$estimate[2], n_1$p.value, n_3$p.value, s3_1$p.value), byrow = F, ncol = 2)) %>%
+##     rownames_to_column(., "Post-hoc using tukey procedure")
+## colnames(post_hoc) <- c("Post-hoc using tukey procedure", "diff", "pval")
+## post_hoc$`Post-hoc using tukey procedure` <- c("neg-S1", "neg-S3", "S3-S1")
+
+
+gplot <- tbl %>% group_by(., group) %>% 
+  summarise(., mean_readings = mean(readings), se = sd(readings)/sqrt(length((readings)))) %>% 
+    ggplot(aes(x = group, y = mean_readings))+
+    geom_bar(stat = "identity", width = 0.4)+
+    geom_text(aes(label = round(mean_readings, digits = 2)), vjust = -0.4)+ 
+    labs(title = "",  y = "normalised intensity \n(error bar is S.E.)", x = paste("n = ", N))+
+    geom_errorbar(aes(ymin = mean_readings-se, ymax = mean_readings + se), width = 0.2)+
+    annotation_custom(grob = textGrob(text, x = 0.8, y = 0.9,gp = gpar(fontsize = 8 ))) +
+    theme(axis.line.x = element_line(size=.6, color = "black"),
+      axis.line.y = element_line(size=.6, color = "black"),
+      axis.ticks.x = element_blank(),
+      axis.text.x = element_text(size=8, color = "black", angle = 45, hjust = 1),
+      axis.title = element_text(size = 12, face = "bold"),
+      plot.title = element_text(hjust = 0.5, size = 13),
+      aspect.ratio =2/(1+sqrt(5)),
+      panel.background = element_blank())+
+    scale_y_continuous(limits = c(0, NA), expand = c(0,0))
+
+gtbl <-  tableGrob(post_hoc)
+gp <- grid.arrange(gplot, gtbl, ncol = 1, newpage = FALSE)
+
+## ggsave(file="~/Desktop/test.pdf", gp)
+#+END_SRC
+
+#+RESULTS[030085f063f4096b6e3beefdda420058b0828f98]: plot graph with tukey
+[[file:wrapper_test.png]]
+
+
+
+
+
+
+* single IF 15/group
+#+BEGIN_SRC R :results output graphics :file ~/Desktop/IF.png :exports results 
+x <- c("tidyverse","modelr", "xtable", "contrast", "survival", "grid", "gridExtra")
+lapply(x, require, character.only = TRUE, quietly = T,  warn.conflicts = F)
+
+
+readings <- scan(text = "
+501419.2552
+895225.6957
+862370.3652
+815644
+272880.8207
+1075175.473
+1333120.707
+925935.5571
+721255.2133
+441063.275
+651184.9222
+882581.7857
+8410.875
+538044.4167
+678355.72
+124802.3514
+336668.6778
+431980.2963
+544068.21
+213034.9684
+116968.3778
+339585.7583
+195255.8333
+3063.844444
+301148.3889
+358318.4
+382567.3083
+163510.0167
+37622.11579
+435952.9579
+451417.18
+43616.10909
+108848.08
+79403.01053
+1304015
+507591.7733
+49862.2
+38783.57333
+525309.8364
+421705.7538
+475967.4375
+312675.8545
+356187.5625
+400695.425
+197245.4429
+")
+
+
+
+group <- c(rep("scrambled_10nM", 15), rep("MGAT4A_S1_10nM", 15), rep("MGAT4A_S3_10nM", 15))
+
+tbl <- tbl_df(cbind(readings, group))
+tbl$group <- factor(tbl$group, levels = c("scrambled_10nM", "MGAT4A_S1_10nM", "MGAT4A_S3_10nM"))
+tbl$readings <- as.numeric(tbl$readings)
+text <- summary(aov(readings~group, data = tbl))[[1]][["Pr(>F)"]][1] %>% signif(., digits = 3) %>% paste0("P-val from anova = ", .)
+
+## post_hoc <- TukeyHSD(x=aov(readings~group, data = tbl), "group", conf.level=0.95)$group[,c(1,4)]
+## colnames(post_hoc) <- c("diff", "pval")
+n_1 <- t.test(tbl$readings[which(group == "scrambled_10nM")], tbl$readings[which(group == "MGAT4A_S1_10nM")])
+n_3 <- t.test(tbl$readings[which(group == "scrambled_10nM")], tbl$readings[which(group == "MGAT4A_S3_10nM")])
+s3_1 <- t.test(tbl$readings[which(group == "MGAT4A_S3_10nM")], tbl$readings[which(group == "MGAT4A_S1_10nM")])
+
+post_hoc <- tbl_df(matrix(c(n_1$estimate[1]-n_1$estimate[2], n_3$estimate[1]-n_3$estimate[2], s3_1$estimate[1]-s3_1$estimate[2], n_1$p.value, n_3$p.value, s3_1$p.value), byrow = F, ncol = 2)) %>%
+    rownames_to_column(., "Post-hoc using tukey procedure")
+colnames(post_hoc) <- c("Post-hoc using tukey procedure", "diff", "pval")
+post_hoc$`Post-hoc using tukey procedure` <- c("neg-S1", "neg-S3", "S3-S1")
+
+gplot <- tbl %>% group_by(., group) %>% 
+  summarise(., mean_readings = mean(readings), se = sd(readings)/sqrt(length((readings)))) %>% 
+    ## mutate(., group = factor(group, levels = c("scrambled_10nM", "MGAT4A_S1_10nM", "MGAT4A_S3_10nM"))) %>% 
+    ggplot(aes(x = group, y = mean_readings))+geom_bar(stat = "identity", width = 0.4) + geom_text(aes(label = signif(mean_readings, digits = 3)), vjust = -0.25)+labs(title = "",  y = "SE")+geom_errorbar(aes(ymin = mean_readings-se, ymax = mean_readings + se), width = 0.2)+annotation_custom(grob = textGrob(text, x = 0.88, y = 0.95,gp = gpar(fontsize =4 )))+theme(axis.line.x = element_line(size=.6, color = "black"),
+      axis.line.y = element_line(size=.6, color = "black"),
+      axis.ticks.x = element_blank(),
+      axis.text.x = element_text(size=4, color = "black"),
+      axis.title = element_text(size = 6),
+      plot.title = element_text(hjust = 0.5, size = 13),
+      aspect.ratio =2/(1+sqrt(5)),
+      panel.background = element_blank())+
+    scale_y_continuous(limits = c(0, NA), expand = c(0,0))
+gtbl <-  tableGrob(post_hoc)
+gp <- grid.arrange(gplot, gtbl, ncol = 1, newpage = FALSE)
+print(gp)
+
+#+END_SRC
+
+#+RESULTS[66874d5b42b607673698b6cb8cdb33210acbb13c]:
+[[file:~/Desktop/IF.png]]
+
+* organizing file into a folder if the file names contain a string
+- terminate ~-exec~
+- [[https://stackoverflow.com/questions/14371039/copy-all-files-in-a-directory-with-a-particular-string-in-the-filename-to-differ][find a string and execuate a function.]]
+
+#+BEGIN_SRC sh
+cd Volumes/Seagate\ Backup\ Plus\ Drive/exp_data/231_IF_3xsingle\ replicate/549_171003_split_DM
+
+
+touch MGAT4A_stained DAPI_stained 
+
+find . -type f -depth 1 -name "*_m.*" -exec mv {} ./MGAT4A_stained \;
+find . -type f -depth 1 -name "*_d.*" -exec mv {} ./DAPI_stained \; 
+
+# find ./S1_1 -type f -depth 1 -name "*_m.*" -exec mv {} ./MGAT4A_stained \;
+# find ./S1_2 -type f -depth 1 -name "*_d.*" -exec mv {} ./DAPI_stained \; 
+
+#+END_SRC
+
+#+RESULTS:
+
+* expand grid/data 
+
+#+BEGIN_SRC R :results output 
+x <- c("tidyverse","modelr", "xtable", "contrast", "survival", "grid", "gridExtra")
+lapply(x, require, character.only = TRUE, quietly = T,  warn.conflicts = F)
+
+
+treatment <- c("scrambled_10nM", "MGAT4A_S1_10nM","MGAT4A_S3_10nM")
+replicate <- c(1)
+slide <- c(1:3)
+field <- c(1:5)
+
+IF_table <- data.frame(expand.grid(field, slide, replicate, treatment)[4:1])
+colnames(IF_table) <- c("field", "slide", "replicate", "treatment")[4:1]
+
+write_excel_csv(IF_table, "~/Desktop/IF_table.csv")
+#+END_SRC
+
+
+
+* trial on representing post hoc on the graph
+#+BEGIN_SRC R :results output graphics :file ./test.png :exports results 
+x <- c("tidyverse","modelr", "xtable", "contrast", "survival", "grid", "gridExtra", "multcompView")
+lapply(x, require, character.only = TRUE, quietly = T,  warn.conflicts = F)
+
+## testing data
+## WaterConDryMass <- structure(list(ChillTime = structure(c(1L, 1L, 1L, 1L, 2L, 2L, 
+## 2L, 2L, 3L, 3L, 3L, 3L, 4L, 4L, 4L, 4L, 5L, 5L, 5L, 5L), .Label = c("Pre_chill", 
+## "6", "13", "24", "Post_chill"), class = "factor"), dmass = c(0.22, 
+## 0.19, 0.34, 0.12, 0.23, 0.33, 0.38, 0.15, 0.31, 0.34, 0.45, 0.48, 
+## 0.59, 0.54, 0.73, 0.69, 0.53, 0.57, 0.39, 0.8)), .Names = c("ChillTime", 
+## "dmass"), row.names = c(NA, -20L), class = "data.frame")
+
+generate_label_df <- function(TUKEY, variable){
+
+  # Extract labels and factor levels from Tukey post-hoc 
+  Tukey.levels <- TUKEY[[variable]][,4]
+  Tukey.labels <- data.frame(multcompLetters(Tukey.levels)['Letters'])
+
+  #I need to put the labels in the same order as in the boxplot :
+  Tukey.labels$treatment=rownames(Tukey.labels)
+  Tukey.labels=Tukey.labels[order(Tukey.labels$treatment) , ]
+  return(Tukey.labels)
+}
+
+model=lm(WaterConDryMass$dmass~WaterConDryMass$ChillTime )
+ANOVA=aov(model)
+TUKEY <- TukeyHSD(x=ANOVA, 'WaterConDryMass$ChillTime', conf.level=0.95)
+
+labels<-generate_label_df(TUKEY , "WaterConDryMass$ChillTime")
+names(labels)<-c('Letters','ChillTime')
+
+yvalue<-aggregate(.~ChillTime, data=WaterConDryMass, mean)
+
+final<-merge(labels,yvalue) #merge dataframes
+
+ggplot(WaterConDryMass, aes(x = ChillTime, y = dmass)) +
+  geom_blank() +
+  theme_bw() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  labs(x = 'Time (weeks)', y = 'Water Content (DM %)') +
+  ggtitle(expression(atop(bold("Water Content"), atop(italic("(Dry Mass)"), "")))) +
+  theme(plot.title = element_text(hjust = 0.5, face='bold')) +
+  annotate(geom = "rect", xmin = 1.5, xmax = 4.5, ymin = -Inf, ymax = Inf, alpha = 0.6, fill = "grey90") +
+  geom_boxplot(fill = 'green2', stat = "boxplot") +
+  geom_text(data = final, aes(x = ChillTime, y = dmass, label = Letters),vjust=-3.5,hjust=-.5) +
+  geom_vline(aes(xintercept=4.5), linetype="dashed") +
+  theme(plot.title = element_text(vjust=-0.6))
+
+
+
+#+END_SRC
+
+
+
+* quotation 
+
+Good Day! I'm Guo Shiyuan from Department of Anatomy, NUS. Could you please quote me with the pricing for 
+
+For the billing and delivery address:
+
+Department of Anatomy,
+Yong Loo Lin School of Medicine,
+National University of Singapore,
+4 Medical Drive, MD10, Singapore 117594
+PI's name: A/P George Yip
+
+Thanks!
+Shiyuan
+
+
+
+
+* IF naming 
+- 231_P16_scrambled_10nM_3-_d
+- 231_P16_scrambled_10nM_3-_m
+
+
+* convert many png to one pdf
+- [[https://jonkimanalyze.wordpress.com/2014/07/24/r-compile-png-files-into-pdf/][convert png to pdf]] online guide
+- about npc unit 
+- 
+#+BEGIN_SRC R :results output 
+library(png)
+
+
+ls <- list.files(path = "/Users/Guoshiyuan/Desktop/GRE_paper1/p1_verbal2", pattern=".png",all.files=T, full.names=F, no.. = T)
+
+
+
+merge.png.pdf <- function(pdfFile, pngFiles, deletePngFiles=FALSE) {
+#### Package Install ####
+pngPackageExists <- require ("png")
+ 
+if ( !pngPackageExists ) {
+install.packages ("png")
+library ("png")
+ 
+}
+#########################
+ 
+pdf(pdfFile)
+ 
+n <- length(pngFiles)
+ 
+for( i in 1:n) {
+ 
+pngFile <- pngFiles[i]
+ 
+pngRaster <- readPNG(pngFile)
+ 
+grid::grid.raster(pngRaster, width=unit(0.75, "npc"))
+ 
+if (i < n) plot.new()
+ 
+}
+dev.off()
+if (deletePngFiles) {
+ 
+unlink(pngFiles)
+}}
+
+setwd("/Users/Guoshiyuan/Desktop/GRE_paper1/p1_verbal2")
+merge.png.pdf(pdfFile = "/Users/Guoshiyuan/Desktop/GRE_paper1/p1_v2.pdf", pngFiles =ls, deletePngFiles = F)
+
+
+library(grid)
+
+redGradient <- matrix(hcl(0, 80, seq(50, 80, 10)),
+                      nrow=4, ncol=5)
+# interpolated
+
+pdf("/Users/Guoshiyuan/Desktop/testh.pdf")
+grid.newpage()
+grid.raster(redGradient, height=unit(1, "npc"))
+dev.off()
+                                        # blocky
+
+pdf("/Users/Guoshiyuan/Desktop/testF.pdf")
+grid.newpage()
+grid.raster(redGradient, interpolate=FALSE)
+grid.newpage()
+#+END_SRC

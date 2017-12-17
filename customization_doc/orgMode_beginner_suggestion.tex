@@ -1,0 +1,394 @@
+% Created 2017-04-11 Tue 16:26
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Carsten Dominik}
+\date{\today}
+\title{Org-Mode Beginners Customization Guide}
+\hypersetup{
+ pdfauthor={Carsten Dominik},
+ pdftitle={Org-Mode Beginners Customization Guide},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.1.1 (Org mode 9.0.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section*{Introduction}
+\label{sec:org4bd04a6}
+\index{Customization!Introduction}
+
+Org-mode is a highly customizable package.  It currently contains close to
+400 customization variables that can be changed to tweak every detail, and
+more than 260 are known to be actually used out there.
+
+However, as a beginner you do not care about this kind of flexibility.  On
+this page, we have a list of five settings that you might want to try first
+in order to personalize your system.
+
+Once you are done with that, we also have a list of some 40 variables that
+are \href{http://orgmode.org/worg/org-configs/org-customization-survey.php}{changed by many users}.
+
+\section*{The Basics}
+\label{sec:orga88657a}
+
+\index{Customization!Basics}
+
+\subsection*{Minimal customization}
+\label{sec:org6de243d}
+
+\index{Customization!Minimal}
+
+The minimal customization needed to use Org-mode is -- \textbf{Nothing at all!}
+\par Org-mode works out of the box, and besides the steps described in the
+manual to \href{http://orgmode.org/manual/Activation.html\#Activation}{activate} it, \emph{nothing is needed at all}.  Just open a \emph{.org}
+file, press \texttt{C-c [} to tell org that this is a file you want to use in your
+agenda, and start putting your life into plain text.
+
+OK, for completeness, let's just repeat what is needed to activate
+Org-mode in files with \emph{.org} extension, and a few important key
+assignments.
+
+\begin{verbatim}
+  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  ;; (global-font-lock-mode 1)  Not needed in recent emacsen
+\end{verbatim}
+
+\subsection*{Five small steps toward a personalized system}
+\label{sec:org9ba8a65}
+
+\subsubsection*{One: More TODO keywords}
+\label{sec:org48cf150}
+
+\index{Todo Keywords}
+
+Define the TODO states you find useful and single letters for fast
+selection.  Customize the variable \texttt{org-todo-keywords} or simply do this
+right in the file with\footnote{press \texttt{C-c C-c} in the line after changing it\label{org4124dac}}:
+
+\begin{verbatim}
+  #+TODO: TODO(t) STARTED(s) WAITING(w) | DONE(d) CANCELED(c)
+\end{verbatim}
+
+\subsubsection*{Two: Which tags do you use most?}
+\label{sec:orge4dbe0d}
+
+\index{Tag}
+
+You can always add tags freely and by hand, but if you configure the
+most important ones along with fast-access keys, life will be better.
+Configure the variable \texttt{org-tags-alist} or simply do this right in the
+file with\textsuperscript{\ref{org4124dac}}
+
+\begin{verbatim}
+#+TAGS: home(h) work(w) @computer(c) @phone(p) errants(e)
+\end{verbatim}
+
+\subsubsection*{Three: Which files are relevant for the agenda?}
+\label{sec:orgc12b8e2}
+
+\index{Agenda}
+
+When Org compiles agenda views like the the agenda for the current
+week (\texttt{C-c a a}) or the global TODO list (\texttt{C-c a t}), it checks all
+files in the variable \texttt{org-agenda-files}.  Instead of setting this
+variable explicitly, it is much easier to just add and remove the
+current buffer with \texttt{C-c [} and \texttt{C-c ]}, respectively.
+
+\subsubsection*{Four: Find what you need to see now}
+\label{sec:org7eec36f}
+
+If you need to sharpen the predefined agenda commands, define your \href{http://orgmode.org/manual/Custom-agenda-views.html\#Custom-agenda-views}{own}
+Agenda commands, using the variable \texttt{org-agenda-custom-commands}.
+This is a pretty complex variable, but if you use the customize
+interface\footnote{\texttt{M-x customize-variable RET
+org-agenda-custom-commands RET}}, it is not too hard.  Everyone
+ends up customizing this one after getting comfortable with Org-mode.
+Do checkout \href{http://orgmode.org/worg/org-tutorials/org-custom-agenda-commands.php}{this tutorial} on building your own custom agenda commands
+as well.
+
+\subsubsection*{Five: Capture ideas with predefined templates}
+\label{sec:org8b0dc48}
+
+\index{Capture}
+
+Use \texttt{org-capture} to quickly capture ideas, tasks, and notes.
+Populate\footnote{M-x customize-variable RET org-capture-templates RET}
+the variable \texttt{org-capture-templates} with templates and target
+locations.
+
+\section*{Pretend to be a power-user}
+\label{sec:org0385701}
+
+Here is a list of the variables most frequently changed by power
+users.  The variables mentioned above are repeated in this list.  Yes,
+some power users change 60 options or more, but these showed up most
+frequently in the \href{http://orgmode.org/worg/org-configs/org-customization-survey.php}{customization survey}.
+
+\subsubsection*{Basic setup}
+\label{sec:org0bd758c}
+
+\index{Directory}
+\index{Agenda!Files}
+\index{Startup}
+\index{Archive!Location}
+
+Here are a few things about basic setup that many people change.
+
+\begin{description}
+\item[{org-directory}] Where are my Org files typically located?  Org
+acutally uses this variable only under rare circumstances, like
+when filing remember notes in an interactive way and prompting
+you for an Org file to put the note into.
+\end{description}
+
+
+\begin{description}
+\item[{org-agenda-files}] Which \href{http://orgmode.org/manual/Agenda-files.html\#Agenda-files}{files} do I want to be checked for entries
+when compiling my agenda?  Many people do not customize this one,
+but just use \texttt{C-c [} and \texttt{C-c ]} to add or remove the current
+file, respectively.
+
+\item[{org-startup-folded}] When visiting an Org file, in what \href{http://orgmode.org/manual/Visibility-cycling.html\#Visibility-cycling}{folding
+state} do I first want to see it?  Many use \texttt{\#+STARTUP} options to
+set this on a \href{http://orgmode.org/manual/In\_002dbuffer-settings.html\#In\_002dbuffer-settings}{per-file basis}.
+
+\item[{org-archive-location}] When \href{http://orgmode.org/manual/Archiving.html\#Archiving}{archiving} an entry, where will it go?
+\end{description}
+
+\subsubsection*{Editing behavior and appearance}
+\label{sec:org4bf9d0e}
+
+\index{Appearance}
+\index{Follow links}
+\index{Completion}
+\index{Ido}
+\index{Levels}
+\index{Blank}
+
+Besides being an organizer, Org-mode is also a text mode for writing
+and taking notes.  The following variables that influence basic
+editing behavior and the appearance of the buffer are often
+customized:
+
+\begin{description}
+\item[{org-hide-leading-stars}] Make the outline more list-like be \href{http://orgmode.org/manual/Clean-view.html\#Clean-view}{hiding}
+all leading stars but one.
+
+\item[{org-odd-levels-only}] Should \href{http://orgmode.org/manual/Clean-view.html\#Clean-view}{2 stars} be added per level?  This
+makes the indentation more like in a book.
+
+\item[{org-special-ctrl-a/e}] Should \texttt{C-a} and \texttt{C-e} behave specially,
+considering the headline and not the leading stars, todo
+keywords, or the trailing tags?  About equal numbers of users set
+this to \texttt{t} or to \texttt{reversed}
+
+\item[{org-special-ctrl-k}] Should \texttt{C-k} behave \href{http://orgmode.org/worg/org-faq.html\#C-k-is-killing-subtrees}{specially} in headlines,
+considering tags and visibility state?
+
+\item[{org-completion-use-ido}] Should \emph{ido.el} be used for completion
+whenever it makes sense?
+
+\item[{org-return-follows-link}] Should pressing RET on a hyperlink \href{http://orgmode.org/manual/Handling-links.html\#Handling-links}{follow}
+the link?  People who are used to this from web browsers often
+make this choice.
+
+\item[{org-blank-before-new-entry}] Org-mode tries to be smart about
+inserting blank lines before \href{http://orgmode.org/manual/Structure-editing.html\#Structure-editing}{new entries/items}, by looking at
+what is before the previous entry/item.  Customize this to
+out-smart it.
+\end{description}
+
+\subsubsection*{The TODO keywords}
+\label{sec:org86607b9}
+
+\index{Todo Keywords}
+\index{Todo Keywords!Faces}
+\index{Todo Keywords!Dependencies}
+\index{Checkbox}
+
+\begin{description}
+\item[{org-todo-keywords}] Which \href{http://orgmode.org/manual/TODO-extensions.html\#TODO-extensions}{TODO keywords} should be used?  Also you
+can define keys for \href{http://orgmode.org/manual/Fast-access-to-TODO-states.html\#Fast-access-to-TODO-states}{fast access} here.  Very many people use this,
+or define the keywords with a \texttt{\#+TODO:} setting in the buffer.
+
+\item[{org-todo-keyword-faces}] Here you can define different faces for
+different TODO keywords.
+
+\item[{org-enforce-todo-dependencies}] Should unfinished children \href{http://orgmode.org/manual/TODO-dependencies.html\#TODO-dependencies}{block}
+state changes in the parent?
+
+\item[{org-enforce-todo-checkbox-dependencies}] Should unfinished
+checkboxes \href{http://orgmode.org/manual/TODO-dependencies.html\#TODO-dependencies}{block} state changes in the parent?
+\end{description}
+
+\subsubsection*{Tags}
+\label{sec:org50aa0f7}
+
+\index{Tag}
+
+\begin{description}
+\item[{org-tag-alist}] Which \href{http://orgmode.org/manual/Tags.html\#Tags}{tags} should be available?  Note that tags
+besides the configured ones can be used, but for the important
+ones you can define keys for \href{http://orgmode.org/manual/Setting-tags.html\#Setting-tags}{fast access} here.
+
+\item[{org-tags-column}] How should tags be aligned in the headline?
+
+\item[{org-fast-tag-selection-single-key}] Set this to make the tags
+interface even faster, if all you normally do is changing a single
+tag.
+\end{description}
+
+\subsubsection*{Progress logging}
+\label{sec:org30e1e10}
+
+\index{Progress!Logging}
+\index{Logging}
+
+\begin{description}
+\item[{org-log-done}] Do you want to \href{http://orgmode.org/manual/Progress-logging.html\#Progress-logging}{capture} time stamps and/or notes when
+TODO state changes, in particular when a task is DONE?  A simple
+setting that many use is \texttt{(setq org-log-done 'time)}.
+\end{description}
+
+\subsubsection*{Capture and Refile}
+\label{sec:orgfdca395}
+
+\index{Capture}
+\index{Refile}
+
+\begin{description}
+\item[{org-reverse-note-order}] When adding new entries (or tasks) to a
+list, do I want the entry to be first or last in the list?
+\end{description}
+
+\texttt{org-capture} is great for fast capture of ideas, notes, and tasks.  It
+is one of the primary capture methods in Org-mode.
+
+\begin{description}
+\item[{org-capture-templates}] Prepare \href{http://orgmode.org/manual/Remember-templates.html\#Remember-templates}{templates} for the typical notes and
+tasks you want to capture quickly.  I believe everyone using
+\texttt{org-capture} customizes this.
+
+\item[{org-default-notes-file}] If you do not set up templates with target
+files, at least tell Org where to put captured notes.
+\end{description}
+
+\emph{Refiling} means moving entries around, for example from a capturing
+location to the correct project.
+
+\begin{description}
+\item[{org-refile-targets}] What should be on the \href{http://orgmode.org/manual/Refiling-notes.html\#Refiling-notes}{menu} when you refile
+tasks with \texttt{C-c C-w}?
+
+\item[{org-refile-use-outline-path}] How would you like to select refile
+targets. Headline only, or the path along the outline hierarchy?
+\end{description}
+
+\subsubsection*{Agenda Views}
+\label{sec:org57dc34e}
+
+\index{Agenda!Views}
+
+\begin{description}
+\item[{org-agenda-start-on-weekday}] Should the \href{http://orgmode.org/manual/Weekly\_002fdaily-agenda.html\#Weekly\_002fdaily-agenda}{agenda} start on Monday, or
+better today?
+
+\item[{org-agenda-ndays}] How many days should the default agenda show?
+Default is 7, a whole week.
+
+\item[{org-agenda-include-diary}] Should the agenda also show \href{http://orgmode.org/manual/Weekly\_002fdaily-agenda.html\#Weekly\_002fdaily-agenda}{entries} from
+the Emacs diary?
+
+\item[{org-agenda-custom-commands}] Define your \href{http://orgmode.org/manual/Custom-agenda-views.html\#Custom-agenda-views}{own} Agenda commands.
+Complex, advanced variable, but pretty much everyone ends up
+configuring it.  Use customize to configure it, this is the best
+and safest way.  Do checkout \href{http://orgmode.org/worg/org-tutorials/org-custom-agenda-commands.php}{this tutorial} on building your own
+custom agenda commands as well.
+
+\item[{org-agenda-sorting-strategy}] How should things be \href{http://orgmode.org/manual/Sorting-of-agenda-items.html\#Sorting-of-agenda-items}{sorted} in the
+agenda display.  Even though I think the defaults are very usable,
+power users tend to tweak this.
+
+\item[{org-stuck-projects}] How to find projects that need \href{http://orgmode.org/manual/Stuck-projects.html\#Stuck-projects}{attention}?
+\end{description}
+
+To reduce clutter in the task list for today, many users like to
+remove tasks from the daily list right when they are done.  The
+following variables give detailed control to what kind of entries this
+should apply:
+
+\begin{description}
+\item[{org-agenda-skip-scheduled-if-done}] Scheduled entries.  Many users
+turn this on.
+
+\item[{org-agenda-skip-deadline-if-done }] Deadlines.  Many users turn
+this on.
+
+\item[{org-agenda-skip-timestamp-if-done}] Entries with any timestamp,
+appointments just like scheduled and deadline entries.
+Relatively few users select this one.
+\end{description}
+
+People who use Org like a \href{http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html}{day planner}, who \href{http://orgmode.org/manual/Deadlines-and-scheduling.html\#Deadlines-and-scheduling}{schedule} all tasks to
+specific dates, often like to not have scheduled tasks listed in their
+global TODO list, because scheduling it already means to have taking
+care of it in a sense, and because they know they will run into these
+tasks in the agenda anyway.
+
+\begin{description}
+\item[{org-agenda-todo-ignore-deadlines}] Don't show deadline tasks in
+global TODO list.
+
+\item[{org-agenda-todo-ignore-with-date}] Don't show any tasks with a date
+in the global TODO list.
+
+\item[{org-agenda-todo-ignore-scheduled}] Don't show scheduled tasks
+in the global TODO list.
+\end{description}
+
+\subsubsection*{Export/Publishing setup}
+\label{sec:org85c5974}
+
+\index{Export}
+\index{Publish!Setup}
+
+\begin{description}
+\item[{org-export-with-\LaTeX{}-fragments}] Should \href{http://orgmode.org/manual/LaTeX-fragments.html\#LaTeX-fragments}{\LaTeX{} fragments} be
+converted to inline images for HTML output?
+
+\item[{org-export-html-style}] Customize the default \href{http://orgmode.org/manual/CSS-support.html\#CSS-support}{style} for HTML
+export.
+
+\item[{org-publish-project-alist}] Set up projects that allow many files
+to be exported and \href{http://orgmode.org/manual/Publishing.html\#Publishing}{published} with a single command.
+\end{description}
+
+\section*{Become a true power user}
+\label{sec:orgf1107c0}
+
+If you want to become a true power user, \href{http://thread.gmane.org/gmane.emacs.orgmode/10804}{see} for yourself what some users
+do.  The Emacs customization system\footnote{\texttt{M-x org-customize RET}} organizes
+all variables into a structure that can be used to easily \href{http://orgmode.org/worg/org-tutorials/org-customize.html}{find the one
+particular option} you might be looking for.  Also, the \href{http://orgmode.org/manual/}{Org-mode manual} and
+the \href{http://orgmode.org/worg/org-faq.html}{FAQ} mention many variables in the appropriate context.
+\end{document}

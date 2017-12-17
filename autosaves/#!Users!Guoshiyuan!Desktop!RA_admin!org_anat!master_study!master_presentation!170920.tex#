@@ -1,0 +1,110 @@
+% Created 2017-09-15 Fri 11:48
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation, t]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{tikz}
+\definecolor{mylinkcolor}{HTML}{006DAF}
+\hypersetup{colorlinks=true, linkcolor=mylinkcolor, urlcolor=mylinkcolor}
+\usetheme{Singapore}
+\usecolortheme{seahorse}
+\author{\href{mailto:antguos@nus.edu.sg}{GUO Shiyuan}}
+\date{\today}
+\title{MGAT4A function elucidation in breast cancer}
+\logo{\includegraphics[height=.5cm]{./images/NUS_logo_full-horizontal.png}}
+\hypersetup{
+ pdfauthor={\href{mailto:antguos@nus.edu.sg}{GUO Shiyuan}},
+ pdftitle={MGAT4A function elucidation in breast cancer},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.1.1 (Org mode 9.0.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tikzstyle{every picture}+=[remember picture]
+
+\section*{Breast and breast cancer}
+\label{sec:org19e0a21}
+\begin{frame}[label={sec:org271894c}]{Breast Anatomy}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{/Users/Guoshiyuan/Desktop/RA_admin/org_anat/master_study/master_presentation/images/Superficial dissection of female pectoral region_Clinically Oriented Anatomy_moore_FIGURE1.21.png}
+\caption{\label{fig:org6f1710d}
+Superficial dissection of female pectoral region (Moore, 2014, Fig1.21)}
+\end{figure}
+\end{column}
+\begin{column}{0.5\columnwidth}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{/Users/Guoshiyuan/Desktop/RA_admin/org_anat/master_study/master_presentation/images/Sagittal section of female breast and anterior thoracic wall_Clinically Oriented Anatomy_moore_FIGURE1.22.png}
+\caption{\label{fig:org5136700}
+Sagittal section of female breast and anterior thoracic (Moore, 2014, Fig 1.22)}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label={sec:orga68e0fb}]{Breast cancer}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{/Users/Guoshiyuan/Desktop/RA_admin/org_anat/master_study/master_presentation/images/Origins of breast disorders_Robbins Basic Pathology_Kumar_Fig. 19.22.png}
+\caption{\label{fig:org165a0f4}
+origin of breast cancer (Kumar, 2017, Fig. 19.22)}
+\end{figure}
+\end{frame}
+
+\begin{frame}[label={sec:orgf304698}]{Risk factor}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{/Users/Guoshiyuan/Desktop/RA_admin/org_anat/master_study/master_presentation/images/Factors Associated With Development of Invasive Carcinoma_Robbins Basic Pathology_Kumar_table 19.6.png}
+\caption{\label{fig:org521309a}
+Factors Associated With Development of Invasive Carcinoma (Kumar, 2017, Tbl 19.6)}
+\end{figure}
+\end{frame}
+
+\begin{frame}[label={sec:org1a3db7b}]{Worldwide breast epidemiology}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{/Users/Guoshiyuan/Desktop/RA_admin/org_anat/master_study/master_presentation/images/world breast cancer incidence and morality annual rate (Estimated age-standardised rate per 100,000).png}
+\caption{\label{fig:org019da05}
+Estimated age-standardised annual rate per 100,000 (Globocan, 2012)}
+\end{figure}
+\end{frame}
+
+\begin{frame}[label={sec:org892e630}]{Singapore breast epidemiology}
+\begin{columns}
+\begin{column}{0.58\columnwidth}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{/Users/Guoshiyuan/Desktop/RA_admin/org_anat/master_study/master_presentation/images/female_incidence_Singapore Cancer Registry Interim Annual Report Trends in Cancer Incidence in Singapore 2010-2014.png}
+\caption{\label{fig:org1d27277}
+female breast cancer incidence (Singapore Cancer Registry Interim Annual Report, 2010-2014)}
+\end{figure}
+\end{column}
+\begin{column}{0.58\columnwidth}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{/Users/Guoshiyuan/Desktop/RA_admin/org_anat/master_study/master_presentation/images/female_mortality_Singapore Cancer Registry Interim Annual Report Trends in Cancer mortality in Singapore 2010-2014.png}
+\caption{\label{fig:orged5e71f}
+female breast cancer mortality (Singapore Cancer Registry Interim Annual Report, 2010-2014)}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+\begin{frame}[label={sec:org85b711c}]{Symptom and Diagnostic}
+\end{frame}
+\end{document}

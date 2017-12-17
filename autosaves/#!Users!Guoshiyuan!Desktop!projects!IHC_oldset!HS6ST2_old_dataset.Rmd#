@@ -1,0 +1,119 @@
+---
+title: "HS6ST2_old_dataset"
+output: 
+  pdf_document:
+    include:
+      in_header: header.tex
+geometry: margin=1cm
+---
+
+
+```{r, include=FALSE}
+library(ProjectTemplate)
+load.project()
+
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo=FALSE, fig.width = 7*0.3/0.7, out.width = "30%", fig.align = 'default')
+panderOptions("table.emphasize.rownames", FALSE)
+options(contrasts=c("contr.treatment","contr.treatment")) # to inhibit the polymodial behavior of multivariant model fitting
+
+source("munge/HS6ST2_data_cleaning.R")
+source("src/eda_hs6st2.R")
+source("src/stats_tests_hs6st2.R")
+
+```
+
+# Data cleaning up 
+
+# Staining distribution and cutoffs. 
+```{r}
+plot_cytoplasm_IRS
+plot_nucleus_IRS
+plot_stromal_IRS
+```
+
+```{r}
+plot_cytoplasm_TPS
+plot_nucleus_TPS
+plot_stromal_TPS
+```
+```{r}
+plot_cytoplasm_WAI
+plot_nucleus_WAI
+plot_stromal_WAI
+```
+```{r}
+plot_age
+plot_race
+plot_size
+```
+
+
+# Result
+### Statistical tests implemented 
+```{r, results="asis"}
+test_summary <- matrix(c("Binary(dichotamised Age, LVI, ER etc.)", "Ordinal(Grade,LN_axi)",  "Survival data", "Fisher exact", "Kendall Tau b", "Survival analysis by Cox Proportional Hazard model", "two-sided exact P-value", "two-sided exact P-value","chisq on two sided asymptotic P-value","conditional Maximum Likelihood Estimate of Odds ratio", "tau-b statistic", "Hazard ratio"), ncol = 4) 
+colnames(test_summary) <- c("variable types", "test statistics", "nature of p-val", "nature of coefficients")
+
+pandoc.table(test_summary, use.hyphening = F, split.cells = 10, caption = "summary of statistical tests")
+```
+
+### Legend
+
+
+\newpage
+
+\blandscape
+
+\tiny
+```{r, results='asis'}
+pandoc.table(stain_coef_pn_tbl, caption = "Summarising the cutoff with one or more significant counts. Arranged with descending order of sf_count", split.tables = Inf, justify = 'center')
+```
+
+\elandscape
+
+\newpage
+
+
+### Confounding analysis
+
+
+
+
+
+
+\newpage
+
+
+
+\Huge
+\pagebreak
+\hspace{0pt}
+\vfill
+{\centering Appendix Table \par} 
+\vfill
+\hspace{0pt}
+\pagebreak
+
+
+\blandscape
+\tiny
+
+```{r, results='asis'}
+stain_tbl <- sf_count_Func(stain_tbl) %>%  rownames_to_column(., var = "bin"); stain_tbl$bin <- rnames
+stain_coef_tbl <- stain_coef_tbl %>% rownames_to_column(., var = "bin")
+
+stain_pcoef_tbl <- paste_coef_Func(stain_tbl,stain_coef_tbl)
+colnames(stain_pcoef_tbl) <- c("bin", cnames, "sf_count")
+stain_pcoef_tbl$bin <- rnames
+stain_pcoef_tbl$sf_count <- stain_tbl$sf_count
+
+pandoc.table(stain_pcoef_tbl, keep.line.breaks = TRUE, split.tables = Inf, justify = 'center',
+             emphasize.strong.cells = which(stain_tbl<0.05&stain_tbl>0, arr.ind = T),
+             emphasize.italics.cells =  which(stain_tbl<0.05&stain_tbl>0, arr.ind = T), 
+             caption = "Confidence of correlation between dichotomised stainings to various clinicopathological parameters and survival data")
+```
+
+
+
+
+\elandscape

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: package_required
+# key: lib_
+# --
+x <- c("tidyverse","modelr", "xtable", "contrast", "survival", "grid", "gridExtra")
+lapply(x, require, character.only = TRUE, quietly = T,  warn.conflicts = F)
+

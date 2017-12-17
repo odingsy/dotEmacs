@@ -1,0 +1,27 @@
+#+TITLE: proliferation+adhesion 
+#+OPTIONS: toc:nil
+**** day 4: 
+1. seed the cell 
+|-------------------------------+------------------------------------------|
+| *seeding info*                |                                          |
+|-------------------------------+------------------------------------------|
+| seeding density for all cells | 10^4/well for collagen, 3X10^4 for fibro |
+| seeding vol.                  | 100uL/well                               |
+| in what median                | complete.                                |
+| seeding order                 | unwashed (right) to washed (left)        |
+|                               |                                          |
+|-------------------------------+------------------------------------------|
+2. incubate 1hr in the incubator; check whether the cell for both fibro and collagen stick to the 
+3. *split*: 
+|--------------------------------------+----------------------------+--------------------|
+| washed                               | unwashed                   | blank              |
+|--------------------------------------+----------------------------+--------------------|
+| 1. remove medium                     |                            |                    |
+| 2. PBS wash x1                       |                            |                    |
+| 3. MTS 1:c_median 5, each well 120uL | 20uL MTS directly to 100uL | 20MTS+100 c_medium |
+|--------------------------------------+----------------------------+--------------------|
+1. wrapping the plates with aluminum foil 
+2. Tecan: shake for 5s, measure absorbance at 490mm. every hour one reading. // 96well\_greiner, removing the cap. 
+3. 
+***** the PBS washing step for wash group, cold or hot PBS.  :attention:
+***** MTS freely prepare, and dilute in a new 15 tube (together with the blank vol.)  :attention:
